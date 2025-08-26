@@ -1,0 +1,14 @@
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\bin\Debug\Command_Control.dll
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\bin\Debug\Command_Control.pdb
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.csproj.AssemblyReference.cache
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.Command_Control.resources
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.csproj.GenerateResource.cache
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.csproj.CoreCompileInputs.cache
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.dll
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.pdb
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\bin\Debug\LineNumbered_TextBox.dll
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\bin\Debug\ReaLTaiizor.dll
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\bin\Debug\LineNumbered_TextBox.pdb
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\bin\Debug\ReaLTaiizor.xml
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.csproj.CopyComplete
+C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.Properties.Resources.resources

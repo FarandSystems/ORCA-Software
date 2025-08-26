@@ -1,0 +1,138 @@
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\Simple_VCP_Control.dll
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\Simple_VCP_Control.pdb
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CopyComplete
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+G:\CNC\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CopyComplete
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CopyComplete
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.Properties.Resources.resources
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.Properties.Resources.resources
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CopyComplete
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+G:\Spray_Imaging_MAPNA\CNC\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.Properties.Resources.resources
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CopyComplete
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+G:\Spray_Imaging_MAPNA\MAPNA_Flash\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.Properties.Resources.resources
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CopyComplete
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+C:\Projects\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.Properties.Resources.resources
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+G:\031127-MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CopyComplete
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.Properties.Resources.resources
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_.16BCE736.Up2Date
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+C:\Users\MORIII\Desktop\Mapna\031127_MAPNA\Software\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.Properties.Resources.resources
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_.16BCE736.Up2Date
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+C:\Users\MORIII\Desktop\Mapna\031201_MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.AssemblyReference.cache
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.CNC_Component.resources
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.GenerateResource.cache
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.dll
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.pdb
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.dll
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_XYZ_Component.pdb
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.dll
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.dll
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\Auto_Detect_VCP_Control.pdb
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\bin\Debug\CNC_Axis_Component.pdb
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.Properties.Resources.resources
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_Component.csproj.CoreCompileInputs.cache
+C:\Users\Matin\source\repos\MAPNA\CNC_XYZ_Component - Laptop_AutoReconnect\CNC_XYZ_Component\obj\Debug\CNC_XYZ_.16BCE736.Up2Date

@@ -39,12 +39,21 @@ public class LineNumberedRichTextBox : UserControl
 
         // Intercept mouse wheel to refresh numbers during kinetic scroll
         Editor.MouseWheel += (_, __) => gutter.Invalidate();
+        // When the control is shown, jump cursor to end and focus
+        this.Load += (s, e) => BeginEditing();
 
         Controls.Add(Editor);
         Controls.Add(gutter);
 
         // A sensible default font for aligned numbers
         Editor.Font = new Font("Consolas", 10f);
+    }
+
+    public void BeginEditing()
+    {
+        if (Editor.CanFocus) Editor.Focus();
+        Editor.SelectionStart = Editor.TextLength;  // caret at end
+        Editor.ScrollToCaret();
     }
 
     private void UpdateCurrentLine()

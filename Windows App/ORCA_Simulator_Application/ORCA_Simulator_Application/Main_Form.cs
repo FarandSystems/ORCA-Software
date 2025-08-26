@@ -33,5 +33,10 @@ namespace ORCA_Simulator_Application
             pictureBox_ORCA_Connection.Image =
                 blinkOn ? Properties.Resources.Connection_Ok : Properties.Resources.Connection_Idle;
         }
+
+        private void command_Control_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

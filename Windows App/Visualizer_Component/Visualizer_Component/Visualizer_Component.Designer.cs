@@ -92,7 +92,7 @@
             this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
             this.metroTabControl1.MCursor = System.Windows.Forms.Cursors.Hand;
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.SelectedTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.metroTabControl1.Size = new System.Drawing.Size(577, 744);
             this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;

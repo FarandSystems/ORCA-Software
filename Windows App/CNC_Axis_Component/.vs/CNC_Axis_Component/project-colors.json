@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "5cd15c68-a3e3-46f5-b968-0a1d639f9a21": {
+      "ProjectGuid": "5cd15c68-a3e3-46f5-b968-0a1d639f9a21",
+      "DisplayName": "CNC_Axis_Component",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
