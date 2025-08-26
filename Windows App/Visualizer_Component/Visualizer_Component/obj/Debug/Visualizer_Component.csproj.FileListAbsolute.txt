@@ -1,0 +1,11 @@
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\bin\Debug\Visualizer_Component.dll
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\bin\Debug\Visualizer_Component.pdb
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\bin\Debug\ReaLTaiizor.dll
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\bin\Debug\ReaLTaiizor.xml
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.AssemblyReference.cache
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.Visualizer_Component.resources
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.GenerateResource.cache
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.CoreCompileInputs.cache
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.CopyComplete
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.dll
+C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.pdb

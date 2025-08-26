@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "8fd7d10f-c622-4780-9ee2-0abc89165269": {
+      "ProjectGuid": "8fd7d10f-c622-4780-9ee2-0abc89165269",
+      "DisplayName": "Visualizer_Component",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
