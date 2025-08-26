@@ -1,0 +1,6 @@
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\LineNumbered_TextBox\bin\Debug\LineNumbered_TextBox.dll
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\LineNumbered_TextBox\bin\Debug\LineNumbered_TextBox.pdb
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\LineNumbered_TextBox\obj\Debug\LineNumbered_TextBox.csproj.AssemblyReference.cache
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\LineNumbered_TextBox\obj\Debug\LineNumbered_TextBox.csproj.CoreCompileInputs.cache
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\LineNumbered_TextBox\obj\Debug\LineNumbered_TextBox.dll
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\LineNumbered_TextBox\obj\Debug\LineNumbered_TextBox.pdb

@@ -18,6 +18,10 @@ namespace Visualizer_Component
         public Visualizer_Component()
         {
             InitializeComponent();
+            metroTabControl1.TabPages[0] = tabPage_3DView;
+            metroTabControl1.TabPages[1] = tabPage_Graphs;
+            metroTabControl1.TabPages[2] = tabPage_System_Messages;
+            metroTabControl1.SelectedTab = tabPage_3DView;
 
             viewport = new Viewport3D { Dock = DockStyle.Fill };
             tabPage_3DView.Controls.Add(viewport);
@@ -40,6 +44,16 @@ namespace Visualizer_Component
             t.Start();
 
             viewport.FrameTo(Vector3.Zero, 4.0f);
+
+
+            // Example:
+            richTextBox_System_Messages.Editor.Text = "Simulator ON\nWaveLogger ON\nIMU is OK";
+            richTextBox_System_Messages.Editor.Select(richTextBox_System_Messages.Editor.TextLength, 0);
+        }
+
+        private void Visualizer_Component_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

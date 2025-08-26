@@ -120,7 +120,7 @@ namespace Viewport3DControl
 
             GL.ClearColor(0.10f, 0.12f, 0.14f, 1f);
             GL.Enable(EnableCap.DepthTest);
-            GL.Enable(EnableCap.CullFace);
+            GL.Disable(EnableCap.CullFace);
             GL.CullFace(CullFaceMode.Back);
             GL.LineWidth(1f);
 
@@ -144,27 +144,30 @@ namespace Viewport3DControl
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            // Build main MVP
             // Build matrices
             var proj = MakePerspective(45f, Math.Max(1, gl.ClientSize.Width), Math.Max(1, gl.ClientSize.Height), 0.05f, 1000f);
             var view = MakeViewMatrix();
-            var model = BuildModelMatrix();  // <-- use pose
-            var mvpNum = model * view * proj;
+            var model = BuildModelMatrix();
+
+            // Keep your existing convention: earlier you used (model * view * proj)
+            var vpNum = System.Numerics.Matrix4x4.Multiply(view, proj);          // VP
+            var mvpNum = System.Numerics.Matrix4x4.Multiply(model, vpNum);        // M * VP
+
+            var vpOtk = ToOpenTK(vpNum);
             var mvpOtk = ToOpenTK(mvpNum);
 
             GL.UseProgram(shaderProgram);
-            GL.UniformMatrix4(uMvpLoc, false, ref mvpOtk);
 
-            // 1) Draw GRID (before geometry)
+            // --- 1) GRID & WORLD AXES with VP (no model) ---
+            GL.UniformMatrix4(uMvpLoc, false, ref vpOtk);
             DrawGrid();
-
-            // 2) Draw world axes at origin
             DrawAxes();
 
-            // 3) Draw triangle (filled + wireframe look using colors)
+            // --- 2) TRIANGLE with full MVP (includes your pose) ---
+            GL.UniformMatrix4(uMvpLoc, false, ref mvpOtk);
             DrawTriangle();
 
-            // 4) Draw overlay axis gizmo (bottom-right mini viewport)
+            // 3) Axis gizmo (overlay) — leave as-is
             DrawAxisGizmoOverlay(view);
 
             gl.SwapBuffers();
@@ -386,26 +389,21 @@ namespace Viewport3DControl
 
         private System.Numerics.Matrix4x4 BuildModelMatrix()
         {
-            // Convert degrees → radians
             float r = rollDeg * (float)Math.PI / 180f;
             float p = pitchDeg * (float)Math.PI / 180f;
             float y = yawDeg * (float)Math.PI / 180f;
 
-            // Axis-angle rotations (explicit, to avoid ambiguity)
             var Rx = System.Numerics.Matrix4x4.CreateFromAxisAngle(new System.Numerics.Vector3(1, 0, 0), r);
             var Ry = System.Numerics.Matrix4x4.CreateFromAxisAngle(new System.Numerics.Vector3(0, 1, 0), p);
             var Rz = System.Numerics.Matrix4x4.CreateFromAxisAngle(new System.Numerics.Vector3(0, 0, 1), y);
 
-            // Rotation order: yaw(Z) * pitch(Y) * roll(X)
-            var R = Rx;                    // start with roll about X
-            R = System.Numerics.Matrix4x4.Multiply(Ry, R); // then pitch about Y
-            R = System.Numerics.Matrix4x4.Multiply(Rz, R); // then yaw about Z
+            // yaw * pitch * roll (adjust if you want a different order)
+            var R = System.Numerics.Matrix4x4.Multiply(System.Numerics.Matrix4x4.Multiply(Rz, Ry), Rx);
 
             var T = System.Numerics.Matrix4x4.CreateTranslation(0f, heave, 0f);
 
-            // Column-vector convention with shader using uMVP * vec4: model = T * R (rotate, then translate)
-            return System.Numerics.Matrix4x4.Multiply(R, T); // If your scene appears off, swap to (T * R)
-                                                             // Note: Depending on your math convention, you might prefer T * R. Try both; keep the one that matches your expectations.
+            // Rotate the local shape, then place it in world:
+            return System.Numerics.Matrix4x4.Multiply(T, R);   // T * R
         }
 
         private System.Numerics.Matrix4x4 MakeViewMatrix()

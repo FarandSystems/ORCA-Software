@@ -13,3 +13,18 @@ C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Com
 C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.GLControl.xml
 C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.CopyComplete
 C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.Viewport3D.resources
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\Viewport3DControl.dll
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\Viewport3DControl.pdb
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.dll
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.GLControl.dll
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.pdb
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.xml
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.GLControl.pdb
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.GLControl.xml
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.AssemblyReference.cache
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.Viewport3D.resources
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.GenerateResource.cache
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.CoreCompileInputs.cache
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.CopyComplete
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.dll
+C:\Projects\ORCA Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.pdb

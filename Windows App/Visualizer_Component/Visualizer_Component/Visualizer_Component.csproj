@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Farand_Chart_Lib_Ver3">
+      <HintPath>..\..\Farand_Chart_Lib_Ver3\Farand_Chart_Lib_Ver3\bin\Debug\Farand_Chart_Lib_Ver3.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="ReaLTaiizor">
       <HintPath>..\..\..\..\ORCA Software\ORCA_Simulator_Application\packages\ReaLTaiizor.3.8.1.3\lib\net48\ReaLTaiizor.dll</HintPath>
@@ -63,10 +66,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LineNumbered_TextBox\LineNumbered_TextBox.csproj">
+      <Project>{f57dd9e3-224c-4c16-b54e-dcb17a791404}</Project>
+      <Name>LineNumbered_TextBox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Viewport3DControl\Viewport3DControl.csproj">
       <Project>{5BC3124D-3FB2-4DCF-8A07-C6622937214E}</Project>
       <Name>Viewport3DControl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

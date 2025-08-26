@@ -5,7 +5,17 @@
       "ProjectGuid": "8fd7d10f-c622-4780-9ee2-0abc89165269",
       "DisplayName": "Visualizer_Component",
       "ColorIndex": 0
+    },
+    "5bc3124d-3fb2-4dcf-8a07-c6622937214e": {
+      "ProjectGuid": "5bc3124d-3fb2-4dcf-8a07-c6622937214e",
+      "DisplayName": "Viewport3DControl",
+      "ColorIndex": 1
+    },
+    "f57dd9e3-224c-4c16-b54e-dcb17a791404": {
+      "ProjectGuid": "f57dd9e3-224c-4c16-b54e-dcb17a791404",
+      "DisplayName": "LineNumbered_TextBox",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 3
 }
