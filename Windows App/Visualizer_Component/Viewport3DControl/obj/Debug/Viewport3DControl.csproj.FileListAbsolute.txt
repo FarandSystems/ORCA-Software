@@ -1,0 +1,15 @@
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\Viewport3DControl.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\Viewport3DControl.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.AssemblyReference.cache
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.GenerateResource.cache
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.CoreCompileInputs.cache
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.GLControl.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.xml
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.GLControl.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\bin\Debug\OpenTK.GLControl.xml
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.csproj.CopyComplete
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Viewport3DControl\obj\Debug\Viewport3DControl.Viewport3D.resources

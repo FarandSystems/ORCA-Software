@@ -9,3 +9,21 @@ C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\V
 C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.CopyComplete
 C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.dll
 C:\Projects\ORCA1\Software\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\Visualizer_Component.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\Visualizer_Component.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\ReaLTaiizor.xml
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.AssemblyReference.cache
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.Visualizer_Component.resources
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.GenerateResource.cache
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.CoreCompileInputs.cache
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.csproj.CopyComplete
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\obj\Debug\Visualizer_Component.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\Viewport3DControl.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\OpenTK.GLControl.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\OpenTK.dll
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\Viewport3DControl.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\OpenTK.GLControl.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\OpenTK.GLControl.xml
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\OpenTK.pdb
+C:\Users\sdf\source\repos\FarandSystems\ORCA-Software\Windows App\Visualizer_Component\Visualizer_Component\bin\Debug\OpenTK.xml
