@@ -17,6 +17,12 @@ namespace CNC_Axis_Component
         int com_Counter = 0;
         public event EventHandler Command_Event;
 
+        string axis_Unit;
+        public string Axis_Unit
+        {
+            get { return axis_Unit; }
+            set { axis_Unit = value; }
+        }
 
         string axis_Name;
         public string Axis_Name 
@@ -28,8 +34,9 @@ namespace CNC_Axis_Component
             set
             {
                 axis_Name = value;
-                label_Current_Position.Text = axis_Name + "(mm) : " + current_Position;
-                label_Axis.Text = axis_Name + "(mm)";
+                label_Current_Position.Text = axis_Name + axis_Unit + ": " + current_Position;
+                label_Axis.Text = axis_Name + axis_Unit;
+                label1.Text = axis_Name + axis_Unit;
                 //button_Step.Text = "Step " + axis_Name;
                 groupBox1.Text = "Control " + axis_Name;
             }
@@ -71,7 +78,7 @@ namespace CNC_Axis_Component
             set
             {
                 current_Position = value;
-                label_Current_Position.Text = axis_Name + "(mm) : " + current_Position.ToString("0.00");
+                label_Current_Position.Text = axis_Name + axis_Unit + ": " + current_Position.ToString("0.00");
             }
         }
 
@@ -192,16 +199,16 @@ namespace CNC_Axis_Component
         }
 
 
-        int step_mm = 0;
-        public int Step_mm
+        int step = 0;
+        public int Step
         {
             get
             {
-                return step_mm;
+                return step;
             }
             set
             {
-                step_mm = value;
+                step = value;
             }
         }
 
@@ -516,7 +523,7 @@ namespace CNC_Axis_Component
 
         private void numericUpDown_Step_ValueChanged(object sender, EventArgs e)
         {
-            step_mm = (int)numericUpDown_Step.Value;
+            step = (int)numericUpDown_Step.Value;
         }
 
 

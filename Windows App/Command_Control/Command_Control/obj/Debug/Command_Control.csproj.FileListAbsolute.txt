@@ -12,3 +12,21 @@ C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\bin\Debug\
 C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\bin\Debug\ReaLTaiizor.xml
 C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.csproj.CopyComplete
 C:\Projects\ORCA Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.Properties.Resources.resources
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\Command_Control.dll
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\Command_Control.pdb
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\CNC_Axis_Component.dll
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\LineNumbered_TextBox.dll
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\ReaLTaiizor.dll
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\CNC_Axis_Component.pdb
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\LineNumbered_TextBox.pdb
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\ReaLTaiizor.xml
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.csproj.AssemblyReference.cache
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.Command_Control.resources
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.Properties.Resources.resources
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.csproj.GenerateResource.cache
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.csproj.CoreCompileInputs.cache
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_.D4A0A4C1.Up2Date
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.dll
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\obj\Debug\Command_Control.pdb
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\Movement_Functions_Control.dll
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Command_Control\Command_Control\bin\Debug\Movement_Functions_Control.pdb

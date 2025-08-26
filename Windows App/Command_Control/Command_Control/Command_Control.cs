@@ -21,5 +21,25 @@ namespace Command_Control
             richTextBox_System_Messages.Editor.Select(richTextBox_System_Messages.Editor.TextLength, 0);
             richTextBox_System_Messages.BeginEditing();
         }
+
+        private void tabPage_Calibration_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void axis_Heave_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void axis_Component1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void axis_Heave_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -75,10 +75,11 @@
             this.groupBox1.Controls.Add(this.pictureBox_Center);
             this.groupBox1.Controls.Add(this.pictureBox_Home);
             this.groupBox1.Controls.Add(this.label_Current_Position);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
-            this.groupBox1.Location = new System.Drawing.Point(3, -1);
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(206, 174);
+            this.groupBox1.Size = new System.Drawing.Size(246, 230);
             this.groupBox1.TabIndex = 52;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Control X";
@@ -88,9 +89,9 @@
             // 
             this.pictureBox_Nodge_Forward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_Nodge_Forward.Image = global::CNC_Axis_Component.Properties.Resources.Nodge_Forward;
-            this.pictureBox_Nodge_Forward.Location = new System.Drawing.Point(172, 46);
+            this.pictureBox_Nodge_Forward.Location = new System.Drawing.Point(210, 49);
             this.pictureBox_Nodge_Forward.Name = "pictureBox_Nodge_Forward";
-            this.pictureBox_Nodge_Forward.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox_Nodge_Forward.Size = new System.Drawing.Size(30, 30);
             this.pictureBox_Nodge_Forward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_Nodge_Forward.TabIndex = 67;
             this.pictureBox_Nodge_Forward.TabStop = false;
@@ -103,9 +104,9 @@
             // 
             this.pictureBox_Nodge_Backward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_Nodge_Backward.Image = global::CNC_Axis_Component.Properties.Resources.Nodge_Backward;
-            this.pictureBox_Nodge_Backward.Location = new System.Drawing.Point(145, 46);
+            this.pictureBox_Nodge_Backward.Location = new System.Drawing.Point(179, 49);
             this.pictureBox_Nodge_Backward.Name = "pictureBox_Nodge_Backward";
-            this.pictureBox_Nodge_Backward.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox_Nodge_Backward.Size = new System.Drawing.Size(30, 30);
             this.pictureBox_Nodge_Backward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_Nodge_Backward.TabIndex = 66;
             this.pictureBox_Nodge_Backward.TabStop = false;
@@ -116,14 +117,16 @@
             // 
             // groupBox_Step
             // 
+            this.groupBox_Step.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox_Step.Controls.Add(this.pictureBox_Step_Forward);
             this.groupBox_Step.Controls.Add(this.numericUpDown_Step);
             this.groupBox_Step.Controls.Add(this.pictureBox_Step_Backward);
             this.groupBox_Step.Controls.Add(this.label1);
             this.groupBox_Step.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
-            this.groupBox_Step.Location = new System.Drawing.Point(6, 123);
+            this.groupBox_Step.Location = new System.Drawing.Point(6, 177);
             this.groupBox_Step.Name = "groupBox_Step";
-            this.groupBox_Step.Size = new System.Drawing.Size(194, 45);
+            this.groupBox_Step.Size = new System.Drawing.Size(234, 45);
             this.groupBox_Step.TabIndex = 65;
             this.groupBox_Step.TabStop = false;
             this.groupBox_Step.Text = "Step";
@@ -133,7 +136,7 @@
             // 
             this.pictureBox_Step_Forward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_Step_Forward.Image = global::CNC_Axis_Component.Properties.Resources.Manual_Step_Up;
-            this.pictureBox_Step_Forward.Location = new System.Drawing.Point(161, 13);
+            this.pictureBox_Step_Forward.Location = new System.Drawing.Point(200, 13);
             this.pictureBox_Step_Forward.Name = "pictureBox_Step_Forward";
             this.pictureBox_Step_Forward.Size = new System.Drawing.Size(25, 25);
             this.pictureBox_Step_Forward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -154,7 +157,7 @@
             0,
             0,
             131072});
-            this.numericUpDown_Step.Location = new System.Drawing.Point(59, 15);
+            this.numericUpDown_Step.Location = new System.Drawing.Point(83, 15);
             this.numericUpDown_Step.Maximum = new decimal(new int[] {
             250,
             0,
@@ -166,7 +169,7 @@
             0,
             -2147483648});
             this.numericUpDown_Step.Name = "numericUpDown_Step";
-            this.numericUpDown_Step.Size = new System.Drawing.Size(43, 20);
+            this.numericUpDown_Step.Size = new System.Drawing.Size(53, 20);
             this.numericUpDown_Step.TabIndex = 49;
             this.numericUpDown_Step.ValueChanged += new System.EventHandler(this.numericUpDown_Step_ValueChanged);
             // 
@@ -174,7 +177,7 @@
             // 
             this.pictureBox_Step_Backward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_Step_Backward.Image = global::CNC_Axis_Component.Properties.Resources.Manual_Step_Down;
-            this.pictureBox_Step_Backward.Location = new System.Drawing.Point(134, 13);
+            this.pictureBox_Step_Backward.Location = new System.Drawing.Point(173, 13);
             this.pictureBox_Step_Backward.Name = "pictureBox_Step_Backward";
             this.pictureBox_Step_Backward.Size = new System.Drawing.Size(25, 25);
             this.pictureBox_Step_Backward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -197,14 +200,16 @@
             // 
             // groupBox_Go_To
             // 
+            this.groupBox_Go_To.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox_Go_To.Controls.Add(this.pictureBox_GoTo);
             this.groupBox_Go_To.Controls.Add(this.label_Axis);
             this.groupBox_Go_To.Controls.Add(this.numericUpDown_Go_To);
             this.groupBox_Go_To.Controls.Add(this.label_Course);
             this.groupBox_Go_To.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
-            this.groupBox_Go_To.Location = new System.Drawing.Point(6, 76);
+            this.groupBox_Go_To.Location = new System.Drawing.Point(6, 130);
             this.groupBox_Go_To.Name = "groupBox_Go_To";
-            this.groupBox_Go_To.Size = new System.Drawing.Size(194, 45);
+            this.groupBox_Go_To.Size = new System.Drawing.Size(234, 45);
             this.groupBox_Go_To.TabIndex = 64;
             this.groupBox_Go_To.TabStop = false;
             this.groupBox_Go_To.Text = "Go To";
@@ -214,7 +219,7 @@
             // 
             this.pictureBox_GoTo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_GoTo.Image = global::CNC_Axis_Component.Properties.Resources.GoTo;
-            this.pictureBox_GoTo.Location = new System.Drawing.Point(162, 11);
+            this.pictureBox_GoTo.Location = new System.Drawing.Point(199, 11);
             this.pictureBox_GoTo.Name = "pictureBox_GoTo";
             this.pictureBox_GoTo.Size = new System.Drawing.Size(28, 28);
             this.pictureBox_GoTo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -245,7 +250,7 @@
             0,
             0,
             131072});
-            this.numericUpDown_Go_To.Location = new System.Drawing.Point(44, 15);
+            this.numericUpDown_Go_To.Location = new System.Drawing.Point(83, 17);
             this.numericUpDown_Go_To.Maximum = new decimal(new int[] {
             500,
             0,
@@ -263,7 +268,7 @@
             // label_Course
             // 
             this.label_Course.AutoSize = true;
-            this.label_Course.Location = new System.Drawing.Point(97, 19);
+            this.label_Course.Location = new System.Drawing.Point(133, 19);
             this.label_Course.Name = "label_Course";
             this.label_Course.Size = new System.Drawing.Size(61, 13);
             this.label_Course.TabIndex = 46;
@@ -273,9 +278,9 @@
             // 
             this.pictureBox_Error.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_Error.Image = global::CNC_Axis_Component.Properties.Resources.Error;
-            this.pictureBox_Error.Location = new System.Drawing.Point(88, 44);
+            this.pictureBox_Error.Location = new System.Drawing.Point(109, 49);
             this.pictureBox_Error.Name = "pictureBox_Error";
-            this.pictureBox_Error.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox_Error.Size = new System.Drawing.Size(30, 30);
             this.pictureBox_Error.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_Error.TabIndex = 63;
             this.pictureBox_Error.TabStop = false;
@@ -288,9 +293,9 @@
             // 
             this.pictureBox_Center.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_Center.Image = global::CNC_Axis_Component.Properties.Resources.Center;
-            this.pictureBox_Center.Location = new System.Drawing.Point(40, 44);
+            this.pictureBox_Center.Location = new System.Drawing.Point(38, 49);
             this.pictureBox_Center.Name = "pictureBox_Center";
-            this.pictureBox_Center.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox_Center.Size = new System.Drawing.Size(30, 30);
             this.pictureBox_Center.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_Center.TabIndex = 62;
             this.pictureBox_Center.TabStop = false;
@@ -303,9 +308,9 @@
             // 
             this.pictureBox_Home.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox_Home.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Home.Image")));
-            this.pictureBox_Home.Location = new System.Drawing.Point(6, 44);
+            this.pictureBox_Home.Location = new System.Drawing.Point(6, 49);
             this.pictureBox_Home.Name = "pictureBox_Home";
-            this.pictureBox_Home.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox_Home.Size = new System.Drawing.Size(30, 30);
             this.pictureBox_Home.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_Home.TabIndex = 61;
             this.pictureBox_Home.TabStop = false;
@@ -342,7 +347,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.groupBox1);
             this.Name = "Axis_Component";
-            this.Size = new System.Drawing.Size(210, 176);
+            this.Size = new System.Drawing.Size(246, 230);
             this.Load += new System.EventHandler(this.Axis_Component_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

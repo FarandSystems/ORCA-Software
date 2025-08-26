@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Matin\\source\\repos\\MAPNA\\CNC_Axis_Component\\",
+  "WorkspaceRootPath": "C:\\Users\\Matin\\source\\repos\\ORCA-Software\\Windows App\\CNC_Axis_Component\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5CD15C68-A3E3-46F5-B968-0A1D639F9A21}|CNC_Axis_Component\\CNC_Axis_Component.csproj|C:\\Users\\Matin\\source\\repos\\MAPNA\\CNC_Axis_Component\\cnc_axis_component\\axis_component.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CD15C68-A3E3-46F5-B968-0A1D639F9A21}|CNC_Axis_Component\\CNC_Axis_Component.csproj|solutionrelative:cnc_axis_component\\axis_component.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CD15C68-A3E3-46F5-B968-0A1D639F9A21}|CNC_Axis_Component\\CNC_Axis_Component.csproj|C:\\Users\\Matin\\source\\repos\\ORCA-Software\\Windows App\\CNC_Axis_Component\\cnc_axis_component\\axis_component.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5CD15C68-A3E3-46F5-B968-0A1D639F9A21}|CNC_Axis_Component\\CNC_Axis_Component.csproj|solutionrelative:cnc_axis_component\\axis_component.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CD15C68-A3E3-46F5-B968-0A1D639F9A21}|CNC_Axis_Component\\CNC_Axis_Component.csproj|c:\\users\\matin\\source\\repos\\mapna\\cnc_axis_component\\cnc_axis_component\\axis_component.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{5CD15C68-A3E3-46F5-B968-0A1D639F9A21}|CNC_Axis_Component\\CNC_Axis_Component.csproj|solutionrelative:cnc_axis_component\\axis_component.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{5CD15C68-A3E3-46F5-B968-0A1D639F9A21}|CNC_Axis_Component\\CNC_Axis_Component.csproj|c:\\users\\matin\\source\\repos\\orca-software\\windows app\\cnc_axis_component\\cnc_axis_component\\axis_component.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CD15C68-A3E3-46F5-B968-0A1D639F9A21}|CNC_Axis_Component\\CNC_Axis_Component.csproj|solutionrelative:cnc_axis_component\\axis_component.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,15 +18,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Axis_Component.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Matin\\source\\repos\\MAPNA\\CNC_Axis_Component\\CNC_Axis_Component\\Axis_Component.cs",
+              "DocumentMoniker": "C:\\Users\\Matin\\source\\repos\\ORCA-Software\\Windows App\\CNC_Axis_Component\\CNC_Axis_Component\\Axis_Component.cs",
               "RelativeDocumentMoniker": "CNC_Axis_Component\\Axis_Component.cs",
-              "ToolTip": "C:\\Users\\Matin\\source\\repos\\MAPNA\\CNC_Axis_Component\\CNC_Axis_Component\\Axis_Component.cs [Design]",
+              "ToolTip": "C:\\Users\\Matin\\source\\repos\\ORCA-Software\\Windows App\\CNC_Axis_Component\\CNC_Axis_Component\\Axis_Component.cs [Design]",
               "RelativeToolTip": "CNC_Axis_Component\\Axis_Component.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-16T06:52:42.879Z",
@@ -35,17 +35,21 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Axis_Component.cs",
-              "DocumentMoniker": "C:\\Users\\Matin\\source\\repos\\MAPNA\\CNC_Axis_Component\\CNC_Axis_Component\\Axis_Component.cs",
+              "DocumentMoniker": "C:\\Users\\Matin\\source\\repos\\ORCA-Software\\Windows App\\CNC_Axis_Component\\CNC_Axis_Component\\Axis_Component.cs",
               "RelativeDocumentMoniker": "CNC_Axis_Component\\Axis_Component.cs",
-              "ToolTip": "C:\\Users\\Matin\\source\\repos\\MAPNA\\CNC_Axis_Component\\CNC_Axis_Component\\Axis_Component.cs",
+              "ToolTip": "C:\\Users\\Matin\\source\\repos\\ORCA-Software\\Windows App\\CNC_Axis_Component\\CNC_Axis_Component\\Axis_Component.cs",
               "RelativeToolTip": "CNC_Axis_Component\\Axis_Component.cs",
-              "ViewState": "AQIAAHYAAAAAAAAAAAAswIIAAAAAAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAAAcwCYAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-16T06:52:42.957Z",
               "EditorCaption": ""

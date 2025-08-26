@@ -1,0 +1,8 @@
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Movement_Functions_Control\Movement_Functions_Control\bin\Debug\Movement_Functions_Control.dll
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Movement_Functions_Control\Movement_Functions_Control\bin\Debug\Movement_Functions_Control.pdb
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Movement_Functions_Control\Movement_Functions_Control\obj\Debug\Movement_Functions_Control.csproj.AssemblyReference.cache
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Movement_Functions_Control\Movement_Functions_Control\obj\Debug\Movement_Functions_Control.csproj.CoreCompileInputs.cache
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Movement_Functions_Control\Movement_Functions_Control\obj\Debug\Movement_Functions_Control.dll
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Movement_Functions_Control\Movement_Functions_Control\obj\Debug\Movement_Functions_Control.pdb
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Movement_Functions_Control\Movement_Functions_Control\obj\Debug\Movement_Functions_Control.SignalGeneratorControl.resources
+C:\Users\Matin\source\repos\ORCA-Software\Windows App\Movement_Functions_Control\Movement_Functions_Control\obj\Debug\Movement_Functions_Control.csproj.GenerateResource.cache
