@@ -21,6 +21,7 @@ namespace ORCA_Simulator_Application
         private void pictureBox_Reconnect_Click(object sender, EventArgs e)
         {
             timer_Connection_Demo.Start();
+            visualizer_Component.Start_3D_Test_Flag = true;
         }
         private void timer_Connection_Demo_Tick(object sender, EventArgs e)
         {

@@ -42,7 +42,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.toggleButton_IMU = new ORCA_Simulator_Application.ToggleButton();
             this.textBox_ORCA_IP = new System.Windows.Forms.TextBox();
             this.textBox_Controller_IP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,12 +49,15 @@
             this.timer_Connection_Demo = new System.Windows.Forms.Timer(this.components);
             this.panel_Visualizer = new System.Windows.Forms.Panel();
             this.panel_Command_Control = new System.Windows.Forms.Panel();
+            this.visualizer_Component = new Visualizer_Component.Visualizer_Component();
+            this.toggleButton_IMU = new ORCA_Simulator_Application.ToggleButton();
             this.groupBox_Connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Log)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Reconnect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ORCA_Connection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Controller_Connection)).BeginInit();
             this.panel_Position.SuspendLayout();
+            this.panel_Visualizer.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_Connection
@@ -125,6 +127,7 @@
             // 
             // panel_Position
             // 
+            this.panel_Position.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel_Position.Controls.Add(this.label7);
             this.panel_Position.Controls.Add(this.label_Roll_Position);
             this.panel_Position.Controls.Add(this.label_Y_Position);
@@ -205,22 +208,6 @@
             this.label3.TabIndex = 27;
             this.label3.Text = "IMU Status";
             // 
-            // toggleButton_IMU
-            // 
-            this.toggleButton_IMU.AutoSize = true;
-            this.toggleButton_IMU.Checked = true;
-            this.toggleButton_IMU.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toggleButton_IMU.Location = new System.Drawing.Point(94, 243);
-            this.toggleButton_IMU.MinimumSize = new System.Drawing.Size(45, 22);
-            this.toggleButton_IMU.Name = "toggleButton_IMU";
-            this.toggleButton_IMU.OffBackColor = System.Drawing.Color.Gray;
-            this.toggleButton_IMU.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.toggleButton_IMU.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.toggleButton_IMU.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.toggleButton_IMU.Size = new System.Drawing.Size(45, 22);
-            this.toggleButton_IMU.TabIndex = 1;
-            this.toggleButton_IMU.UseVisualStyleBackColor = true;
-            // 
             // textBox_ORCA_IP
             // 
             this.textBox_ORCA_IP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
@@ -266,6 +253,10 @@
             // 
             // panel_Visualizer
             // 
+            this.panel_Visualizer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_Visualizer.Controls.Add(this.visualizer_Component);
             this.panel_Visualizer.Location = new System.Drawing.Point(786, 16);
             this.panel_Visualizer.Name = "panel_Visualizer";
             this.panel_Visualizer.Size = new System.Drawing.Size(577, 744);
@@ -277,6 +268,32 @@
             this.panel_Command_Control.Name = "panel_Command_Control";
             this.panel_Command_Control.Size = new System.Drawing.Size(617, 744);
             this.panel_Command_Control.TabIndex = 2;
+            // 
+            // visualizer_Component
+            // 
+            this.visualizer_Component.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.visualizer_Component.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.visualizer_Component.Location = new System.Drawing.Point(0, 0);
+            this.visualizer_Component.Name = "visualizer_Component";
+            this.visualizer_Component.Size = new System.Drawing.Size(577, 744);
+            this.visualizer_Component.Start_3D_Test_Flag = false;
+            this.visualizer_Component.TabIndex = 0;
+            // 
+            // toggleButton_IMU
+            // 
+            this.toggleButton_IMU.AutoSize = true;
+            this.toggleButton_IMU.Checked = true;
+            this.toggleButton_IMU.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toggleButton_IMU.Location = new System.Drawing.Point(94, 243);
+            this.toggleButton_IMU.MinimumSize = new System.Drawing.Size(45, 22);
+            this.toggleButton_IMU.Name = "toggleButton_IMU";
+            this.toggleButton_IMU.OffBackColor = System.Drawing.Color.Gray;
+            this.toggleButton_IMU.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.toggleButton_IMU.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.toggleButton_IMU.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.toggleButton_IMU.Size = new System.Drawing.Size(45, 22);
+            this.toggleButton_IMU.TabIndex = 1;
+            this.toggleButton_IMU.UseVisualStyleBackColor = true;
             // 
             // Main_Form
             // 
@@ -299,6 +316,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Controller_Connection)).EndInit();
             this.panel_Position.ResumeLayout(false);
             this.panel_Position.PerformLayout();
+            this.panel_Visualizer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -326,6 +344,7 @@
         private System.Windows.Forms.Timer timer_Connection_Demo;
         private System.Windows.Forms.Panel panel_Visualizer;
         private System.Windows.Forms.Panel panel_Command_Control;
+        private Visualizer_Component.Visualizer_Component visualizer_Component;
     }
 }
 

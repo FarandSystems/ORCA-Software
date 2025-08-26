@@ -15,7 +15,12 @@
       "ProjectGuid": "f57dd9e3-224c-4c16-b54e-dcb17a791404",
       "DisplayName": "LineNumbered_TextBox",
       "ColorIndex": 2
+    },
+    "d8df3b18-868b-48ae-8049-6ad42117f555": {
+      "ProjectGuid": "d8df3b18-868b-48ae-8049-6ad42117f555",
+      "DisplayName": "Visualizer_Test_App",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }

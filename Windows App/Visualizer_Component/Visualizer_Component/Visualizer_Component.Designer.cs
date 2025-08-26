@@ -82,8 +82,8 @@
             this.metroTabControl1.AnimateEasingType = ReaLTaiizor.Enum.Metro.EasingType.CubeOut;
             this.metroTabControl1.AnimateTime = 200;
             this.metroTabControl1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.metroTabControl1.Controls.Add(this.tabPage_3DView);
             this.metroTabControl1.Controls.Add(this.tabPage_Graphs);
+            this.metroTabControl1.Controls.Add(this.tabPage_3DView);
             this.metroTabControl1.Controls.Add(this.tabPage_System_Messages);
             this.metroTabControl1.ControlsVisible = true;
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
