@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox_Connection = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.pictureBox_Log = new System.Windows.Forms.PictureBox();
             this.pictureBox_Reconnect = new System.Windows.Forms.PictureBox();
             this.pictureBox_ORCA_Connection = new System.Windows.Forms.PictureBox();
@@ -41,10 +44,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.timer_Connection_Demo = new System.Windows.Forms.Timer(this.components);
             this.panel_Visualizer = new System.Windows.Forms.Panel();
-            this.visualizer_Component = new Visualizer_Component.Visualizer_Component();
             this.panel_Command_Control = new System.Windows.Forms.Panel();
             this.command_Control = new Command_Control.Command_Control();
-            this.toggleButton_IMU_Status = new ORCA_Simulator_Application.ToggleButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label_Roll_Position = new System.Windows.Forms.Label();
@@ -59,12 +60,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.toggleButton1 = new ORCA_Simulator_Application.ToggleButton();
-            this.label14 = new System.Windows.Forms.Label();
-            this.toggleButton2 = new ORCA_Simulator_Application.ToggleButton();
-            this.label15 = new System.Windows.Forms.Label();
             this.toggleButton3 = new ORCA_Simulator_Application.ToggleButton();
-            this.label16 = new System.Windows.Forms.Label();
+            this.toggleButton2 = new ORCA_Simulator_Application.ToggleButton();
+            this.toggleButton1 = new ORCA_Simulator_Application.ToggleButton();
+            this.toggleButton_IMU_Status = new ORCA_Simulator_Application.ToggleButton();
+            this.visualizer_Component = new Visualizer_Component.Visualizer_Component();
             this.groupBox_Connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Log)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Reconnect)).BeginInit();
@@ -97,12 +97,39 @@
             this.groupBox_Connection.Controls.Add(this.label2);
             this.groupBox_Connection.Controls.Add(this.label1);
             this.groupBox_Connection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.groupBox_Connection.Location = new System.Drawing.Point(12, 11);
+            this.groupBox_Connection.Location = new System.Drawing.Point(12, 2);
             this.groupBox_Connection.Name = "groupBox_Connection";
-            this.groupBox_Connection.Size = new System.Drawing.Size(145, 398);
+            this.groupBox_Connection.Size = new System.Drawing.Size(166, 73);
             this.groupBox_Connection.TabIndex = 0;
             this.groupBox_Connection.TabStop = false;
             this.groupBox_Connection.Text = "Connection";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 363);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(37, 13);
+            this.label16.TabIndex = 38;
+            this.label16.Text = "GNSS";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(7, 318);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(37, 13);
+            this.label15.TabIndex = 36;
+            this.label15.Text = "Iridium";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 273);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(31, 13);
+            this.label14.TabIndex = 34;
+            this.label14.Text = "GSM";
             // 
             // pictureBox_Log
             // 
@@ -139,7 +166,7 @@
             // pictureBox_Controller_Connection
             // 
             this.pictureBox_Controller_Connection.Image = global::ORCA_Simulator_Application.Properties.Resources.Connection_Idle;
-            this.pictureBox_Controller_Connection.Location = new System.Drawing.Point(114, 70);
+            this.pictureBox_Controller_Connection.Location = new System.Drawing.Point(114, 74);
             this.pictureBox_Controller_Connection.Name = "pictureBox_Controller_Connection";
             this.pictureBox_Controller_Connection.Size = new System.Drawing.Size(20, 20);
             this.pictureBox_Controller_Connection.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -204,20 +231,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_Visualizer.Controls.Add(this.visualizer_Component);
-            this.panel_Visualizer.Location = new System.Drawing.Point(163, 2);
+            this.panel_Visualizer.Location = new System.Drawing.Point(12, 81);
             this.panel_Visualizer.Name = "panel_Visualizer";
-            this.panel_Visualizer.Size = new System.Drawing.Size(861, 744);
+            this.panel_Visualizer.Size = new System.Drawing.Size(1012, 690);
             this.panel_Visualizer.TabIndex = 1;
-            // 
-            // visualizer_Component
-            // 
-            this.visualizer_Component.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.visualizer_Component.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.visualizer_Component.Location = new System.Drawing.Point(0, 0);
-            this.visualizer_Component.Name = "visualizer_Component";
-            this.visualizer_Component.Size = new System.Drawing.Size(861, 744);
-            this.visualizer_Component.Start_3D_Test_Flag = false;
-            this.visualizer_Component.TabIndex = 0;
             // 
             // panel_Command_Control
             // 
@@ -239,22 +256,6 @@
             this.command_Control.TabIndex = 0;
             this.command_Control.Load += new System.EventHandler(this.command_Control_Load);
             // 
-            // toggleButton_IMU_Status
-            // 
-            this.toggleButton_IMU_Status.AutoSize = true;
-            this.toggleButton_IMU_Status.Checked = true;
-            this.toggleButton_IMU_Status.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toggleButton_IMU_Status.Location = new System.Drawing.Point(89, 224);
-            this.toggleButton_IMU_Status.MinimumSize = new System.Drawing.Size(45, 22);
-            this.toggleButton_IMU_Status.Name = "toggleButton_IMU_Status";
-            this.toggleButton_IMU_Status.OffBackColor = System.Drawing.Color.Gray;
-            this.toggleButton_IMU_Status.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.toggleButton_IMU_Status.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.toggleButton_IMU_Status.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.toggleButton_IMU_Status.Size = new System.Drawing.Size(45, 22);
-            this.toggleButton_IMU_Status.TabIndex = 33;
-            this.toggleButton_IMU_Status.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label7);
@@ -264,9 +265,9 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.groupBox1.Location = new System.Drawing.Point(12, 433);
+            this.groupBox1.Location = new System.Drawing.Point(193, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(145, 132);
+            this.groupBox1.Size = new System.Drawing.Size(341, 73);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controller Position";
@@ -275,7 +276,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(82, 104);
+            this.label7.Location = new System.Drawing.Point(166, 51);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(55, 15);
             this.label7.TabIndex = 40;
@@ -285,7 +286,7 @@
             // 
             this.label_Roll_Position.AutoSize = true;
             this.label_Roll_Position.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Roll_Position.Location = new System.Drawing.Point(82, 60);
+            this.label_Roll_Position.Location = new System.Drawing.Point(241, 18);
             this.label_Roll_Position.Name = "label_Roll_Position";
             this.label_Roll_Position.Size = new System.Drawing.Size(55, 15);
             this.label_Roll_Position.TabIndex = 39;
@@ -305,7 +306,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(7, 104);
+            this.label6.Location = new System.Drawing.Point(91, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 15);
             this.label6.TabIndex = 37;
@@ -315,7 +316,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(7, 60);
+            this.label5.Location = new System.Drawing.Point(166, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 15);
             this.label5.TabIndex = 36;
@@ -340,9 +341,9 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.groupBox2.Location = new System.Drawing.Point(12, 582);
+            this.groupBox2.Location = new System.Drawing.Point(549, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(145, 132);
+            this.groupBox2.Size = new System.Drawing.Size(475, 73);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Logger Position";
@@ -351,7 +352,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(82, 104);
+            this.label8.Location = new System.Drawing.Point(219, 48);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 15);
             this.label8.TabIndex = 40;
@@ -361,7 +362,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(82, 60);
+            this.label9.Location = new System.Drawing.Point(312, 16);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 15);
             this.label9.TabIndex = 39;
@@ -381,7 +382,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(7, 104);
+            this.label11.Location = new System.Drawing.Point(144, 48);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(43, 15);
             this.label11.TabIndex = 37;
@@ -391,7 +392,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(7, 60);
+            this.label12.Location = new System.Drawing.Point(237, 16);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(37, 15);
             this.label12.TabIndex = 36;
@@ -406,6 +407,34 @@
             this.label13.Size = new System.Drawing.Size(51, 15);
             this.label13.TabIndex = 35;
             this.label13.Text = "Heave:";
+            // 
+            // toggleButton3
+            // 
+            this.toggleButton3.AutoSize = true;
+            this.toggleButton3.Location = new System.Drawing.Point(89, 358);
+            this.toggleButton3.MinimumSize = new System.Drawing.Size(45, 22);
+            this.toggleButton3.Name = "toggleButton3";
+            this.toggleButton3.OffBackColor = System.Drawing.Color.Gray;
+            this.toggleButton3.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.toggleButton3.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.toggleButton3.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.toggleButton3.Size = new System.Drawing.Size(45, 22);
+            this.toggleButton3.TabIndex = 39;
+            this.toggleButton3.UseVisualStyleBackColor = true;
+            // 
+            // toggleButton2
+            // 
+            this.toggleButton2.AutoSize = true;
+            this.toggleButton2.Location = new System.Drawing.Point(89, 313);
+            this.toggleButton2.MinimumSize = new System.Drawing.Size(45, 22);
+            this.toggleButton2.Name = "toggleButton2";
+            this.toggleButton2.OffBackColor = System.Drawing.Color.Gray;
+            this.toggleButton2.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.toggleButton2.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.toggleButton2.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.toggleButton2.Size = new System.Drawing.Size(45, 22);
+            this.toggleButton2.TabIndex = 37;
+            this.toggleButton2.UseVisualStyleBackColor = true;
             // 
             // toggleButton1
             // 
@@ -423,60 +452,32 @@
             this.toggleButton1.TabIndex = 35;
             this.toggleButton1.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // toggleButton_IMU_Status
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 273);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(31, 13);
-            this.label14.TabIndex = 34;
-            this.label14.Text = "GSM";
+            this.toggleButton_IMU_Status.AutoSize = true;
+            this.toggleButton_IMU_Status.Checked = true;
+            this.toggleButton_IMU_Status.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toggleButton_IMU_Status.Location = new System.Drawing.Point(89, 224);
+            this.toggleButton_IMU_Status.MinimumSize = new System.Drawing.Size(45, 22);
+            this.toggleButton_IMU_Status.Name = "toggleButton_IMU_Status";
+            this.toggleButton_IMU_Status.OffBackColor = System.Drawing.Color.Gray;
+            this.toggleButton_IMU_Status.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.toggleButton_IMU_Status.OnBackColor = System.Drawing.Color.LimeGreen;
+            this.toggleButton_IMU_Status.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.toggleButton_IMU_Status.Size = new System.Drawing.Size(45, 22);
+            this.toggleButton_IMU_Status.TabIndex = 33;
+            this.toggleButton_IMU_Status.UseVisualStyleBackColor = true;
             // 
-            // toggleButton2
+            // visualizer_Component
             // 
-            this.toggleButton2.AutoSize = true;
-            this.toggleButton2.Location = new System.Drawing.Point(89, 313);
-            this.toggleButton2.MinimumSize = new System.Drawing.Size(45, 22);
-            this.toggleButton2.Name = "toggleButton2";
-            this.toggleButton2.OffBackColor = System.Drawing.Color.Gray;
-            this.toggleButton2.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.toggleButton2.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.toggleButton2.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.toggleButton2.Size = new System.Drawing.Size(45, 22);
-            this.toggleButton2.TabIndex = 37;
-            this.toggleButton2.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(7, 318);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(37, 13);
-            this.label15.TabIndex = 36;
-            this.label15.Text = "Iridium";
-            // 
-            // toggleButton3
-            // 
-            this.toggleButton3.AutoSize = true;
-            this.toggleButton3.Location = new System.Drawing.Point(89, 358);
-            this.toggleButton3.MinimumSize = new System.Drawing.Size(45, 22);
-            this.toggleButton3.Name = "toggleButton3";
-            this.toggleButton3.OffBackColor = System.Drawing.Color.Gray;
-            this.toggleButton3.OffToggleColor = System.Drawing.Color.Gainsboro;
-            this.toggleButton3.OnBackColor = System.Drawing.Color.LimeGreen;
-            this.toggleButton3.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.toggleButton3.Size = new System.Drawing.Size(45, 22);
-            this.toggleButton3.TabIndex = 39;
-            this.toggleButton3.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 363);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(37, 13);
-            this.label16.TabIndex = 38;
-            this.label16.Text = "GNSS";
+            this.visualizer_Component.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.visualizer_Component.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.visualizer_Component.Location = new System.Drawing.Point(0, 0);
+            this.visualizer_Component.Name = "visualizer_Component";
+            this.visualizer_Component.Size = new System.Drawing.Size(1012, 690);
+            this.visualizer_Component.Start_3D_Test_Flag = false;
+            this.visualizer_Component.TabIndex = 0;
+            this.visualizer_Component.Load += new System.EventHandler(this.visualizer_Component_Load);
             // 
             // Main_Form
             // 

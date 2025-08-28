@@ -38,5 +38,10 @@ namespace ORCA_Simulator_Application
         {
 
         }
+
+        private void visualizer_Component_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

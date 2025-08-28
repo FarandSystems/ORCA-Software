@@ -72,3 +72,7 @@ C:\Users\Matin\source\repos\ORCA-Software\Windows App\ORCA_Simulator_Application
 C:\Users\Matin\source\repos\ORCA-Software\Windows App\ORCA_Simulator_Application\ORCA_Simulator_Application\bin\Debug\Movement_Functions_Control.dll
 C:\Users\Matin\source\repos\ORCA-Software\Windows App\ORCA_Simulator_Application\ORCA_Simulator_Application\bin\Debug\CNC_Axis_Component.pdb
 C:\Users\Matin\source\repos\ORCA-Software\Windows App\ORCA_Simulator_Application\ORCA_Simulator_Application\bin\Debug\Movement_Functions_Control.pdb
+C:\Projects\ORCA Software\Windows App\ORCA_Simulator_Application\ORCA_Simulator_Application\bin\Debug\CNC_Axis_Component.dll
+C:\Projects\ORCA Software\Windows App\ORCA_Simulator_Application\ORCA_Simulator_Application\bin\Debug\Movement_Functions_Control.dll
+C:\Projects\ORCA Software\Windows App\ORCA_Simulator_Application\ORCA_Simulator_Application\bin\Debug\CNC_Axis_Component.pdb
+C:\Projects\ORCA Software\Windows App\ORCA_Simulator_Application\ORCA_Simulator_Application\bin\Debug\Movement_Functions_Control.pdb

@@ -72,5 +72,10 @@ namespace Visualizer_Component
 
             viewport.FrameTo(Vector3.Zero, 4.0f);
         }
+
+        private void farand_Chart3_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
