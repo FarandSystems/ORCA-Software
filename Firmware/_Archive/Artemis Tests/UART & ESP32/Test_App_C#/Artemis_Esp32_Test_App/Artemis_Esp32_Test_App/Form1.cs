@@ -8,6 +8,9 @@ namespace Artemis_Esp32_Test_App
 {
     public partial class Form1 : Form
     {
+        byte[] command_bytes = new byte[8];
+
+
         Simple_Client_LAN_Control.Simple_Client_LAN_Control lan =
             new Simple_Client_LAN_Control.Simple_Client_LAN_Control();
 
@@ -35,7 +38,7 @@ namespace Artemis_Esp32_Test_App
             // tell the control to expect 64-byte packets
             lan.RX_Byte_Count = 64;
 
-            lan.IPAddress = "192.168.4.1";
+            lan.IPAddress = "WaveLogger.local";
             lan.Port = 80;
 
             // fire when each 64-byte report arrives
@@ -43,14 +46,21 @@ namespace Artemis_Esp32_Test_App
 
             // start connecting on load
             this.Load += async (_, __) => await lan.ConnectAsync();
+
+            this.Controls.Add(lan);
+            
         }
 
         private void LanControl_Recieved_Data(object sender, EventArgs e)
         {
-            var buf = lan.RX_Data;
-            if (buf.Length < 64) return;
-            Show_Rx_Data(buf);
-            Graph_Data();
+            if (checkBox_Reporting.Checked)
+            {
+                var buf = lan.RX_Data;
+                if (buf.Length < 64) return;
+                Show_Rx_Data(buf);
+                Graph_Data();
+            }
+
 
         }
 
@@ -434,6 +444,89 @@ namespace Artemis_Esp32_Test_App
             farand_Chart1.Add_Farand_Graph(myGraph11);
 
             farand_Chart1.Refresh_All();
+        }
+
+        private void checkBox_Start_Qwiic_CheckedChanged(object sender, EventArgs e)
+        {
+            Power_Switch_Sensors(checkBox_Start_Qwiic.Checked);
+        }
+
+        private void Power_Switch_Sensors(bool is_On)
+        {
+            if (is_On)
+            {
+                command_bytes[0] = 0x00;
+                command_bytes[1] = 0x01;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+
+                checkBox_Reporting.Enabled = true;
+            }
+            else
+            {
+                command_bytes[0] = 0x00;
+                command_bytes[1] = 0x02;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+
+                checkBox_Reporting.Enabled = false;
+            }
+            command_bytes[7] = Calculate_Checksum(command_bytes);
+
+            lan.Send_Data(command_bytes);
+
+        }
+
+        private byte Calculate_Checksum(byte[] packet)
+        {
+            byte checksum = 0;
+            for (int i = 0; i < packet.Length; i++)
+            {
+                checksum += packet[i];
+            }
+            return checksum;
+        }
+
+        private void checkBox_Reporting_CheckedChanged(object sender, EventArgs e)
+        {
+            Switch_Reporting(checkBox_Reporting.Checked);
+        }
+
+
+        private void Switch_Reporting(bool is_Reporting)
+        {
+            if (is_Reporting)
+            {
+                command_bytes[0] = 0x00;
+                command_bytes[1] = 0x04;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+
+                checkBox_Reporting.Enabled = true;
+            }
+            else
+            {
+                command_bytes[0] = 0x00;
+                command_bytes[1] = 0x05;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+                command_bytes[0] = 0x00;
+            }
+            command_bytes[7] = Calculate_Checksum(command_bytes);
+
+            lan.Send_Data(command_bytes);
+
         }
     }
 }
