@@ -105,7 +105,6 @@ void TcpServer::task() {
         if (b < 0) break;
         rxBuf_[rxIdx_++] = static_cast<uint8_t>(b);
         if (rxIdx_ == kCmdSize) {
-          Serial.println("Rx: %i", rxBuf_[1]);
           if (cb_) cb_(rxBuf_, kCmdSize, cbCtx_);
           rxIdx_ = 0;
         }

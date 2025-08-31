@@ -38,7 +38,7 @@ namespace Artemis_Esp32_Test_App
             // tell the control to expect 64-byte packets
             lan.RX_Byte_Count = 64;
 
-            lan.IPAddress = "WaveLogger.local";
+            lan.IPAddress = "192.168.4.1";
             lan.Port = 80;
 
             // fire when each 64-byte report arrives

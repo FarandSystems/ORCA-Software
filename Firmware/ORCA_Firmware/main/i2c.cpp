@@ -67,6 +67,9 @@ static void tiny_delay_ms(uint32_t ms) {
 // ---- API ----
 void i2c_init(void) {
   agtWire.begin();
+  delay(100);
+  agtWire.setClock(1000000);
+  delay(100);
 
   // Try Qwiic power switch
   qwiic_present = qwiic_switch.begin(agtWire);

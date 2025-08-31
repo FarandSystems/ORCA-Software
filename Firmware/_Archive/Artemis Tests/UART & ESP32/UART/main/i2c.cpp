@@ -1,24 +1,40 @@
 #include "i2c.h"
 #include "main.h"
 
-#include <Wire.h>
+
+
 #include <Adafruit_ISM330DHCX.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_LIS3MDL.h>
 #include <SparkFun_PHT_MS8607_Arduino_Library.h>
 
 // I2C on D9/D8 for Artemis Global Tracker
-static TwoWire agtWire(9, 8);
+TwoWire agtWire(9, 8);
 
 // existing
 static Adafruit_ISM330DHCX ism330dhcx;
 static MS8607             baro;
+QWIIC_POWER qwiic_switch;
 
 // magnetometer
 static Adafruit_LIS3MDL lis3mdl;
 
 void i2c_init() {
   agtWire.begin();
+  delay(100);
+  agtWire.setClock(1000000);
+  delay(100);
+
+  if (!qwiic_switch.begin(agtWire)) {
+    Serial.println("Qwiic Power Switch not found!");
+    while (1);
+  }
+
+  qwiic_switch.powerOn();
+  delay(100);
+  Serial.println("Qwiic is powered on");
+
+
   baro.begin(agtWire);
 
   // — IMU init (unchanged) —

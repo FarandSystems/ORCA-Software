@@ -2,7 +2,7 @@
 #include <HardwareSerial.h>
 
 // Set up UART1 for communication with Artemis
-HardwareSerial mySerial(1);
+HardwareSerial mySerial(0);
 
 // Wi-Fi credentials for the Access Point
 const char* ssid     = "ESP32_AP";
@@ -16,13 +16,13 @@ uint8_t rx_Buffer[8];
 uint8_t tx_Buffer[64];
 
 void setup() {
-  Serial.begin(115200);
-  mySerial.begin(115200, SERIAL_8N1, 16, 17);
+  // Serial.begin(115200);
+  mySerial.begin(115200, SERIAL_8N1, 3, 1);
   mySerial.setTimeout(200);
 
   WiFi.softAP(ssid, password);
   delay(500);
-  Serial.print("AP IP: "); Serial.println(WiFi.softAPIP());
+  // Serial.print("AP IP: "); Serial.println(WiFi.softAPIP());
 
   server.begin();
 }
@@ -32,7 +32,7 @@ void loop() {
   if (!client || !client.connected()) {
     client = server.available();
     if (client && client.connected()) {
-      Serial.println("Client connected");
+      // Serial.println("Client connected");
     }
   }
 
@@ -42,7 +42,7 @@ void loop() {
     if (mySerial.available() >= 64) {
       int got = mySerial.readBytes(tx_Buffer, 64);
       if (got == 64) {
-        Serial.println("UART→TCP (64 bytes)");
+        // Serial.println("UART→TCP (64 bytes)");
         client.write(tx_Buffer, 64);
       }
     }
@@ -51,7 +51,7 @@ void loop() {
     if (client.available() >= 8) {
       int got = client.read(rx_Buffer, 8);
       if (got == 8) {
-        Serial.println("TCP→UART (8 bytes)");
+        // Serial.println("TCP→UART (8 bytes)");
         mySerial.write(rx_Buffer, 8);
       }
     }

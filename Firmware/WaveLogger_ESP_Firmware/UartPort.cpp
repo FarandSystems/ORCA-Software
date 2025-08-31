@@ -19,6 +19,7 @@ void UartPort::send(const uint8_t* data, size_t len) {
   if (!qTx_ || !data || len == 0) return;
   Packet p{};
   p.len = (len > kPktSize) ? kPktSize : len;
+  Serial.println(p.data[1]);
   memcpy(p.data, data, p.len);
   // non-blocking: drop if queue is full
 

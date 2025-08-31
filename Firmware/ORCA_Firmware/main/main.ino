@@ -64,8 +64,9 @@ void setup() {
 
 void loop() {
   // Service tickers regularly
-  i2cTicker.update();
   uartTicker.update();
+  i2cTicker.update();
+  
   reportTicker.update();
   alarmTicker.update();
 }

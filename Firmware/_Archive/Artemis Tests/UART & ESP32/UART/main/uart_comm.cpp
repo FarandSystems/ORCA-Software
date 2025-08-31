@@ -10,6 +10,7 @@ static void Service_Input_Command(uint8_t* RxBuffer) {
   switch (RxBuffer[1]) {
     case 0x00: break;
     case 0x02:
+      
       // example: single-shot
       // Alarm(SHORT_BEEP_X1,1,32,1);
       break;

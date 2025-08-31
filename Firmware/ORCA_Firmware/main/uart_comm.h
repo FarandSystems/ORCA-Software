@@ -1,11 +1,10 @@
 #pragma once
-#include <stdint.h>
 
 // Call once after Serial1.begin()
 void UART_init();
 
-// Non-blocking: feed bytes from UART1 and dispatch full 8-byte commands
+// Called periodically (e.g. via Ticker) to poll RX and prepare TX
 void UART_poll();
 
-// Build & send the 64-byte telemetry frame (call periodically)
+// Called every report tick (e.g. 1000 ms)
 void Report_Measured_Data();

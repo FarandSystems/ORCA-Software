@@ -5,6 +5,8 @@
 #include "uart_comm.h"
 #include "i2c.h"
 
+
+
 // define globals from main.h
 volatile int32_t g_Temperature = 0;
 volatile int32_t g_Pressure    = 0;
@@ -42,9 +44,6 @@ void setup() {
 
   Serial.begin(115200);
   while (!Serial);
-
-  // UART1↔ESP32
-  Serial1.begin(115200);
 
   // init subsystems
   i2c_init();
