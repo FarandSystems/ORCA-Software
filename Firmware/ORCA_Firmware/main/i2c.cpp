@@ -29,10 +29,17 @@ static bool init_imu() {
     Serial.println("ISM330DHCX not found!");
     return false;
   }
-  ism330.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
-  ism330.setGyroRange(LSM6DS_GYRO_RANGE_125_DPS);
-  ism330.setAccelDataRate(LSM6DS_RATE_833_HZ);
-  ism330.setGyroDataRate(LSM6DS_RATE_833_HZ);
+  
+  // Set accelerometer to its highest range (±2g) for max resolution
+  ism330.setAccelRange(LSM6DS_ACCEL_RANGE_16_G);   // ±2g range provides max resolution
+  
+  // Set gyroscope to its highest range (±125 dps) for max resolution
+  ism330.setGyroRange(LSM6DS_GYRO_RANGE_125_DPS);  // ±125 dps provides max resolution
+  
+  // Set the highest data rate for accelerometer and gyroscope (6.66 kHz)
+  ism330.setAccelDataRate(LSM6DS_RATE_6_66K_HZ);  // Highest data rate
+  ism330.setGyroDataRate(LSM6DS_RATE_6_66K_HZ);   // Highest data rate
+
   ism330.configInt1(false, false, true);
   ism330.configInt2(false, true, false);
   return true;

@@ -25,7 +25,7 @@ volatile bool g_report_enabled = true;
 // IMU @ ~500 Hz, Mag ~155 Hz, Baro slower; we read all at 2 ms (500 Hz) to keep it simple
 Ticker i2cTicker   ((void (*)())i2c_read,            2, 0, MILLIS);
 Ticker uartTicker  ((void (*)())UART_poll,          10, 0, MILLIS); // 100 Hz poll for 8B cmds
-Ticker reportTicker((void (*)())Report_Measured_Data, 50, 0, MILLIS); // 20 Hz telemetry
+Ticker reportTicker((void (*)())Report_Measured_Data, 125, 0, MILLIS); // 20 Hz telemetry
 
 Ticker alarmTicker([]{
   Alarm_Update_32Hz();           // ~32 Hz driver; choose 31 or 32 ms

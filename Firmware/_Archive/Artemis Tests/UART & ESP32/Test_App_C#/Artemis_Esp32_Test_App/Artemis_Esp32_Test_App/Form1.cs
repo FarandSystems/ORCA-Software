@@ -58,6 +58,7 @@ namespace Artemis_Esp32_Test_App
                 var buf = lan.RX_Data;
                 if (buf.Length < 64) return;
                 Show_Rx_Data(buf);
+                time_Sec += 0.125f;
                 Graph_Data();
             }
 
@@ -75,28 +76,27 @@ namespace Artemis_Esp32_Test_App
             // byte 8 is reserved
 
             // bytes 9–10 = Humidity (%RH, integer)
-            Humidity = (short)((buf[9] << 8) + buf[10]);
+            Humidity = (short)((buf[8] << 8) + buf[9]);
 
 
             // Extract 32-bit values
-            int Acc_X_i32 = GetInt32FromBuffer(buf, 11);
+            int Acc_X_i32 = GetInt32FromBuffer(buf, 10);
 
-            // Acc_Y is spread across buf[15], [17], [18], [19] (skip [16])
-            int Acc_Y_i32 = (buf[15] << 24) + (buf[17] << 16) + (buf[18] << 8) + buf[19];
 
-            int Acc_Z_i32 = GetInt32FromBuffer(buf, 20);  // 20–23
+            int Acc_Y_i32 = GetInt32FromBuffer(buf, 14);
 
-            int GyroX_i32 = GetInt32FromBuffer(buf, 25);
+            int Acc_Z_i32 = GetInt32FromBuffer(buf, 18);  // 20–23
 
-            // GyroY is spread across buf[29], [30], [31], [33] (skip [32])
-            int GyroY_i32 = (buf[29] << 24) + (buf[30] << 16) + (buf[31] << 8) + buf[33];
+            int GyroX_i32 = GetInt32FromBuffer(buf, 22);
 
-            int GyroZ_i32 = GetInt32FromBuffer(buf, 34);
+            int GyroY_i32 = GetInt32FromBuffer(buf, 26);
+
+            int GyroZ_i32 = GetInt32FromBuffer(buf, 30);
 
             // Magnetometer
-            int Mag_X_i32 = (buf[38] << 24) + (buf[39] << 16) + (buf[41] << 8) + buf[42];
-            int Mag_Y_i32 = GetInt32FromBuffer(buf, 43);
-            int Mag_Z_i32 = (buf[47] << 24) + (buf[49] << 16) + (buf[50] << 8) + buf[51];
+            int Mag_X_i32 = GetInt32FromBuffer(buf, 34);
+            int Mag_Y_i32 = GetInt32FromBuffer(buf, 38);
+            int Mag_Z_i32 = GetInt32FromBuffer(buf, 42);
 
             // Convert back to float (in original units)
             Acc_X = Acc_X_i32 / 1000.0f;
@@ -138,17 +138,12 @@ namespace Artemis_Esp32_Test_App
         // Helper to extract 4 bytes (big-endian) and convert to int32
         int GetInt32FromBuffer(byte[] buf, int startIdx)
         {
-            return (buf[startIdx] << 24) + (buf[startIdx + 1] << 16) + (buf[startIdx + 2] << 8) + buf[startIdx + 3];
+            Int32 rx_data = (Int32)((buf[startIdx] << 24) + (buf[startIdx + 1] << 16) + (buf[startIdx + 2] << 8) + buf[startIdx + 3]);
+            return rx_data;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             Initialize_Chart1();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            Graph_Data();
-            time_Sec += timer1.Interval * 0.001;
         }
 
         void Graph_Data()
@@ -173,37 +168,34 @@ namespace Artemis_Esp32_Test_App
             Farand_Chart.Farand_Graph graph_Mag_Z = farand_Chart1.Get_Farand_Graph_Object(11);
 
 
-            if (time_Sec > farand_Chart1.XAxis.Maximum)
+            if (time_Sec > farand_Chart1.XAxis.Minimum + 10)
             {
+                // Ensure that the first point is visible on the graph
                 if (radioButton_PHT.Checked == true)
                 {
-                    graph_Temperature.Points.Clear();
-                    graph_Humidity.Points.Clear();
-                    graph_Pressure.Points.Clear();
-
-
+                    // Shift points by removing the first (oldest) point and keeping the new ones
+                    if (graph_Temperature.Points.Count > 10) graph_Temperature.Points.RemoveAt(0);
+                    if (graph_Humidity.Points.Count > 10) graph_Humidity.Points.RemoveAt(0);
+                    if (graph_Pressure.Points.Count > 10) graph_Pressure.Points.RemoveAt(0);
                 }
                 if (radioButton_IMU.Checked == true)
                 {
-                    graph_Acc_X.Points.Clear();
-                    graph_Acc_Y.Points.Clear();
-                    graph_Acc_Z.Points.Clear();
+                    if (graph_Acc_X.Points.Count > 10) graph_Acc_X.Points.RemoveAt(0);
+                    if (graph_Acc_Y.Points.Count > 10) graph_Acc_Y.Points.RemoveAt(0);
+                    if (graph_Acc_Z.Points.Count > 10) graph_Acc_Z.Points.RemoveAt(0);
                 }
                 if (radioButton_Mag.Checked)
                 {
-                    graph_Mag_X.Points.Clear();
-                    graph_Mag_Y.Points.Clear();
-                    graph_Mag_Z.Points.Clear();
+                    if (graph_Mag_X.Points.Count > 10) graph_Mag_X.Points.RemoveAt(0);
+                    if (graph_Mag_Y.Points.Count > 10) graph_Mag_Y.Points.RemoveAt(0);
+                    if (graph_Mag_Z.Points.Count > 10) graph_Mag_Z.Points.RemoveAt(0);
                 }
 
-                //graph_Z_Motor_Measured_deg.Points.Clear();
-                //graph_Theta_Measured_Angle_deg.Points.Clear();
-                //graph_Z_Motor_Measured_mm.Points.Clear();
-                //graph_Z_Motor_Desired_mm.Points.Clear();
-
-                farand_Chart1.XAxis.Initial_Minimum += 60;
-                farand_Chart1.XAxis.Initial_Maximum += 60;
+                // Increment the X-Axis range
+                farand_Chart1.XAxis.Initial_Minimum += 1;
+                farand_Chart1.XAxis.Initial_Maximum += 1;
             }
+
 
             if (radioButton_PHT.Checked == true)
             {
@@ -226,13 +218,13 @@ namespace Artemis_Esp32_Test_App
             }
             if (radioButton_IMU.Checked == true)
             {
-                graph_Acc_X.Add_Point(time_Sec, (double)Acc_X);
-                graph_Acc_Y.Add_Point(time_Sec, (double)Acc_Y);
-                graph_Acc_Z.Add_Point(time_Sec, (double)Acc_Z);
+                graph_Acc_X.Add_Point(time_Sec, (double)Acc_X * 10.0f);
+                graph_Acc_Y.Add_Point(time_Sec, (double)Acc_Y * 10.0f);
+                graph_Acc_Z.Add_Point(time_Sec, (double)Acc_Z * 10.0f);
 
-                graph_Gyro_X.Add_Point(time_Sec, (double) GyroX * 100.0f);
-                graph_Gyro_Y.Add_Point(time_Sec, (double) GyroY * 100.0f);
-                graph_Gyro_Z.Add_Point(time_Sec, (double) GyroZ * 100.0f);
+                graph_Gyro_X.Add_Point(time_Sec, (double) GyroX);
+                graph_Gyro_Y.Add_Point(time_Sec, (double) GyroY);
+                graph_Gyro_Z.Add_Point(time_Sec, (double) GyroZ);
 
                 graph_Temperature.Points.Clear();
                 graph_Pressure.Points.Clear();
@@ -281,8 +273,8 @@ namespace Artemis_Esp32_Test_App
             farand_Chart1.View_Changed += Farand_Chart1_View_Changed;
 
             farand_Chart1.XAxis.Initial_Minimum = 0;
-            farand_Chart1.XAxis.Initial_Maximum = 60;
-            farand_Chart1.XAxis.MajorGrid.Interval = 10;
+            farand_Chart1.XAxis.Initial_Maximum = 10;
+            farand_Chart1.XAxis.MajorGrid.Interval = 1;
             farand_Chart1.XAxis.MajorGrid.Labels.DecimalPlaces = 0;
             farand_Chart1.XAxis.Title.FrameSize = new SizeF(100F, 20F);
             farand_Chart1.XAxis.Title.TopMargin = -20F;
