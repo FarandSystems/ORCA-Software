@@ -23,6 +23,11 @@ static MS8607              ms8607;
 
 static bool s_sensors_ready = false;
 
+// top of file (or static in i2c.c)
+static uint32_t last_imu_us = 0;
+static const uint32_t imu_period_us = 1200; // 833 Hz
+
+
 // ---- helpers ----
 static bool init_imu() {
   if (!ism330.begin_I2C(0x6A, &agtWire)) {
@@ -30,15 +35,11 @@ static bool init_imu() {
     return false;
   }
   
-  // Set accelerometer to its highest range (±2g) for max resolution
-  ism330.setAccelRange(LSM6DS_ACCEL_RANGE_16_G);   // ±2g range provides max resolution
-  
-  // Set gyroscope to its highest range (±125 dps) for max resolution
-  ism330.setGyroRange(LSM6DS_GYRO_RANGE_125_DPS);  // ±125 dps provides max resolution
-  
-  // Set the highest data rate for accelerometer and gyroscope (6.66 kHz)
-  ism330.setAccelDataRate(LSM6DS_RATE_6_66K_HZ);  // Highest data rate
-  ism330.setGyroDataRate(LSM6DS_RATE_6_66K_HZ);   // Highest data rate
+  // 1) Use finest LSB and a sane ODR
+  ism330.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);      // finest resolution
+  ism330.setGyroRange (LSM6DS_GYRO_RANGE_125_DPS);
+  ism330.setAccelDataRate(LSM6DS_RATE_833_HZ);       // start here
+  ism330.setGyroDataRate (LSM6DS_RATE_833_HZ);
 
   ism330.configInt1(false, false, true);
   ism330.configInt2(false, true, false);
@@ -73,6 +74,9 @@ static void tiny_delay_ms(uint32_t ms) {
 
 // ---- API ----
 void i2c_init(void) {
+  pinMode(TOGGLE_PIN, OUTPUT);
+  digitalWrite(TOGGLE_PIN, LOW);
+
   agtWire.begin();
   delay(100);
   agtWire.setClock(1000000);
@@ -134,19 +138,11 @@ void imu_set_rates(uint8_t acc_code, uint8_t gyr_code) {
   if (gyr_code < 10) ism330.setGyroDataRate (gyr_map[gyr_code]);
 }
 
-void i2c_read(void) {
-  if (!s_sensors_ready) return;
+void i2c_read() {
+  digitalWrite(TOGGLE_PIN, HIGH);     // start of tick
+  uint32_t t0 = micros();
 
-  // --- MS8607 ---
-  // Library returns floats (deg C, mbar, %RH). Cast to ints if you prefer.
-  float Tf = ms8607.getTemperature();
-  float Pf = ms8607.getPressure();
-  float Hf = ms8607.getHumidity();
-  g_Temperature = (int32_t)Tf;
-  g_Pressure    = (int32_t)Pf;
-  g_Humidity    = (int32_t)Hf;
-
-  // --- ISM330DHCX ---
+  // ---- IMU ONLY here ----
   sensors_event_t accel, gyro, temp;
   if (ism330.getEvent(&accel, &gyro, &temp)) {
     Acc_X = accel.acceleration.x;
@@ -157,12 +153,40 @@ void i2c_read(void) {
     GyroZ = gyro.gyro.z;
   }
 
-  // --- LIS3MDL ---
-  sensors_event_t mag;
-  lis3.getEvent(&mag);
-  Mag_X = mag.magnetic.x;
-  Mag_Y = mag.magnetic.y;
-  Mag_Z = mag.magnetic.z;
+  // ---- THROTTLE slow sensors (don’t run every tick) ----
+  static uint32_t lastSlow = 0;
+  uint32_t now = millis();
+  if (now - lastSlow >= 50) {         // 20 Hz
+    lastSlow = now;
+
+    // If these lines are inside every tick, they will kill 100 Hz:
+    float Tf = ms8607.getTemperature();
+    float Pf = ms8607.getPressure();
+    float Hf = ms8607.getHumidity();
+    g_Temperature = (int32_t)Tf;
+    g_Pressure    = (int32_t)Pf;
+    g_Humidity    = (int32_t)Hf;
+
+    sensors_event_t mag;
+    lis3.getEvent(&mag);
+    Mag_X = mag.magnetic.x;
+    Mag_Y = mag.magnetic.y;
+    Mag_Z = mag.magnetic.z;
+  }
+
+  uint32_t dt = micros() - t0;
+  digitalWrite(TOGGLE_PIN, LOW);      // end of tick
+
+  // Log once a second so we can see average execution time
+  static uint32_t acc=0, cnt=0, lastLog=0;
+  acc += dt; cnt++;
+  uint32_t ms = millis();
+  if (ms - lastLog >= 1000) {
+    lastLog = ms;
+    Serial.print("i2c_read avg us: ");
+    Serial.println(acc / (cnt ? cnt : 1)); // expect << 10000 for 100 Hz
+    acc = cnt = 0;
+  }
 }
 
 void IMU_print_settings(void) {

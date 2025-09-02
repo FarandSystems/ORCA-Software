@@ -1,72 +1,57 @@
-#include <Arduino.h>
-#include <Ticker.h>
-#include "main.h"
-#include "i2c.h"
-#include "uart_comm.h"
-#include "Alarm.h"
+#include "I2CModule.h"
+#include "RTOSManager.h"
+#include "ImuReader.h"
+#include "SerialModule.h"
+#include "QwiicPowerModule.h"
+#include "SensorsModule.h"
+#include "AlarmModule.h"
 
-// -------- Globals (defined) --------
-volatile int32_t g_Temperature = 0;
-volatile int32_t g_Pressure    = 0;
-volatile int32_t g_Humidity    = 0;
+I2CModule g_i2c_module(1, AM_HAL_IOM_1MHZ, 120);
+ImuReader imu_reader(g_i2c_module, 0);
+SensorModule sensor_module(g_i2c_module, 166);
+QwiicPowerModule power_module(g_i2c_module, imu_reader, sensor_module);
+SerialModule serial_module(Serial1, 115200, 166, power_module, Serial);
+AlarmModule g_alarm_module(312);
 
-float Acc_X = 0, Acc_Y = 0, Acc_Z = 0;
-float GyroX = 0, GyroY = 0, GyroZ = 0;
-float Mag_X = 0, Mag_Y = 0, Mag_Z = 0;
+void setup()
+{
+    Serial.begin(115200);
+    // am_hal_gpio_pinconfig(43, g_AM_HAL_GPIO_OUTPUT);
+    // pinMode(43, OUTPUT);  digitalWrite(43, LOW);
 
-uint8_t rx_Buffer[8];
-uint8_t tx_Buffer[64];
+    if (!g_i2c_module.init())
+    {
+        Serial.println("i2c init failed!");
+        while (1) {}
+    }
 
-volatile bool g_report_enabled = true;
+    if (!g_alarm_module.init())
+    {
+        Serial.println("alarm init failed!");
+        while (1) {}
+    }
+    if (!power_module.powerOn())
+    {
+        Serial.println("qwiic powering failed!");
+        while (1) {}
+    }
 
+    serial_module.init(imu_reader, sensor_module);
 
+    RTOSManager& rtos = RTOSManager::getInstance();
+    rtos.registerTickable(&g_i2c_module);
+    rtos.registerTickable(&serial_module);
+    rtos.registerTickable(&sensor_module);
+    rtos.registerTickable(&g_alarm_module);
+    rtos.startTicker();
 
-// Tickers: keep periods short but reasonable for libs
-// IMU @ ~500 Hz, Mag ~155 Hz, Baro slower; we read all at 2 ms (500 Hz) to keep it simple
-Ticker i2cTicker   ((void (*)())i2c_read,            2, 0, MILLIS);
-Ticker uartTicker  ((void (*)())UART_poll,          10, 0, MILLIS); // 100 Hz poll for 8B cmds
-Ticker reportTicker((void (*)())Report_Measured_Data, 125, 0, MILLIS); // 20 Hz telemetry
-
-Ticker alarmTicker([]{
-  Alarm_Update_32Hz();           // ~32 Hz driver; choose 31 or 32 ms
-}, 31, 0, MILLIS);
-
-void setup() {
-  // Basic rails
-  pinMode(IRIDIUM_PWR_PIN, OUTPUT);
-  digitalWrite(IRIDIUM_PWR_PIN, LOW);
-  pinMode(IRIDIUM_SLEEP_PIN, OUTPUT);
-  digitalWrite(IRIDIUM_SLEEP_PIN, LOW);
-
-  Serial.begin(115200);
-  while (!Serial) { }  // if USB
-
-  // Your buzzer pin here (example: D19), active-high
-  Alarm_Init(BUZZER_PIN, /*activeHigh=*/true);
-
-  alarmTicker.start();
-
-  // UART1 <-> ESP32
-  Serial1.begin(115200);
-  
-
-  // Subsystems
-  i2c_init();
-  UART_init();
-
-  // Start timers
-  i2cTicker.start();
-  uartTicker.start();
-  reportTicker.start();
-
-  Serial.println("AGT: I2C + UART + Qwiic (non-blocking)");
+    g_i2c_module.start();
+    imu_reader.start();
+    sensor_module.start();
+    serial_module.start();
+    g_alarm_module.start();
 }
 
-void loop() {
-  // Service tickers regularly
-  uartTicker.update();
-  i2cTicker.update();
-  
-  reportTicker.update();
-  alarmTicker.update();
+void loop()
+{
 }

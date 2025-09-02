@@ -8,6 +8,7 @@
 #define IRIDIUM_SLEEP_PIN   17
 #define LED_PIN             19
 #define BUZZER_PIN          42
+#define TOGGLE_PIN          43
 
 
 // PHT (integer - you can choose scale: here native library floats -> cast to int)
