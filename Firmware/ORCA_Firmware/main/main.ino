@@ -4,6 +4,7 @@
 #include "SensorsManager.h"
 #include "RTOSManager.h"
 #include "SerialDebugger.h"
+#include "Alarm.h"   // ← add this
 
 BoardControl    g_board;
 PowerManager    g_power;
@@ -21,6 +22,11 @@ void setup()
   g_power.enableSensorsRail(true);
   delay(20);
 
+  // ---- Buzzer init: pin 42, active-high ----
+  Alarm_Init(42, true);
+  // Optional: short boot chirp (pattern, repeats, slices=32, on)
+  Alarm(SHORT_BEEP_X2, 1, 32, BEEP_ON);
+
   if (!g_board.initI2C_IOM1_D8D9_1MHz())
   {
     LOGE("I2C init FAILED");
@@ -35,6 +41,7 @@ void setup()
   }
   LOGI("Sensors init OK");
 
+  // ---- Start RTOS (includes the new 32 Hz alarm thread) ----
   g_rtos.start();
 }
 

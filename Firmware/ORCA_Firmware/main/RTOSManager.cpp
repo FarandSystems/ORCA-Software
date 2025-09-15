@@ -1,5 +1,6 @@
 #include "RTOSManager.h"
 #include "SerialDebugger.h"
+#include "Alarm.h"     
 #include <Arduino.h>
 using namespace rtos;
 using namespace std::chrono;
@@ -11,10 +12,13 @@ RTOSManager::RTOSManager(SensorsManager& sensors)
   : m_sensors(sensors),
     m_semIMU(0),
     m_sem100(0),
+    m_semAlarm(0),                       // ← new
     m_tIMU(osPriorityHigh, 1536),
     m_tLog(osPriorityAboveNormal, 1024),
+    m_tAlarm(osPriorityAboveNormal, 768),// ← new
     m_cIMU(0),
-    m_c100(0)
+    m_c100(0),
+    m_accAlarmUs(0)                      // ← new
 {
 }
 
@@ -25,8 +29,12 @@ void RTOSManager::start()
   m_tIMU.start(mbed::callback(this, &RTOSManager::imuThread_));
   m_tLog.start(mbed::callback(this, &RTOSManager::logThread_));
 
+  // ---- Start 32 Hz Alarm thread ----
+  m_tAlarm.start(mbed::callback(this, &RTOSManager::alarmThread_));
+
+  // 200 µs master ticker (drives IMU, 100 Hz log, and 32 Hz alarm)
   m_masterTick.attach(mbed::callback(this, &RTOSManager::masterISR_), 200us);
-  LOGI("RTOS started (200us ticker, IMU~833Hz, log 100Hz)");
+  LOGI("RTOS started (200us ticker, IMU~833Hz, log 100Hz, alarm 32Hz)");
 }
 
 void RTOSManager::masterISRThunk_(void* ctx)
@@ -36,16 +44,26 @@ void RTOSManager::masterISRThunk_(void* ctx)
 
 void RTOSManager::masterISR_()
 {
+  // IMU ~833 Hz
   if (++m_cIMU >= 6)
   {
     m_cIMU = 0;
     m_semIMU.release();
   }
 
+  // Logger 100 Hz
   if (++m_c100 >= 50)
   {
     m_c100 = 0;
     m_sem100.release();
+  }
+
+  // Alarm 32 Hz (every 31,250 µs)
+  m_accAlarmUs += 200;          // each tick = 200 µs
+  if (m_accAlarmUs >= 31250)
+  {
+    m_accAlarmUs -= 31250;
+    m_semAlarm.release();
   }
 }
 
@@ -67,7 +85,6 @@ void RTOSManager::imuThread_()
     }
     else
     {
-      // noisy if sensor absent; keep at TRACE
       LOGT("IMU read failed");
     }
   }
@@ -97,7 +114,22 @@ void RTOSManager::logThread_()
 
     uint32_t tms = millis() - t0;
 
-    // serial_debugger.printf("%lu,%.4f,%.4f,%.4f,%.2f,%.2f,%.2f\r\n",
-    //                        (unsigned long)tms, ax, ay, az, gx, gy, gz);
+    serial_debugger.printf("%lu,%.4f,%.4f,%.4f,%.2f,%.2f,%.2f\r\n",
+                           (unsigned long)tms, ax, ay, az, gx, gy, gz);
+  }
+}
+
+// ---- 32 Hz Alarm thread ----
+void RTOSManager::alarmThreadThunk_(void* arg)
+{
+  static_cast<RTOSManager*>(arg)->alarmThread_();
+}
+
+void RTOSManager::alarmThread_()
+{
+  while (true)
+  {
+    m_semAlarm.acquire();
+    Alarm_Update_32Hz();   // advances pattern and drives buzzer pin 42
   }
 }
