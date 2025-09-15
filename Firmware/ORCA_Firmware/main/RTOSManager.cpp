@@ -1,4 +1,5 @@
 #include "RTOSManager.h"
+#include "SerialDebugger.h"
 #include <Arduino.h>
 using namespace rtos;
 using namespace std::chrono;
@@ -19,12 +20,13 @@ RTOSManager::RTOSManager(SensorsManager& sensors)
 
 void RTOSManager::start()
 {
-  Serial.println(F("t[ms], ax[g], ay[g], az[g], gx[dps], gy[dps], gz[dps]"));
+  serial_debugger.println("t[ms], ax[g], ay[g], az[g], gx[dps], gy[dps], gz[dps]");
 
   m_tIMU.start(mbed::callback(this, &RTOSManager::imuThread_));
   m_tLog.start(mbed::callback(this, &RTOSManager::logThread_));
 
   m_masterTick.attach(mbed::callback(this, &RTOSManager::masterISR_), 200us);
+  LOGI("RTOS started (200us ticker, IMU~833Hz, log 100Hz)");
 }
 
 void RTOSManager::masterISRThunk_(void* ctx)
@@ -63,6 +65,11 @@ void RTOSManager::imuThread_()
     {
       m_sensors.setLatest(s);
     }
+    else
+    {
+      // noisy if sensor absent; keep at TRACE
+      LOGT("IMU read failed");
+    }
   }
 }
 
@@ -90,12 +97,7 @@ void RTOSManager::logThread_()
 
     uint32_t tms = millis() - t0;
 
-    Serial.print(tms);         Serial.print(',');
-    Serial.print(ax, 4);       Serial.print(',');
-    Serial.print(ay, 4);       Serial.print(',');
-    Serial.print(az, 4);       Serial.print(',');
-    Serial.print(gx, 2);       Serial.print(',');
-    Serial.print(gy, 2);       Serial.print(',');
-    Serial.println(gz, 2);
+    // serial_debugger.printf("%lu,%.4f,%.4f,%.4f,%.2f,%.2f,%.2f\r\n",
+    //                        (unsigned long)tms, ax, ay, az, gx, gy, gz);
   }
 }

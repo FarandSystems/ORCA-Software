@@ -1,4 +1,5 @@
 #include "BoardControl.h"
+#include "SerialDebugger.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -15,6 +16,8 @@ BoardControl::BoardControl()
 
 bool BoardControl::initI2C_IOM1_D8D9_1MHz()
 {
+  LOGD("Pinmux IOM1: D8/D9");
+
   am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_SCL, g_AM_BSP_GPIO_IOM1_SCL);
   am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_SDA, g_AM_BSP_GPIO_IOM1_SDA);
 
@@ -22,10 +25,12 @@ bool BoardControl::initI2C_IOM1_D8D9_1MHz()
 
   if (am_hal_iom_initialize(m_iomIndex, &m_iomHandle) != AM_HAL_STATUS_SUCCESS)
   {
+    LOGE("am_hal_iom_initialize failed");
     return false;
   }
   if (am_hal_iom_power_ctrl(m_iomHandle, AM_HAL_SYSCTRL_WAKE, false) != AM_HAL_STATUS_SUCCESS)
   {
+    LOGE("am_hal_iom_power_ctrl failed");
     return false;
   }
 
@@ -36,13 +41,16 @@ bool BoardControl::initI2C_IOM1_D8D9_1MHz()
 
   if (am_hal_iom_configure(m_iomHandle, &cfg) != AM_HAL_STATUS_SUCCESS)
   {
+    LOGE("am_hal_iom_configure failed");
     return false;
   }
   if (am_hal_iom_enable(m_iomHandle) != AM_HAL_STATUS_SUCCESS)
   {
+    LOGE("am_hal_iom_enable failed");
     return false;
   }
 
+  LOGI("IOM%lu enabled @1MHz", (unsigned long)m_iomIndex);
   return true;
 }
 
@@ -50,6 +58,7 @@ bool BoardControl::readBytes(uint8_t addr, uint8_t reg, uint8_t* buf, uint32_t l
 {
   if (!m_iomHandle || len == 0)
   {
+    LOGW("readBytes guard hit (handle=%p, len=%lu)", m_iomHandle, (unsigned long)len);
     return false;
   }
 
@@ -69,6 +78,7 @@ bool BoardControl::readBytes(uint8_t addr, uint8_t reg, uint8_t* buf, uint32_t l
     bounce = static_cast<uint32_t*>(malloc(words * sizeof(uint32_t)));
     if (!bounce)
     {
+      LOGE("readBytes OOM (len=%lu)", (unsigned long)len);
       return false;
     }
     x.pui32RxBuffer = bounce;
@@ -80,6 +90,11 @@ bool BoardControl::readBytes(uint8_t addr, uint8_t reg, uint8_t* buf, uint32_t l
 
   uint32_t st = am_hal_iom_blocking_transfer(m_iomHandle, &x);
   bool ok = (st == AM_HAL_STATUS_SUCCESS);
+
+  if (!ok)
+  {
+    LOGW("readBytes NAK/ERR addr=0x%02X reg=0x%02X st=0x%08lX", addr, reg, (unsigned long)st);
+  }
 
   if (bounce)
   {
@@ -97,6 +112,7 @@ bool BoardControl::writeU8(uint8_t addr, uint8_t reg, uint8_t val)
 {
   if (!m_iomHandle)
   {
+    LOGW("writeU8 guard hit (handle=null)");
     return false;
   }
 
@@ -111,7 +127,15 @@ bool BoardControl::writeU8(uint8_t addr, uint8_t reg, uint8_t val)
   x.ui32NumBytes = 1;
   x.pui32TxBuffer = &word;
 
-  return am_hal_iom_blocking_transfer(m_iomHandle, &x) == AM_HAL_STATUS_SUCCESS;
+  uint32_t st = am_hal_iom_blocking_transfer(m_iomHandle, &x);
+  bool ok = (st == AM_HAL_STATUS_SUCCESS);
+
+  if (!ok)
+  {
+    LOGW("writeU8 NAK/ERR addr=0x%02X reg=0x%02X st=0x%08lX", addr, reg, (unsigned long)st);
+  }
+
+  return ok;
 }
 
 void BoardControl::scanI2C()
@@ -121,7 +145,7 @@ void BoardControl::scanI2C()
     return;
   }
 
-  Serial.println("[I2C] scan:");
+  LOGI("I2C scan begin");
   for (uint8_t a = 0x08; a <= 0x77; ++a)
   {
     am_hal_iom_transfer_t t;
@@ -132,10 +156,10 @@ void BoardControl::scanI2C()
 
     if (am_hal_iom_blocking_transfer(m_iomHandle, &t) == AM_HAL_STATUS_SUCCESS)
     {
-      Serial.print("  - 0x");
-      Serial.println(a, HEX);
+      LOGI("  found 0x%02X", a);
     }
   }
+  LOGI("I2C scan end");
 }
 
 void* BoardControl::iomHandle() const

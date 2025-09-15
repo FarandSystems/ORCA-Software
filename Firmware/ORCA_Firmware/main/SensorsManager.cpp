@@ -1,5 +1,6 @@
 #include "SensorsManager.h"
 #include "BoardControl.h"
+#include "SerialDebugger.h"
 #include <Arduino.h>
 
 static constexpr uint8_t REG_WHO_AM_I  = 0x0F;
@@ -32,17 +33,17 @@ bool IMU_ISM330::init(BoardControl& board)
   }
   else
   {
-    Serial.println("[IMU] WHO_AM_I failed");
+    LOGE("[IMU] WHO_AM_I failed (read=0x%02X)", v);
     return false;
   }
 
-  m_board->writeU8(m_addr, REG_CTRL3_C,  0x44); // BDU=1, IF_INC=1
-  m_board->writeU8(m_addr, REG_CTRL1_XL, 0x70); // 833 Hz, ±2 g
-  m_board->writeU8(m_addr, REG_CTRL2_G,  0x72); // 833 Hz, 125 dps
+  LOGI("[IMU] ISM330DHCX @0x%02X", m_addr);
+
+  if (!m_board->writeU8(m_addr, REG_CTRL3_C,  0x44)) LOGW("CTRL3_C write failed");
+  if (!m_board->writeU8(m_addr, REG_CTRL1_XL, 0x70)) LOGW("CTRL1_XL write failed");
+  if (!m_board->writeU8(m_addr, REG_CTRL2_G,  0x72)) LOGW("CTRL2_G write failed");
 
   m_inited = true;
-  Serial.print("[IMU] ISM330DHCX @0x");
-  Serial.println(m_addr, HEX);
   return true;
 }
 
@@ -55,6 +56,7 @@ bool IMU_ISM330::readBurst(ImuSample& out)
 {
   if (!m_inited || !m_board)
   {
+    LOGW("IMU read before init");
     return false;
   }
 
@@ -62,6 +64,7 @@ bool IMU_ISM330::readBurst(ImuSample& out)
 
   if (!m_board->readBytes(m_addr, REG_OUT_START, buf, sizeof(buf)))
   {
+    LOGW("IMU burst read failed");
     return false;
   }
 

@@ -14,10 +14,8 @@ class BoardControl
 public:
   BoardControl();
 
-  // I2C on IOM1 using D8 (SCL) / D9 (SDA) @ 1 MHz
   bool initI2C_IOM1_D8D9_1MHz();
 
-  // Low-level I2C helpers (blocking)
   bool readBytes(uint8_t addr, uint8_t reg, uint8_t* buf, uint32_t len);
   bool writeU8(uint8_t addr, uint8_t reg, uint8_t val);
 
