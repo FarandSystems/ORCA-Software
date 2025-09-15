@@ -9,7 +9,7 @@ namespace Artemis_Esp32_Test_App
     public partial class Form1 : Form
     {
         byte[] command_bytes = new byte[8];
-
+        bool is_Command_Ready = false;
 
         Simple_Client_LAN_Control.Simple_Client_LAN_Control lan =
             new Simple_Client_LAN_Control.Simple_Client_LAN_Control();
@@ -46,6 +46,7 @@ namespace Artemis_Esp32_Test_App
 
             // start connecting on load
             this.Load += async (_, __) => await lan.ConnectAsync();
+            timer_Connection.Start();
 
             this.Controls.Add(lan);
             
@@ -447,31 +448,18 @@ namespace Artemis_Esp32_Test_App
         {
             if (is_On)
             {
-                command_bytes[0] = 0x00;
                 command_bytes[1] = 0x01;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
 
                 checkBox_Reporting.Enabled = true;
             }
             else
             {
-                command_bytes[0] = 0x00;
                 command_bytes[1] = 0x02;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
 
                 checkBox_Reporting.Enabled = false;
             }
-            command_bytes[7] = Calculate_Checksum(command_bytes);
 
-            lan.Send_Data(command_bytes);
+            is_Command_Ready = true;
 
         }
 
@@ -485,6 +473,14 @@ namespace Artemis_Esp32_Test_App
             return checksum;
         }
 
+        private void Clear_All_Buffers()
+        {
+            for (int i = 0; i < command_bytes.Length; i++)
+            {
+                command_bytes[i] = 0x00;
+            }
+        }
+
         private void checkBox_Reporting_CheckedChanged(object sender, EventArgs e)
         {
             Switch_Reporting(checkBox_Reporting.Checked);
@@ -495,30 +491,35 @@ namespace Artemis_Esp32_Test_App
         {
             if (is_Reporting)
             {
-                command_bytes[0] = 0x00;
                 command_bytes[1] = 0x04;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
 
                 checkBox_Reporting.Enabled = true;
             }
             else
             {
-                command_bytes[0] = 0x00;
                 command_bytes[1] = 0x05;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
             }
-            command_bytes[7] = Calculate_Checksum(command_bytes);
 
+            is_Command_Ready = true;
+
+        }
+
+        private void timer_Connection_Tick(object sender, EventArgs e)
+        {
+            if (!is_Command_Ready) //Heartbeat
+            {
+                Clear_All_Buffers();
+                command_bytes[1] = 0xFF;
+
+                command_bytes[7] = Calculate_Checksum(command_bytes);
+            }
+            else
+            {
+                is_Command_Ready = false;
+                command_bytes[7] = Calculate_Checksum(command_bytes);
+            }
+            Console.WriteLine($"Sending {command_bytes[1]}");
             lan.Send_Data(command_bytes);
-
         }
     }
 }

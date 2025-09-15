@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+
 static inline bool isAligned4_(const void* p)
 {
   return ((reinterpret_cast<uintptr_t>(p) & 0x3u) == 0);
