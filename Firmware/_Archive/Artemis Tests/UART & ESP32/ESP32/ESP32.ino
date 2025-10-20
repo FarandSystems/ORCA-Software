@@ -1,61 +1,121 @@
 #include <WiFi.h>
 #include <HardwareSerial.h>
+#include <ESPmDNS.h>
 
-// Set up UART1 for communication with Artemis
+// ---- UART1 on GPIO16 (RX) / GPIO17 (TX) ----
 HardwareSerial mySerial(0);
+static const int UART_RX = 3;
+static const int UART_TX = 1;
 
-// Wi-Fi credentials for the Access Point
-const char* ssid     = "ESP32_AP";
-const char* password = "12345678";
+// Station WiFi
+const char* sta_ssid     = "ORCA";
+const char* sta_password = "Orca8868";
 
-WiFiServer server(80);
-
-WiFiClient client;  // keep this global so we can check .connected()
+WiFiServer server(3333);
+WiFiClient client;
 
 uint8_t rx_Buffer[8];
 uint8_t tx_Buffer[64];
 
-void setup() {
-  // Serial.begin(115200);
-  mySerial.begin(115200, SERIAL_8N1, 3, 1);
-  mySerial.setTimeout(200);
+const int rxPin = 16;  // debug pulse (not UART function)
+const int txPin = 17;  // debug pulse (not UART function)
+const int ledPin = 2;  // onboard LED
 
-  WiFi.softAP(ssid, password);
-  delay(500);
-  // Serial.print("AP IP: "); Serial.println(WiFi.softAPIP());
+unsigned long last_rx_time = 0;
+const unsigned long RX_TIMEOUT = 2000;  // ms, relaxed
+
+const char* hostname = "WaveLogger";
+
+void quickPulse(int pin, int times=1, int us=2000) {
+  for (int i=0; i<times; ++i) {
+    digitalWrite(pin, HIGH); delayMicroseconds(us);
+    digitalWrite(pin, LOW);  delayMicroseconds(us);
+  }
+}
+
+void setup() {
+  // UART1 at 115200, 8N1 on 16/17
+  mySerial.begin(115200, SERIAL_8N1, UART_RX, UART_TX);
+
+  pinMode(rxPin, OUTPUT);
+  pinMode(txPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(rxPin, LOW);
+  digitalWrite(txPin, LOW);
+  digitalWrite(ledPin, LOW);
+
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(sta_ssid, sta_password);
+  unsigned long t0 = millis();
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(200);
+    digitalWrite(ledPin, !digitalRead(ledPin));
+    if (millis() - t0 > 15000) break;  // 15 s safety timeout
+  }
+  digitalWrite(ledPin, HIGH);
+
+  if (MDNS.begin(hostname)) {
+    // service name "raw" over tcp on 3333 (choose any service name you like)
+    MDNS.addService("raw", "tcp", 3333);
+  }
 
   server.begin();
+  server.setNoDelay(true);
+}
+
+void acceptClientIfNeeded() {
+  if (client.connected()) return;
+  WiFiClient c = server.available();
+  if (c) {
+    if (client) client.stop();          // drop old one if any
+    client = c;
+    client.setNoDelay(true);
+    last_rx_time = millis();
+    quickPulse(rxPin, 3);
+  }
+}
+
+inline void bumpActivity() {
+  last_rx_time = millis();
+  // Optional visual: toggle LED
+  digitalWrite(ledPin, !digitalRead(ledPin));
 }
 
 void loop() {
-  // Accept a new client if none
-  if (!client || !client.connected()) {
-    client = server.available();
-    if (client && client.connected()) {
-      // Serial.println("Client connected");
-    }
-  }
+  acceptClientIfNeeded();
 
-  // If we have a connected client, shuttle data both ways
-  if (client && client.connected()) {
-    // 1) Check if Artemis sent us a 64-byte packet
+  if (client.connected()) {
+    // ---- UART -> TCP (64B frames) ----
     if (mySerial.available() >= 64) {
       int got = mySerial.readBytes(tx_Buffer, 64);
       if (got == 64) {
-        // Serial.println("UART→TCP (64 bytes)");
-        client.write(tx_Buffer, 64);
+        digitalWrite(rxPin, HIGH);
+        (void)client.write(tx_Buffer, 64);   // no client.flush()
+        digitalWrite(rxPin, LOW);
+        bumpActivity();                      // count as traffic
       }
     }
 
-    // 2) Check if the PC sent us an 8-byte command
+    // ---- TCP -> UART (8B commands) ----
     if (client.available() >= 8) {
       int got = client.read(rx_Buffer, 8);
       if (got == 8) {
-        // Serial.println("TCP→UART (8 bytes)");
-        mySerial.write(rx_Buffer, 8);
+        digitalWrite(txPin, HIGH);
+        (void)mySerial.write(rx_Buffer, 8);  // no mySerial.flush()
+        digitalWrite(txPin, LOW);
+        bumpActivity();                      // count as traffic
+      } else if (got > 0) {
+        // read remainder later (optional: accumulate exactly 8)
       }
+    }
+
+    // ---- Idle/timeout ----
+    if (millis() - last_rx_time > RX_TIMEOUT) {
+      client.stop();
+      quickPulse(txPin, 5);
+      digitalWrite(ledPin, HIGH); // steady until next connect
     }
   }
 
-  delay(1); // let WiFi background run
+  delay(1); // yield to WiFi stack
 }

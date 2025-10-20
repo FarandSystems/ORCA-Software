@@ -21,6 +21,16 @@ UartManager::UartManager(BoardControl& board, PowerManager& power, SensorsManage
 
 void UartManager::begin(uint32_t baud)
 {
+    // Configure the TX pin (Pin 42) for UART1
+  am_hal_gpio_pincfg_t pinConfigTx = g_AM_BSP_GPIO_COM_UART_TX;
+  pinConfigTx.uFuncSel = AM_HAL_PIN_42_UART1TX;  // Set Pin 42 to UART1TX function
+  pin_config(D42, pinConfigTx);  // Configure Pin 42 for UART TX
+  
+  // Configure the RX pin (Pin 43) for UART1
+  am_hal_gpio_pincfg_t pinConfigRx = g_AM_BSP_GPIO_COM_UART_RX;
+  pinConfigRx.uFuncSel = AM_HAL_PIN_43_UART1RX;  // Set Pin 43 to UART1RX function
+  pinConfigRx.ePullup = AM_HAL_GPIO_PIN_PULLUP_WEAK;  // Enable weak pull-up for RX pin
+  pin_config(D43, pinConfigRx);  // Configure Pin 43 for UART RX
   Serial1.begin(baud);
   while (!Serial1)
   {
@@ -313,17 +323,19 @@ void UartManager::buildAndSendReport_()
   {
     m_tx[i] = 0x00;
   }
+  uint8_t tx[24];
 
   // Simple checksum over first 63 bytes
   uint8_t cs = 0;
-  for (int i = 0; i < 63; ++i)
+  for (int i = 0; i < 23; ++i)
   {
-    cs += m_tx[i];
+    tx[i] = i;
+    cs += tx[i];
   }
-  m_tx[63] = cs;
+  tx[23] = cs;
 
   // Transmit
-  Serial1.write(m_tx, sizeof(m_tx));
+  Serial1.write(tx, sizeof(tx));
 
 #ifdef UART_LED_PIN
   digitalWrite(UART_LED_PIN, HIGH);
@@ -358,8 +370,19 @@ void UartManager::buildAndSendHeartbeat_()
     }
     m_tx[63] = cs;
 
+    uint8_t tx[24];
+
+    // Simple checksum over first 63 bytes
+    cs = 0;
+    for (int i = 0; i < 23; ++i)
+    {
+      tx[i] = i;
+      cs += tx[i];
+    }
+    tx[23] = cs;
+
     // Transmit
-    Serial1.write(m_tx, sizeof(m_tx));
+    Serial1.write(tx, sizeof(tx));
 }
 
 

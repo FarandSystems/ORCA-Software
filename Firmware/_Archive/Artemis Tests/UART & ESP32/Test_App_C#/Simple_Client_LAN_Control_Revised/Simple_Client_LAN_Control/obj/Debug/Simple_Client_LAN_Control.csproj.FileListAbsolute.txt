@@ -46,11 +46,19 @@ D:\ \Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simp
 D:\ \Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.CoreCompileInputs.cache
 D:\ \Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.dll
 D:\ \Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.pdb
-C:\Projects\ORCA1\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.dll
-C:\Projects\ORCA1\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.pdb
-C:\Projects\ORCA1\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.AssemblyReference.cache
-C:\Projects\ORCA1\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.Simple_Client_LAN_Control.resources
-C:\Projects\ORCA1\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.GenerateResource.cache
-C:\Projects\ORCA1\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.CoreCompileInputs.cache
-C:\Projects\ORCA1\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.dll
-C:\Projects\ORCA1\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.pdb
+C:\Users\Parsi\Desktop\040308_Pouyeshgar_C#\Pouyeshgar_Projects\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.dll
+C:\Users\Parsi\Desktop\040308_Pouyeshgar_C#\Pouyeshgar_Projects\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.pdb
+C:\Users\Parsi\Desktop\040308_Pouyeshgar_C#\Pouyeshgar_Projects\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.AssemblyReference.cache
+C:\Users\Parsi\Desktop\040308_Pouyeshgar_C#\Pouyeshgar_Projects\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.Simple_Client_LAN_Control.resources
+C:\Users\Parsi\Desktop\040308_Pouyeshgar_C#\Pouyeshgar_Projects\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.GenerateResource.cache
+C:\Users\Parsi\Desktop\040308_Pouyeshgar_C#\Pouyeshgar_Projects\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.CoreCompileInputs.cache
+C:\Users\Parsi\Desktop\040308_Pouyeshgar_C#\Pouyeshgar_Projects\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.dll
+C:\Users\Parsi\Desktop\040308_Pouyeshgar_C#\Pouyeshgar_Projects\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.dll
+C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.AssemblyReference.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.Simple_Client_LAN_Control.resources
+C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.GenerateResource.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.CoreCompileInputs.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.dll
+C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.pdb

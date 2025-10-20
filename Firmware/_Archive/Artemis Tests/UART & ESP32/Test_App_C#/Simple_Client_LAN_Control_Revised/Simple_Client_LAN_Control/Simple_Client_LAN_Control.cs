@@ -17,6 +17,14 @@ namespace Simple_Client_LAN_Control
         private TcpClient tcpClient;
         private NetworkStream stream;
         private bool is_Connected = false;
+        public bool IsConnected
+        {
+            get { return is_Connected; }
+            set
+            { 
+                is_Connected = value;
+            }
+        }
         private bool is_Data_Received = false;
         private int maxRetries = 5; // Limit the number of retries
         private int retryCount = 0;
@@ -57,6 +65,26 @@ namespace Simple_Client_LAN_Control
         public delegate void UpdateReceivedDataDelegate(string data);
         public UpdateReceivedDataDelegate UpdateReceivedDataCallback;
         public event EventHandler Recieved_Data;
+        public event EventHandler onDisconnect;
+        public event EventHandler onConnected;
+
+        private void Fire_On_Disconnect()
+        {
+            if (onDisconnect != null)
+            {
+                onDisconnect(this, null);
+            }
+        }
+
+        private void Fire_On_Connected()
+        {
+            if (onConnected != null)
+            {
+                onConnected(this, null);
+            }
+        }
+
+
 
         public Simple_Client_LAN_Control()
         {
@@ -75,6 +103,7 @@ namespace Simple_Client_LAN_Control
                     is_Connected = true;
                     retryCount = 0; // Reset retry count upon successful connection
                     _ = ReadDataAsync(); // Start reading data once connected
+                    Fire_On_Connected();
                     break;
                 }
                 catch (Exception ex)
@@ -94,74 +123,50 @@ namespace Simple_Client_LAN_Control
 
         private async Task ReadDataAsync()
         {
-            var tempBuf = new byte[256];      // read chunk
-            var frameBuf = new List<byte>();  // accumulator
-
+            var buffer = new byte[rx_Byte_Count];
             try
             {
                 while (is_Connected)
                 {
-                    int n = await stream.ReadAsync(tempBuf, 0, tempBuf.Length);
-                    if (n == 0)
+                    int bytesRead = 0;
+                    try
                     {
-                        // disconnected
+                        bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Read error: {ex}");
+                        // Connection error occurred
+                        Fire_On_Disconnect();
                         is_Connected = false;
                         break;
                     }
-                    // append to accumulator
-                    frameBuf.AddRange(tempBuf.Take(n));
 
-                    // try to pull out all full frames
-                    while (frameBuf.Count >= RX_Byte_Count)
+                    if (bytesRead > 0)
                     {
-                        // look for a candidate frame start at index 0..(Count-64)
-                        int idx = -1;
-                        for (int i = 0; i <= frameBuf.Count - RX_Byte_Count; i++)
-                        {
-                            // sync bytes at [2]==0x55 && [3]==0x55
-                            if (frameBuf[i + 2] == 0x55 && frameBuf[i + 3] == 0x55)
-                            {
-                                // checksum: sum[0..62] & 0xFF == frame[63]
-                                int sum = 0;
-                                for (int j = 0; j < RX_Byte_Count - 1; j++)
-                                    sum += frameBuf[i + j];
-                                if ((byte)sum == frameBuf[i + RX_Byte_Count - 1])
-                                {
-                                    idx = i;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (idx < 0)
-                        {
-                            // no valid frame header found yet; drop everything before Count-64
-                            frameBuf.RemoveRange(0, frameBuf.Count - (RX_Byte_Count - 1));
-                            break;
-                        }
-
-                        // extract that frame
-                        var frame = frameBuf.Skip(idx).Take(RX_Byte_Count).ToArray();
-                        // copy into RX_Data
-                        Array.Copy(frame, RX_Data, RX_Data.Length);
-                        // signal
+                        Copy_To_Rx_Data(buffer);
                         Recieved_Data?.Invoke(this, null);
                         is_Data_Received = true;
-
-                        // remove up through end of that frame
-                        frameBuf.RemoveRange(0, idx + RX_Byte_Count);
+                    }
+                    else
+                    {
+                        // The remote host has closed the connection
+                        Console.WriteLine("Remote host closed the connection.");
+                        // Attempt to reconnect
+                        Fire_On_Disconnect();
+                        is_Connected = false;
+                        break;
                     }
                 }
             }
             finally
             {
+                // Ensure streams are closed
                 stream?.Close();
                 tcpClient?.Close();
                 await ConnectAsync();
             }
         }
-
-
 
 
         public async Task Send_Data(byte[] buffer)
@@ -186,10 +191,19 @@ namespace Simple_Client_LAN_Control
 
         private void Copy_To_Rx_Data(byte[] buffer)
         {
-            for (int i = 0; i < buffer.Length; i++)
+            if (buffer != null)
             {
-                rx_Data[i] = buffer[i];
+                for (int i = 0; i < buffer.Length; i++)
+                {
+                    rx_Data[i] = buffer[i];
+                }
+
             }
+            else
+            {
+                rx_Data = null;
+            }
+
         }
 
         private void button_LAN_MouseUp_1(object sender, MouseEventArgs e)

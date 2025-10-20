@@ -44,6 +44,8 @@ void setup() {
 
   Serial.begin(115200);
   while (!Serial);
+  Serial1.begin(115200);
+  while (!Serial1);
 
   // init subsystems
   i2c_init();

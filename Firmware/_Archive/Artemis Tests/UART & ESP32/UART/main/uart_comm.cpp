@@ -123,9 +123,9 @@ void Report_Measured_Data(void) {
     Serial1.write(tx_Buffer, 64);
 
     // blink
-    // digitalWrite(LED_PIN, HIGH);
-    // delay(5);
-    // digitalWrite(LED_PIN, LOW);
+    digitalWrite(LED_PIN, HIGH);
+    delay(5);
+    digitalWrite(LED_PIN, LOW);
 }
 
 // Initializes UART pins/LED

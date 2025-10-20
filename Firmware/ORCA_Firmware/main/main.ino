@@ -13,19 +13,15 @@ SensorsManager  g_sensors;
 UartManager     g_uart(g_board, g_power, g_sensors);
 RTOSManager     g_rtos(g_sensors, g_uart);
 
-static constexpr int PIN_IMU_RDY = 43;
-
 void setup()
 {
-  am_hal_gpio_pinconfig(PIN_IMU_RDY, g_AM_HAL_GPIO_OUTPUT);
-  am_hal_gpio_output_clear(PIN_IMU_RDY);
   
   serial_debugger.begin(115200);
   serial_debugger.setLevel(DBG_DEBUG);
   LOGI("Booting…");
 
-  // Buzzer (pin 42, active-high as you said)
-  Alarm_Init(42, true);
+  // Buzzer (pin 37, active-high as you said)
+  Alarm_Init(37, true);
 
   // Power rails up first
   g_power.init(g_board);
@@ -47,7 +43,7 @@ void setup()
   LOGI("Sensors init OK");
 
   // UART1 to PC/host
-  g_uart.begin(115200);
+  g_uart.begin(19200);
 
   // Start all threads (IMU, logger, alarm, UART)
   g_rtos.start();

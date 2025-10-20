@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.Drawing.Design;
 using Farand_Chart_Lib_Ver3;
 using System.Drawing;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Artemis_Esp32_Test_App
 {
@@ -30,40 +32,60 @@ namespace Artemis_Esp32_Test_App
         float MagY =  0;
         float MagZ = 0;
 
-
+        private readonly object _cmdLock = new object();
         public Form1()
         {
             InitializeComponent();
 
             // tell the control to expect 64-byte packets
-            lan.RX_Byte_Count = 64;
-
-            lan.IPAddress = "192.168.4.1";
-            lan.Port = 80;
-
-            // fire when each 64-byte report arrives
-            lan.Recieved_Data += LanControl_Recieved_Data;
-
-            // start connecting on load
-            this.Load += async (_, __) => await lan.ConnectAsync();
-            timer_Connection.Start();
 
             this.Controls.Add(lan);
-            
+
+    }
+
+        private void Lan_onDisconnect(object sender, EventArgs e)
+        {
+            timer_Connection.Stop();
         }
 
         private void LanControl_Recieved_Data(object sender, EventArgs e)
         {
-            if (checkBox_Reporting.Checked)
+            if (lan.RX_Data[1] == Calculate_Checksum(lan.RX_Data))
             {
-                var buf = lan.RX_Data;
-                if (buf.Length < 64) return;
-                Show_Rx_Data(buf);
-                time_Sec += 0.125f;
-                Graph_Data();
+                Console.WriteLine($"Received Counter: {lan.RX_Data[1]}");
+                if (checkBox_Reporting.Checked)
+                {
+                    var buf = lan.RX_Data;
+                    if (buf.Length < 64) return;
+
+                    // Process received data on a separate thread to not block the main thread
+                    Task.Run(() => {
+                        Show_Rx_Data(buf);
+                        time_Sec += 0.125f;
+                        Graph_Data();
+                    });
+                }
             }
 
 
+        }
+
+        private void Initialize_Lan_Component()
+        {
+            lan.RX_Byte_Count = 64;
+
+            lan.IPAddress = "192.168.0.199";
+            lan.Port = 3333;
+
+            // fire when each 64-byte report arrives
+            lan.Recieved_Data += LanControl_Recieved_Data;
+            lan.onConnected += LanControl_Is_Connected;
+            lan.onDisconnect += Lan_onDisconnect;
+            lan.ConnectAsync();
+        }
+        private void LanControl_Is_Connected(object sender, EventArgs e)
+        {
+            timer_Connection.Start();
         }
 
         private void Show_Rx_Data(byte[] buf)
@@ -144,6 +166,7 @@ namespace Artemis_Esp32_Test_App
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            Initialize_Lan_Component();
             Initialize_Chart1();
         }
 
@@ -506,6 +529,7 @@ namespace Artemis_Esp32_Test_App
 
         private void timer_Connection_Tick(object sender, EventArgs e)
         {
+            
             if (!is_Command_Ready) //Heartbeat
             {
                 Clear_All_Buffers();
@@ -521,5 +545,6 @@ namespace Artemis_Esp32_Test_App
             Console.WriteLine($"Sending {command_bytes[1]}");
             lan.Send_Data(command_bytes);
         }
+
     }
 }

@@ -3,6 +3,7 @@
 #include <mbed.h>
 #include <stdarg.h>
 
+// ── levels ─────────────────────────────────────────────────────────────────────
 enum DebugLevel
 {
   DBG_FATAL = 0,
@@ -30,9 +31,28 @@ public:
 private:
   void vprintf_(const char* fmt, va_list ap);
 
+  // ── internal non-blocking backend ────────────────────────────────────────────
+  void enqueue_(const char* data, size_t n);
+  void enqueue_char_(char c);
+  void tx_task_();
+  void emit_dropped_notice_();
+
+  // Small wrappers to handle mbed variants with push/pop vs try_put/try_get
+  inline bool cb_try_put_(uint8_t b);
+  inline bool cb_try_get_(uint8_t& b);
+
 private:
   rtos::Mutex m_mtx;
   int         m_level;
+
+  rtos::Thread     m_txThread;
+  rtos::Semaphore  m_kick{0};
+  volatile bool    m_run = false;
+
+  static constexpr size_t TX_BUF_SIZE = 4096;
+  mbed::CircularBuffer<uint8_t, TX_BUF_SIZE> m_q;
+
+  volatile uint32_t m_dropped = 0;
 };
 
 extern SerialDebugger serial_debugger;

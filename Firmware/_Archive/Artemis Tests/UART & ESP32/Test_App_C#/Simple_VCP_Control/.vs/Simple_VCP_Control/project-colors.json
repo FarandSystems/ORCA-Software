@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "bcb202b6-5960-443c-8d73-cb0240d1d549": {
+      "ProjectGuid": "bcb202b6-5960-443c-8d73-cb0240d1d549",
+      "DisplayName": "Simple_VCP_Control",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

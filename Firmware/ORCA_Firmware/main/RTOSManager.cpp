@@ -8,7 +8,7 @@ using namespace std::chrono;
 static constexpr float ACC_G_PER_LSB   = 0.000061f;
 static constexpr float GYR_DPS_PER_LSB = 0.004375f;
 
-static constexpr int PIN_IMU_RDY = 43;
+//saic constexpr int PIN_IMU_RDY = 43;
 
 RTOSManager::RTOSManager(SensorsManager& sensors, UartManager& uart)
   : m_sensors(sensors),
@@ -157,6 +157,6 @@ void RTOSManager::uartThread_()
   {
     m_semUART.acquire();
     m_uart.poll(125);   // one pass every 125 ms
-    am_hal_gpio_output_toggle(PIN_IMU_RDY);
+    //am_hal_gpio_output_toggle(PIN_IMU_RDY);
   }
 }
