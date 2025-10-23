@@ -2,23 +2,20 @@
 #ifndef TIM_H
 #define TIM_H
 #include <Arduino.h>
+#include <am_hal_ctimer.h>     // CTIMER HAL
+#include <am_hal_interrupt.h>  // Interrupt HAL (NVIC)
+#include <am_hal_sysctrl.h>    // For clocks (HFRC auto-enabled)
 
-// Pin definitions (extern - defined in main)
-extern uint8_t pin_800;
-extern uint8_t pin_100;
-extern uint8_t pin_8;
-extern uint8_t pin_1;
+extern bool is_800hz_Timer_Int_Ready;
 
-// Declare interrupt flag (only for 800 Hz)
-extern volatile bool interrupt800Hz;
-
-// NEW: Software counters (extern - defined in main)
-extern volatile uint32_t counter_100hz;
-extern volatile uint32_t counter_8hz;
-extern volatile uint32_t counter_1hz;
+extern uint32_t counter_800;
+extern uint32_t counter_100hz;
+extern uint32_t counter_8hz;
+extern uint32_t counter_1hz;
 
 // Timer ISR declaration (only 800 Hz)
-extern "C" {
+extern "C" 
+{
   void Timer_ISR_800Hz(void);
 }
 
@@ -31,6 +28,6 @@ void on_8hz_tick(void);
 void on_1hz_tick(void);
 
 // Wrapper for full setup
-void setupTimers(void);
+extern void setupTimers(void);
 
 #endif // TIM_H
