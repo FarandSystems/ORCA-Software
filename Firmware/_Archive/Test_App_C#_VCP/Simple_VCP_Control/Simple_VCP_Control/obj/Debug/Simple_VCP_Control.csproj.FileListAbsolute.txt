@@ -1,0 +1,16 @@
+G:\_Laser Guided Asphalting\Software\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.csproj.AssemblyReference.cache
+G:\_Laser Guided Asphalting\Software\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.Simple_VCP_Control.resources
+G:\_Laser Guided Asphalting\Software\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.csproj.GenerateResource.cache
+G:\_Laser Guided Asphalting\Software\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.csproj.CoreCompileInputs.cache
+G:\_Laser Guided Asphalting\Software\Simple_VCP_Control\Simple_VCP_Control\bin\Debug\Simple_VCP_Control.dll
+G:\_Laser Guided Asphalting\Software\Simple_VCP_Control\Simple_VCP_Control\bin\Debug\Simple_VCP_Control.pdb
+G:\_Laser Guided Asphalting\Software\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.dll
+G:\_Laser Guided Asphalting\Software\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.pdb
+G:\Projects\Software Components\Farand Simple VCP Control\Simple_VCP_Control\Simple_VCP_Control\bin\Debug\Simple_VCP_Control.dll
+G:\Projects\Software Components\Farand Simple VCP Control\Simple_VCP_Control\Simple_VCP_Control\bin\Debug\Simple_VCP_Control.pdb
+G:\Projects\Software Components\Farand Simple VCP Control\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.Simple_VCP_Control.resources
+G:\Projects\Software Components\Farand Simple VCP Control\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.csproj.GenerateResource.cache
+G:\Projects\Software Components\Farand Simple VCP Control\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.csproj.CoreCompileInputs.cache
+G:\Projects\Software Components\Farand Simple VCP Control\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.dll
+G:\Projects\Software Components\Farand Simple VCP Control\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.pdb
+G:\Projects\Software Components\Farand Simple VCP Control\Simple_VCP_Control\Simple_VCP_Control\obj\Debug\Simple_VCP_Control.csproj.AssemblyReference.cache

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple_VCP_Control", "Simple_VCP_Control\Simple_VCP_Control.csproj", "{BCB202B6-5960-443C-8D73-CB0240D1D549}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCB202B6-5960-443C-8D73-CB0240D1D549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCB202B6-5960-443C-8D73-CB0240D1D549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCB202B6-5960-443C-8D73-CB0240D1D549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCB202B6-5960-443C-8D73-CB0240D1D549}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {203F1E41-9320-41ED-8424-2E192034EA21}
+	EndGlobalSection
+EndGlobal
