@@ -60,16 +60,16 @@ void read_IMU(void)
   gy = gyro.gyro.y;
   gz = gyro.gyro.z;
   
-  imu_counter++;
-  if (imu_counter >= 8)
-  {
-    Serial.print("AX:"); Serial.print(ax, 2);
-    Serial.print(" AY:"); Serial.print(ay, 2);
-    Serial.print(" AZ:"); Serial.print(az, 2);
-    Serial.print("  GX:"); Serial.print(gx, 2);
-    Serial.print(" GY:"); Serial.print(gy, 2);
-    Serial.print(" GZ:"); Serial.print(gz, 2);
-    Serial.println();
-    imu_counter = 0;
-  }
+//  imu_counter++;
+//  if (imu_counter >= 8)
+//  {
+//    Serial.print("AX:"); Serial.print(ax, 2);
+//    Serial.print(" AY:"); Serial.print(ay, 2);
+//    Serial.print(" AZ:"); Serial.print(az, 2);
+//    Serial.print("  GX:"); Serial.print(gx, 2);
+//    Serial.print(" GY:"); Serial.print(gy, 2);
+//    Serial.print(" GZ:"); Serial.print(gz, 2);
+//    Serial.println();
+//    imu_counter = 0;
+//  }
 }

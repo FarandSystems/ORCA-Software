@@ -9,5 +9,6 @@
 #include "gpio.h"
 #include "i2c.h"
 #include "uart.h"
+#include "command_Rx.h"
 
 #endif // MAIN_H

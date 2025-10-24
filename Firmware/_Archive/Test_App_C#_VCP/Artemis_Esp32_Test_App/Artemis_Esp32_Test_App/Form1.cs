@@ -41,7 +41,7 @@ namespace Artemis_Esp32_Test_App
 
             // tell the control to expect 64-byte packets
             vcp.Is_Minimised = true;
-            vcp.Rx_Byte_Count = 24;
+            vcp.Rx_Byte_Count = 64;
             vcp.Baud_Rate = 115200;
             vcp.Received_Data_Ready += Vcp_Received_Data_Ready;
             vcp.Start_Connection();

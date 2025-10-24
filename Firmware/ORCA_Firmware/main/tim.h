@@ -10,7 +10,7 @@ extern bool is_800hz_Timer_Int_Ready;
 
 extern uint32_t counter_800;
 extern uint32_t counter_100hz;
-extern uint32_t counter_8hz;
+extern uint32_t counter_5hz;
 extern uint32_t counter_1hz;
 
 // Timer ISR declaration (only 800 Hz)
@@ -24,7 +24,7 @@ void configureTimer(uint32_t timer, uint32_t frequency);
 
 // NEW: Function prototypes for lower-freq actions (implement in tim.cpp or main)
 void on_100hz_tick(void);
-void on_8hz_tick(void);
+void on_5hz_tick(void);
 void on_1hz_tick(void);
 
 // Wrapper for full setup

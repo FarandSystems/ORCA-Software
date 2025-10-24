@@ -13,9 +13,11 @@ extern uint8_t pin_100;
 extern uint8_t pin_8;
 extern uint8_t pin_1;
 extern uint8_t pin_LED;
+extern uint8_t pin_Buzzer;
 
 extern void setup_GPIO(void);
 extern void i2c_pins_init(void);
 extern void uart_pins_init(void);
+extern void disable_iridium(void);
 
 #endif //GPIO_H

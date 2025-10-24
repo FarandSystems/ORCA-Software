@@ -2,7 +2,7 @@
 #include "main.h"
 
 uint32_t counter_100hz = 0;
-uint32_t counter_8hz = 0;
+uint32_t counter_5hz = 0;
 uint32_t counter_1hz = 0;
 
 uint32_t counter_800 = 0;
@@ -17,7 +17,7 @@ extern "C" void Timer_ISR_800Hz(void)
 
   // NEW: Increment counters every 800 Hz tick
   counter_100hz++;
-  counter_8hz++;
+  counter_5hz++;
   counter_1hz++;
 
   // Check for 100 Hz: Every 8 ticks (800 / 100 = 8)
@@ -27,11 +27,11 @@ extern "C" void Timer_ISR_800Hz(void)
     on_100hz_tick();    // Call the 100 Hz function
   }
 
-  // Check for 8 Hz: Every 100 ticks (800 / 8 = 100)
-  if (counter_8hz >= 100) 
+  // Check for 5 Hz: Every 160 ticks (800 / 5 = 160)
+  if (counter_5hz >= 160) 
   {
-    counter_8hz = 0;    // Reset to 0
-    on_8hz_tick();      // Call the 8 Hz function
+    counter_5hz = 0;    // Reset to 0
+    on_5hz_tick();      // Call the 8 Hz function
   }
 
   // Check for 1 Hz: Every 800 ticks (800 / 1 = 800)
@@ -101,10 +101,15 @@ void on_100hz_tick(void)
   // Add more 100 Hz logic here (e.g., Serial.println("100Hz!"); but keep short)
 }
 
-void on_8hz_tick(void) 
+void on_5hz_tick(void) 
 {
   // digitalWrite(pin_8, !digitalRead(pin_8));  // Example: Toggle pin for 8Hz
-  
+  if (rx_frame_ready)
+  {
+    rx_frame_ready = false;
+    //Service_Input_Command(rx_buffer);
+    Report_To_PC();
+  }
 }
 
 void on_1hz_tick(void) 
