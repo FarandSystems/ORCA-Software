@@ -6,6 +6,8 @@ uint8_t pin_800 = 4;
 //uint8_t pin_8 = 37;
 //uint8_t pin_1 = 4;
 
+uint8_t pin_LED = 19;
+
 
 void i2c_pins_init(void);
 void uart_pins_init(void);
@@ -17,6 +19,8 @@ void setup_GPIO()
 //  pinMode(pin_100, OUTPUT);
 //  pinMode(pin_8, OUTPUT);
 //  pinMode(pin_1, OUTPUT);
+
+  pinMode(pin_LED, OUTPUT);
 }
 
 void i2c_pins_init()

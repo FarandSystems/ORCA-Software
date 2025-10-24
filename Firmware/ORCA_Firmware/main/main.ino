@@ -25,4 +25,22 @@ void loop()
     is_800hz_Timer_Int_Ready = false;
     read_IMU();
   }
+
+  while (Serial1.available()) 
+  {
+    uint8_t b = Serial1.read();
+    rx_buffer[rx_index++] = b;
+
+    // When 8 bytes are collected → mark frame ready
+    if (rx_index >= RX_Buffer_Size) 
+    {
+      if (rx_buffer[RX_Buffer_Size - 1] == Calculate_Checksum(rx_buffer, RX_Buffer_Size))
+      {
+        am_hal_gpio_output_toggle(pin_LED);
+        
+        frame_ready = true;
+      }
+      rx_index = 0;
+    }
+  }
 }

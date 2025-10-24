@@ -12,6 +12,7 @@ extern uint8_t pin_800;
 extern uint8_t pin_100;
 extern uint8_t pin_8;
 extern uint8_t pin_1;
+extern uint8_t pin_LED;
 
 extern void setup_GPIO(void);
 extern void i2c_pins_init(void);

@@ -1,8 +1,11 @@
 #include "main.h"
 
+uint8_t rx_buffer[RX_Buffer_Size];
+uint8_t rx_index = 0;
+bool frame_ready = false;
 
 void uart_begin(uint32_t baud);
-
+uint8_t Calculate_Checksum(uint8_t *buffer, uint8_t length);
 
 void uart_begin(uint32_t baud)
 {
@@ -13,5 +16,15 @@ void uart_begin(uint32_t baud)
     // wait if needed for USB<->UART bridges; usually quick
   }
   
-  Serial.print("UART Started! at speed:  ");Serial.println(baud)
+  Serial.print("UART Started! at speed:  ");Serial.println(baud);
+}
+
+uint8_t Calculate_Checksum(uint8_t *buffer, uint8_t length)
+{
+  uint8_t sum = 0;
+  for(uint8_t i; i < length - 1; i++)
+  {
+    sum += buffer[i];
+  }
+  return sum;
 }

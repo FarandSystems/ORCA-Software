@@ -104,7 +104,7 @@ void on_100hz_tick(void)
 void on_8hz_tick(void) 
 {
   // digitalWrite(pin_8, !digitalRead(pin_8));  // Example: Toggle pin for 8Hz
-  // Add more 8 Hz logic here
+  
 }
 
 void on_1hz_tick(void) 

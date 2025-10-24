@@ -11,6 +11,8 @@ namespace Artemis_Esp32_Test_App
     {
         byte[] command_bytes = new byte[8];
 
+        bool is_Command_Ready = false;
+
 
         //Simple_Client_LAN_Control.Simple_Client_LAN_Control lan =
         //    new Simple_Client_LAN_Control.Simple_Client_LAN_Control();
@@ -40,7 +42,7 @@ namespace Artemis_Esp32_Test_App
             // tell the control to expect 64-byte packets
             vcp.Is_Minimised = true;
             vcp.Rx_Byte_Count = 24;
-            vcp.Baud_Rate = 19200;
+            vcp.Baud_Rate = 115200;
             vcp.Received_Data_Ready += Vcp_Received_Data_Ready;
             vcp.Start_Connection();
 
@@ -53,6 +55,7 @@ namespace Artemis_Esp32_Test_App
 
         private void Vcp_Received_Data_Ready(object sender, EventArgs e)
         {
+
 
             var buf = vcp.Rx_Bytes;
             if (checkBox_Reporting.Checked && buf[vcp.Rx_Byte_Count - 1] == Calculate_CheckSum(buf))
@@ -114,6 +117,20 @@ namespace Artemis_Esp32_Test_App
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (!is_Command_Ready)
+            {
+                command_bytes[0] = 0x00;
+                command_bytes[1] = 0x55;
+                command_bytes[2] = 0x00;
+                command_bytes[3] = 0x00;
+                command_bytes[4] = 0x00;
+                command_bytes[5] = 0x00;
+                command_bytes[6] = 0x00;
+            }
+            command_bytes[7] = Calculate_CheckSum(command_bytes);
+            vcp.Send_Data(command_bytes);
+
+
             Graph_Data();
             time_Sec += timer1.Interval * 0.001;
         }
@@ -424,11 +441,11 @@ namespace Artemis_Esp32_Test_App
             {
                 command_bytes[0] = 0x00;
                 command_bytes[1] = 0x01;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
+                command_bytes[2] = 0x00;
+                command_bytes[3] = 0x00;
+                command_bytes[4] = 0x00;
+                command_bytes[5] = 0x00;
+                command_bytes[6] = 0x00;
 
                 checkBox_Reporting.Enabled = true;
             }
@@ -436,17 +453,16 @@ namespace Artemis_Esp32_Test_App
             {
                 command_bytes[0] = 0x00;
                 command_bytes[1] = 0x02;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
+                command_bytes[2] = 0x00;
+                command_bytes[3] = 0x00;
+                command_bytes[4] = 0x00;
+                command_bytes[5] = 0x00;
+                command_bytes[6] = 0x00;
 
                 checkBox_Reporting.Enabled = false;
             }
-            command_bytes[7] = Calculate_CheckSum(command_bytes);
 
-            vcp.Send_Data(command_bytes);
+            is_Command_Ready = true;
 
         }
 
@@ -472,11 +488,11 @@ namespace Artemis_Esp32_Test_App
             {
                 command_bytes[0] = 0x00;
                 command_bytes[1] = 0x04;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
+                command_bytes[2] = 0x00;
+                command_bytes[3] = 0x00;
+                command_bytes[4] = 0x00;
+                command_bytes[5] = 0x00;
+                command_bytes[6] = 0x00;
 
                 checkBox_Reporting.Enabled = true;
             }
@@ -484,15 +500,14 @@ namespace Artemis_Esp32_Test_App
             {
                 command_bytes[0] = 0x00;
                 command_bytes[1] = 0x05;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
-                command_bytes[0] = 0x00;
+                command_bytes[2] = 0x00;
+                command_bytes[3] = 0x00;
+                command_bytes[4] = 0x00;
+                command_bytes[5] = 0x00;
+                command_bytes[6] = 0x00;
             }
-            command_bytes[7] = Calculate_CheckSum(command_bytes);
 
-            vcp.Send_Data(command_bytes);
+            is_Command_Ready = true;
 
         }
     }
