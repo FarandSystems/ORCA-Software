@@ -12,7 +12,7 @@ void setup()
   disable_iridium();
   setup_i2c();
 
-  uart_begin(115200);
+  uart_begin(9600);
 
   // Initialize and configure the single 800 Hz timer + counters
   setupTimers();
@@ -20,11 +20,27 @@ void setup()
 
 void loop() 
 {
+  // Check Timer 800Hz Int for reading IMU
   if(is_800hz_Timer_Int_Ready)
   {
     is_800hz_Timer_Int_Ready = false;
     read_IMU();
   }
 
+  // Check if Power Commands received
+  if(is_power_requested)
+  {
+    is_power_requested = false;
+    Switch_Qwiic(is_qwiic_on);
+  }
+  
+  // Check for any receiving RX Data
   check_rx_ready();
+
+  // Check if we should send data to PC
+  if(report_to_pc_ready)
+  {
+    report_to_pc_ready = false;
+    Serial1.write(tx_buffer, TX_Buffer_Size);
+  }
 }

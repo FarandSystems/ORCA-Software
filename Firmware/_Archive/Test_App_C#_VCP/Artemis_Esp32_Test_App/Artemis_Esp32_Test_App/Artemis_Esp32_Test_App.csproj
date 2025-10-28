@@ -34,14 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Auto_Detect_VCP_Control">
+      <HintPath>..\..\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\bin\Debug\Auto_Detect_VCP_Control.dll</HintPath>
+    </Reference>
     <Reference Include="Farand_Chart_Lib_Ver3">
       <HintPath>..\..\Farand_Chart_Lib_Ver3\Farand_Chart_Lib_Ver3\bin\Debug\Farand_Chart_Lib_Ver3.dll</HintPath>
     </Reference>
     <Reference Include="Simple_Client_LAN_Control">
       <HintPath>..\..\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.dll</HintPath>
-    </Reference>
-    <Reference Include="Simple_VCP_Control">
-      <HintPath>..\..\Simple_VCP_Control\Simple_VCP_Control\bin\Debug\Simple_VCP_Control.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

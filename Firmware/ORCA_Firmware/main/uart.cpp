@@ -23,7 +23,7 @@ void uart_begin(uint32_t baud)
 uint8_t Calculate_Checksum(uint8_t *buffer, uint8_t length)
 {
   uint8_t sum = 0;
-  for(uint8_t i; i < length - 1; i++)
+  for(uint8_t i = 0; i < length - 1; i++)
   {
     sum += buffer[i];
   }

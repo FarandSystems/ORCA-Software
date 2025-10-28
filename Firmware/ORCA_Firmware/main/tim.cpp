@@ -107,7 +107,7 @@ void on_5hz_tick(void)
   if (rx_frame_ready)
   {
     rx_frame_ready = false;
-    //Service_Input_Command(rx_buffer);
+    Service_Input_Command(rx_buffer);
     Report_To_PC();
   }
 }

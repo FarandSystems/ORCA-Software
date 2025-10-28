@@ -1,9 +1,9 @@
 {
   "Version": 1,
   "ProjectMap": {
-    "bf051eeb-6067-417d-b4b6-cdaa1837aace": {
-      "ProjectGuid": "bf051eeb-6067-417d-b4b6-cdaa1837aace",
-      "DisplayName": "Artemis_Esp32_Test_App",
+    "59ab372e-e868-4e46-bc47-fc54a424d111": {
+      "ProjectGuid": "59ab372e-e868-4e46-bc47-fc54a424d111",
+      "DisplayName": "Auto_Detect_VCP_Control",
       "ColorIndex": 0
     },
     "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {

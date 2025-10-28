@@ -3,7 +3,8 @@ using System.Windows.Forms;
 using System.Drawing.Design;
 using Farand_Chart_Lib_Ver3;
 using System.Drawing;
-using Simple_VCP_Control;
+using Auto_Detect_VCP_Control;
+using System.Threading;
 
 namespace Artemis_Esp32_Test_App
 {
@@ -12,11 +13,11 @@ namespace Artemis_Esp32_Test_App
         byte[] command_bytes = new byte[8];
 
         bool is_Command_Ready = false;
-
+        System.Threading.Timer timer_vcp;
 
         //Simple_Client_LAN_Control.Simple_Client_LAN_Control lan =
         //    new Simple_Client_LAN_Control.Simple_Client_LAN_Control();
-        Simple_VCP_Control.Simple_VCP_Control vcp = new Simple_VCP_Control.Simple_VCP_Control();
+        Auto_Detect_VCP_Control.Auto_Detect_VCP_Control vcp = new Auto_Detect_VCP_Control.Auto_Detect_VCP_Control();
 
         double time_Sec = 0;
 
@@ -40,17 +41,44 @@ namespace Artemis_Esp32_Test_App
             InitializeComponent();
 
             // tell the control to expect 64-byte packets
+
+            
+        }
+
+        private void Initialize_VCP()
+        {
             vcp.Is_Minimised = true;
-            vcp.Rx_Byte_Count = 64;
-            vcp.Baud_Rate = 115200;
+            vcp.Rx_Byte_Count = 32;
+            vcp.Command_Byte_Count = 8;
+            vcp.Baud_Rate = 9600;
             vcp.Received_Data_Ready += Vcp_Received_Data_Ready;
-            vcp.Start_Connection();
+            vcp.Start_VCP_Connection = true;
 
             // start connecting on load
 
 
             this.Controls.Add(vcp);
-            
+            vcp.BringToFront();
+        }
+
+        private void Timer_Vcp_Tick(object state)
+        {
+            if (!is_Command_Ready)
+            {
+                command_bytes[0] = 0x00;
+                command_bytes[1] = 0x55;
+                command_bytes[2] = 0x00;
+                command_bytes[3] = 0x00;
+                command_bytes[4] = 0x00;
+                command_bytes[5] = 0x00;
+                command_bytes[6] = 0x00;
+            }
+            command_bytes[7] = Calculate_CheckSum(command_bytes);
+            is_Command_Ready = false;
+            vcp.Send_Data(command_bytes);
+
+
+            //time_Sec += timer1.Interval * 0.001;
         }
 
         private void Vcp_Received_Data_Ready(object sender, EventArgs e)
@@ -112,27 +140,14 @@ namespace Artemis_Esp32_Test_App
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            Initialize_VCP();
             Initialize_Chart1();
+            timer_vcp = new System.Threading.Timer(Timer_Vcp_Tick, null, 0, 200);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (!is_Command_Ready)
-            {
-                command_bytes[0] = 0x00;
-                command_bytes[1] = 0x55;
-                command_bytes[2] = 0x00;
-                command_bytes[3] = 0x00;
-                command_bytes[4] = 0x00;
-                command_bytes[5] = 0x00;
-                command_bytes[6] = 0x00;
-            }
-            command_bytes[7] = Calculate_CheckSum(command_bytes);
-            vcp.Send_Data(command_bytes);
 
-
-            Graph_Data();
-            time_Sec += timer1.Interval * 0.001;
         }
 
         void Graph_Data()

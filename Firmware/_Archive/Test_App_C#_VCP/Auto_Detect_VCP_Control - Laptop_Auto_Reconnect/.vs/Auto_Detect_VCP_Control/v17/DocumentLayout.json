@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\MORIII\\Desktop\\Mapna\\031201_MAPNA\\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{59AB372E-E868-4E46-BC47-FC54A424D111}|Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.csproj|c:\\users\\moriii\\desktop\\mapna\\031201_mapna\\auto_detect_vcp_control - laptop_auto_reconnect\\auto_detect_vcp_control\\auto_detect_vcp_control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59AB372E-E868-4E46-BC47-FC54A424D111}|Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.csproj|solutionrelative:auto_detect_vcp_control\\auto_detect_vcp_control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59AB372E-E868-4E46-BC47-FC54A424D111}|Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.csproj|c:\\users\\moriii\\desktop\\mapna\\031201_mapna\\auto_detect_vcp_control - laptop_auto_reconnect\\auto_detect_vcp_control\\auto_detect_vcp_control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{59AB372E-E868-4E46-BC47-FC54A424D111}|Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.csproj|solutionrelative:auto_detect_vcp_control\\auto_detect_vcp_control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Auto_Detect_VCP_Control.cs",
+              "DocumentMoniker": "C:\\Users\\MORIII\\Desktop\\Mapna\\031201_MAPNA\\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\\Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.cs",
+              "RelativeDocumentMoniker": "Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.cs",
+              "ToolTip": "C:\\Users\\MORIII\\Desktop\\Mapna\\031201_MAPNA\\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\\Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.cs",
+              "RelativeToolTip": "Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.cs",
+              "ViewState": "AQIAAPIBAAAAAAAAAAAAAJgBAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-19T05:31:26.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Auto_Detect_VCP_Control.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\MORIII\\Desktop\\Mapna\\031201_MAPNA\\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\\Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.cs",
+              "RelativeDocumentMoniker": "Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.cs",
+              "ToolTip": "C:\\Users\\MORIII\\Desktop\\Mapna\\031201_MAPNA\\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\\Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.cs [Design]",
+              "RelativeToolTip": "Auto_Detect_VCP_Control\\Auto_Detect_VCP_Control.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-19T05:31:23.093Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

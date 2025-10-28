@@ -83,3 +83,21 @@ C:\Users\Matin\source\repos\ORCA-Software\Firmware\_Archive\Test_App_C#_VCP\Arte
 C:\Users\Matin\source\repos\ORCA-Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_.961E10DD.Up2Date
 C:\Users\Matin\source\repos\ORCA-Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.exe
 C:\Users\Matin\source\repos\ORCA-Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Artemis_Esp32_Test_App.exe.config
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Artemis_Esp32_Test_App.exe
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Artemis_Esp32_Test_App.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Farand_Chart_Lib_Ver3.dll
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Simple_Client_LAN_Control.dll
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Farand_Chart_Lib_Ver3.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Simple_Client_LAN_Control.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.csproj.AssemblyReference.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.csproj.SuggestedBindingRedirects.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.Form1.resources
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.Properties.Resources.resources
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.csproj.GenerateResource.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.csproj.CoreCompileInputs.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.csproj.CopyComplete
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.exe
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\obj\Debug\Artemis_Esp32_Test_App.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Auto_Detect_VCP_Control.dll
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Artemis_Esp32_Test_App\Artemis_Esp32_Test_App\bin\Debug\Auto_Detect_VCP_Control.pdb

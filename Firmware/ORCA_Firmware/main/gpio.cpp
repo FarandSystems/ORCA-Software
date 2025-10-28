@@ -44,11 +44,11 @@ void uart_pins_init()
   // === TX (MCU → PC) ===
   am_hal_gpio_pincfg_t pinConfigTx = g_AM_BSP_GPIO_COM_UART_TX;
   pinConfigTx.uFuncSel = AM_HAL_PIN_42_UART1TX;
-  pin_config(D42, pinConfigTx);
+  am_hal_gpio_pinconfig(42, pinConfigTx);
 
   // === RX (PC → MCU) ===
   am_hal_gpio_pincfg_t pinConfigRx = g_AM_BSP_GPIO_COM_UART_RX;
   pinConfigRx.uFuncSel = AM_HAL_PIN_43_UART1RX;
   pinConfigRx.ePullup = AM_HAL_GPIO_PIN_PULLUP_WEAK;
-  pin_config(D43, pinConfigRx);
+  am_hal_gpio_pinconfig(43, pinConfigRx);
 }

@@ -10,8 +10,10 @@ uint8_t imu_counter = 0;
 
 volatile float ax, ay, az;
 volatile float gx, gy, gz;
+bool is_qwiic_on = true;
 void setup_i2c(void);
 void read_IMU(void);
+void Switch_Qwiic(bool is_On);
 
 void setup_i2c(void)
 {
@@ -27,7 +29,7 @@ void setup_i2c(void)
     while (1);
   }
 
-  qwiic_switch.powerOn();
+  Switch_Qwiic(is_qwiic_on);
   delay(100);
   Serial.println("Qwiic is powered on");
 
@@ -44,6 +46,17 @@ void setup_i2c(void)
   ism330dhcx.setGyroDataRate(LSM6DS_RATE_833_HZ);
 
   Serial.println("IMU is Started!");
+}
+void Switch_Qwiic(bool is_On)
+{
+  if (is_On)
+  {
+    qwiic_switch.powerOn();
+  }
+  else
+  {
+    qwiic_switch.powerOff();
+  }
 }
 
 void read_IMU(void)
