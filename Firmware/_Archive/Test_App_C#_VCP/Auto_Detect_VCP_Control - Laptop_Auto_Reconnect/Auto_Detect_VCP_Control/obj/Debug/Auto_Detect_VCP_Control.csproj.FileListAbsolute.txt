@@ -51,3 +51,12 @@ G:\ORCA1\Software\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VC
 G:\ORCA1\Software\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.csproj.CoreCompileInputs.cache
 G:\ORCA1\Software\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.dll
 G:\ORCA1\Software\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\bin\Debug\Auto_Detect_VCP_Control.dll
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\bin\Debug\Auto_Detect_VCP_Control.pdb
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.csproj.AssemblyReference.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.Auto_Detect_VCP_Control.resources
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.Properties.Resources.resources
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.csproj.GenerateResource.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.csproj.CoreCompileInputs.cache
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.dll
+C:\Projects\ORCA Software\Firmware\_Archive\Test_App_C#_VCP\Auto_Detect_VCP_Control - Laptop_Auto_Reconnect\Auto_Detect_VCP_Control\obj\Debug\Auto_Detect_VCP_Control.pdb

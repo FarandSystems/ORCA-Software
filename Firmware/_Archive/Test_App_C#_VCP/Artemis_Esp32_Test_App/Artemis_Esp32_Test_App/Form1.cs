@@ -48,7 +48,7 @@ namespace Artemis_Esp32_Test_App
         private void Initialize_VCP()
         {
             vcp.Is_Minimised = true;
-            vcp.Rx_Byte_Count = 32;
+            vcp.Rx_Byte_Count = 16 * 5;
             vcp.Command_Byte_Count = 8;
             vcp.Baud_Rate = 9600;
             vcp.Received_Data_Ready += Vcp_Received_Data_Ready;

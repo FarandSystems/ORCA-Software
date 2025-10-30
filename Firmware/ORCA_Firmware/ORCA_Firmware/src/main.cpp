@@ -24,6 +24,7 @@ void loop()
   if(is_800hz_Timer_Int_Ready)
   {
     is_800hz_Timer_Int_Ready = false;
+
     read_IMU();
   }
 
@@ -40,7 +41,10 @@ void loop()
   // Check if we should send data to PC
   if(report_to_pc_ready)
   {
+
     report_to_pc_ready = false;
+    GPIO-> WTSA = (1 << pin_UART);
     Serial1.write(tx_buffer, TX_Buffer_Size);
+    GPIO->WTCA = (1 << pin_UART);
   }
 }

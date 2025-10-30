@@ -4,6 +4,8 @@ uint8_t rx_buffer[RX_Buffer_Size];
 uint8_t rx_index = 0;
 uint8_t tx_buffer[TX_Buffer_Size];
 
+uint8_t encoded_length = 0;
+
 
 void uart_begin(uint32_t baud);
 uint8_t Calculate_Checksum(uint8_t *buffer, uint8_t length);

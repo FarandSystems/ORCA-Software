@@ -1,13 +1,14 @@
 #include "main.h"
 
 // Pin definitions
-uint8_t pin_800 = 4;
+uint8_t pin_Toggle = 4;
 //uint8_t pin_100 = 43;
 //uint8_t pin_1 = 4;
 
 uint8_t pin_LED = 19;
 
 uint8_t pin_Buzzer = 37;
+uint8_t pin_UART = 7;
 
 uint8_t pin_IRIDIUM_EN = 17;
 
@@ -19,9 +20,9 @@ void disable_iridium(void);
 void setup_GPIO()
 {
     // Set the pins as outputs
-  pinMode(pin_800, OUTPUT);
-//  pinMode(pin_100, OUTPUT);
-//  pinMode(pin_1, OUTPUT);
+  pinMode(pin_Toggle, OUTPUT);
+  pinMode(pin_UART, OUTPUT);
+
 
   pinMode(pin_LED, OUTPUT);
   pinMode(pin_Buzzer, OUTPUT);

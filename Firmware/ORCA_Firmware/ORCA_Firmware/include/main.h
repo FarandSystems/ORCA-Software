@@ -4,6 +4,8 @@
 #include "am_mcu_apollo.h"
 #include "am_hal_cachectrl.h"
 #include "am_hal_sysctrl.h"
+#include "am_hal_gpio.h"
+#include <Arduino.h>
 
 #include "tim.h"
 #include "gpio.h"
