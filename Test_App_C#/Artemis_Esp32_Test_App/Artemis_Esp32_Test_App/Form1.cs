@@ -1,56 +1,42 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Drawing.Design;
-using Farand_Chart_Lib_Ver3;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Threading;
+using Farand_Chart_Lib_Ver3;
 
 namespace Artemis_Esp32_Test_App
 {
     public partial class Form1 : Form
     {
         private Simple_Client_LAN_Control.Simple_Client_LAN_Control esp;
+
         byte[] command_bytes = new byte[8];
         bool is_Command_Ready = false;
 
+        // this runs on a ThreadPool thread, used to send commands/heartbeat
         System.Threading.Timer timer_Connection;
 
         const byte PACKETS_HEADER = 0xFA;
 
         double time_Sec = 0;
+
         short Temperature = 0;
-        short Pressure = 0; 
-        short Humidity = 0; 
-        float Acc_X = 0; 
-        float Acc_Y = 0; 
-        float Acc_Z = 0; 
-        float GyroX = 0; 
-        float GyroY = 0; 
-        float GyroZ = 0; 
-        float MagX = 0; 
-        float MagY = 0; 
+        short Pressure = 0;
+        short Humidity = 0;
+
+        float Acc_X = 0;
+        float Acc_Y = 0;
+        float Acc_Z = 0;
+
+        float GyroX = 0;
+        float GyroY = 0;
+        float GyroZ = 0;
+
+        float MagX = 0;
+        float MagY = 0;
         float MagZ = 0;
 
-        private struct SensorSnapshot
-        {
-            public short Temperature;
-            public short Pressure;
-            public short Humidity;
-
-            public float Acc_X;
-            public float Acc_Y;
-            public float Acc_Z;
-
-            public float GyroX;
-            public float GyroY;
-            public float GyroZ;
-
-            public float MagX;
-            public float MagY;
-            public float MagZ;
-        }
-
+        // one 16-byte IMU frame from ESP
         private struct ImuSample
         {
             public byte Header;
@@ -63,73 +49,78 @@ namespace Artemis_Esp32_Test_App
             public byte Checksum;
         }
 
+        // we receive 5 samples per batch (80 bytes total)
         private ImuSample[] _incomingBatch = new ImuSample[5];
-        private volatile bool _newBatchReady = false;
-
-        // shared latest data from ESP
-        private SensorSnapshot _latestSample;
-        // flag to tell UI "new data arrived"
-        private volatile bool _newSampleReady = false;
+        private bool _newBatchReady = false; // set true when new batch decoded
 
         private readonly object _cmdLock = new object();
+
         public Form1()
         {
             InitializeComponent();
 
-            timer_Connection = new System.Threading.Timer(Timer_Connection_Tick, null, 0, 200);
+            // create the background TX timer (but don't start it yet)
+            // we'll start it when connected
+            timer_Connection = new System.Threading.Timer(
+                Timer_Connection_Tick,
+                null,
+                Timeout.Infinite,
+                Timeout.Infinite
+            );
 
+            // init TCP client control
             esp = new Simple_Client_LAN_Control.Simple_Client_LAN_Control
             {
-                IPAddress = "192.168.1.101",
-                Port = 9000,
-                RX_Byte_Count = 16 * 5 // 16 bytes on 25msec , 80 bytes each 125 msec from artemis
+                IPAddress = "192.168.0.117",
+                Port = 5001,
+                RX_Byte_Count = 16 * 5 // 16 bytes/sample * 5 samples = 80 bytes per batch
             };
-            esp.onConnected += Esp_onConnected;
-            esp.onDisconnect += Esp_onDisconnect;
-            esp.Recieved_Data += Esp_Recieved_Data;
 
+            // hook events from the LAN control
+            esp.Connected += Esp_onConnected;
+            esp.Disconnected += Esp_onDisconnect;
+            esp.DataReceived += Esp_DataReceived;
+
+            // add it to the form so it can live/get disposed with the form
             Controls.Add(esp);
 
-            // tell the control to expect 64-byte packets
-
-    }
-
-        private void Timer_Connection_Tick(object state)
-        {
-            if (!is_Command_Ready) //Heartbeat
-            {
-                Clear_All_Buffers();
-                command_bytes[1] = 0xFA;
-
-            }
-            else
-            {
-                is_Command_Ready = false;
-
-            }
-
-            command_bytes[7] = Calculate_Checksum(command_bytes);
-
-            Console.WriteLine($"Sending {command_bytes[1]}");
-            esp.Send_Data(command_bytes);
+            // start async connect/reconnect loop in the control
+            esp.Start();
         }
 
-        private void Esp_Recieved_Data(object sender, EventArgs e)
-        {
-            byte[] raw = esp.RX_Data; // length = 80
+        // =========================================
+        // CONNECTION HANDLERS
+        // =========================================
 
-            // safety check
+        private void Esp_onConnected(object sender, EventArgs e)
+        {
+            // start sending commands/heartbeat every 200 ms
+            timer_Connection.Change(0, 200);
+        }
+
+        private void Esp_onDisconnect(object sender, EventArgs e)
+        {
+            // stop sending commands if link is down
+            timer_Connection.Change(Timeout.Infinite, Timeout.Infinite);
+        }
+
+        // =========================================
+        // RECEIVE HANDLER
+        // called on UI thread (BeginInvoke inside control)
+        // =========================================
+
+        private void Esp_DataReceived(object sender, Simple_Client_LAN_Control.DataReceivedEventArgs e)
+        {
+            byte[] raw = e.Data; // should be length 80 (5 * 16)
             if (raw == null || raw.Length < 80)
                 return;
 
-            // decode 5 samples
             for (int i = 0; i < 5; i++)
             {
                 int baseIndex = i * 16;
 
                 if (!VerifyChecksumAndHeader(raw, baseIndex))
                 {
-                    // bad frame, skip or mark it
                     Console.WriteLine($"Bad Checksum or Header on sample {i}!!!");
                     continue;
                 }
@@ -138,52 +129,140 @@ namespace Artemis_Esp32_Test_App
 
                 s.Header = raw[baseIndex + 0];
 
-                s.AccX = GetInt16_BE(raw, baseIndex + 1);
-                s.AccY = GetInt16_BE(raw, baseIndex + 3);
-                s.AccZ = GetInt16_BE(raw, baseIndex + 5);
+                s.AccX = GetUInt16_BE(raw, baseIndex + 1);
+                s.AccY = GetUInt16_BE(raw, baseIndex + 3);
+                s.AccZ = GetUInt16_BE(raw, baseIndex + 5);
 
-                s.GyroX = GetInt16_BE(raw, baseIndex + 7);
-                s.GyroY = GetInt16_BE(raw, baseIndex + 9);
-                s.GyroZ = GetInt16_BE(raw, baseIndex + 11);
+                s.GyroX = GetUInt16_BE(raw, baseIndex + 7);
+                s.GyroY = GetUInt16_BE(raw, baseIndex + 9);
+                s.GyroZ = GetUInt16_BE(raw, baseIndex + 11);
 
-                // bytes 13,14 reserved -> we can read them if you need them later
-                // short reserved = GetInt16_BE(raw, baseIndex + 13);
-
+                // bytes [13],[14] reserved if you want later
                 s.Checksum = raw[baseIndex + 15];
-
-                // OPTIONAL: verify checksum here before trusting
-                // if (!VerifyChecksum(raw, baseIndex)) { /* mark invalid, etc */ }
 
                 _incomingBatch[i] = s;
             }
 
-            // tell the UI timer there is fresh data
             _newBatchReady = true;
         }
 
-        private UInt16 GetInt16_BE(byte[] buf, int start)
+        // =========================================
+        // BACKGROUND SEND / HEARTBEAT
+        // runs on ThreadPool thread
+        // =========================================
+
+        private void Timer_Connection_Tick(object state)
         {
-            // big-endian -> high byte first
-            int hi = buf[start];
-            int lo = buf[start + 1];
-            // combine: hi << 8 | lo, then cast to short
-            int combined = (hi << 8) + lo;
-            return (UInt16)combined;
+            lock (_cmdLock)
+            {
+                if (!is_Command_Ready) // heartbeat / keep-alive mode
+                {
+                    Clear_All_Buffers();
+                    command_bytes[1] = 0xFA;
+                }
+                else
+                {
+                    // we had a pending command set by UI (Power_Switch_Sensors etc.)
+                    is_Command_Ready = false;
+                }
+
+                command_bytes[7] = Calculate_Checksum(command_bytes);
+
+                // send bytes to ESP
+                esp.Send(command_bytes);
+            }
         }
 
-        private void Esp_onDisconnect(object sender, EventArgs e)
-        {
-            timer_Connection.Change(Timeout.Infinite, Timeout.Infinite);
-        }
+        // =========================================
+        // FORM EVENTS / UI TIMERS
+        // =========================================
 
-        private void Esp_onConnected(object sender, EventArgs e)
-        {
-            timer_Connection.Change(0, 200);
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
             Initialize_Chart1();
         }
+
+        // This runs on WinForms timer (UI thread).
+        // It pulls the latest decoded batch and updates labels + charts.
+        private void timerUiUpdate_Tick(object sender, EventArgs e)
+        {
+            if (!_newBatchReady)
+                return;
+
+            _newBatchReady = false;
+
+            // copy batch locally
+            ImuSample[] localBatch = new ImuSample[5];
+            for (int i = 0; i < 5; i++)
+                localBatch[i] = _incomingBatch[i];
+
+            // newest sample is the last one in the batch
+            ImuSample latest = localBatch[4];
+
+            UpdateLabelsFromSample(latest);
+            PushBatchToChart(localBatch);
+        }
+
+        // =========================================
+        // LABEL / UI UPDATE HELPERS
+        // =========================================
+
+        private void UpdateLabelsFromSample(ImuSample s)
+        {
+            // apply scaling here (example: divide by 100.0f)
+            float accX = s.AccX / 100.0f;
+            float accY = s.AccY / 100.0f;
+            float accZ = s.AccZ / 100.0f;
+
+            float gyroX = s.GyroX / 100.0f;
+            float gyroY = s.GyroY / 100.0f;
+            float gyroZ = s.GyroZ / 100.0f;
+
+            // update UI labels
+            lblTemp.Text = $"AccX: {accX:0.00}";
+            lblPres.Text = $"AccY: {accY:0.00}";
+            lblHum.Text = $"AccZ: {accZ:0.00}";
+
+            label_AccX.Text = $"GyroX: {gyroX:0.00}";
+            label_AccY.Text = $"GyroY: {gyroY:0.00}";
+            label_AccZ.Text = $"GyroZ: {gyroZ:0.00}";
+        }
+
+        private void PushBatchToChart(ImuSample[] batch)
+        {
+            for (int i = 0; i < batch.Length; i++)
+            {
+                ImuSample s = batch[i];
+
+                float accX = s.AccX / 100.0f;
+                float accY = s.AccY / 100.0f;
+                float accZ = s.AccZ / 100.0f;
+
+                float gyroX = s.GyroX / 100.0f;
+                float gyroY = s.GyroY / 100.0f;
+                float gyroZ = s.GyroZ / 100.0f;
+
+                // assign globals so Graph_Data() can consume them
+                Acc_X = accX;
+                Acc_Y = accY;
+                Acc_Z = accZ;
+
+                GyroX = gyroX;
+                GyroY = gyroY;
+                GyroZ = gyroZ;
+
+                // if you later include mag and PHT, assign those too
+
+                // each sub-sample is 25 ms apart
+                time_Sec += 0.025;
+
+                Graph_Data();
+            }
+        }
+
+        // =========================================
+        // GRAPHING / CHART MANAGEMENT
+        // =========================================
 
         void Graph_Data()
         {
@@ -206,18 +285,16 @@ namespace Artemis_Esp32_Test_App
             Farand_Chart.Farand_Graph graph_Mag_Y = farand_Chart1.Get_Farand_Graph_Object(10);
             Farand_Chart.Farand_Graph graph_Mag_Z = farand_Chart1.Get_Farand_Graph_Object(11);
 
-
+            // scroll window after ~10 seconds
             if (time_Sec > farand_Chart1.XAxis.Minimum + 10)
             {
-                // Ensure that the first point is visible on the graph
-                if (radioButton_PHT.Checked == true)
+                if (radioButton_PHT.Checked)
                 {
-                    // Shift points by removing the first (oldest) point and keeping the new ones
                     if (graph_Temperature.Points.Count > 10) graph_Temperature.Points.RemoveAt(0);
                     if (graph_Humidity.Points.Count > 10) graph_Humidity.Points.RemoveAt(0);
                     if (graph_Pressure.Points.Count > 10) graph_Pressure.Points.RemoveAt(0);
                 }
-                if (radioButton_IMU.Checked == true)
+                if (radioButton_IMU.Checked)
                 {
                     if (graph_Acc_X.Points.Count > 10) graph_Acc_X.Points.RemoveAt(0);
                     if (graph_Acc_Y.Points.Count > 10) graph_Acc_Y.Points.RemoveAt(0);
@@ -230,15 +307,13 @@ namespace Artemis_Esp32_Test_App
                     if (graph_Mag_Z.Points.Count > 10) graph_Mag_Z.Points.RemoveAt(0);
                 }
 
-                // Increment the X-Axis range
                 farand_Chart1.XAxis.Initial_Minimum += 1;
                 farand_Chart1.XAxis.Initial_Maximum += 1;
             }
 
-
-            if (radioButton_PHT.Checked == true)
+            if (radioButton_PHT.Checked)
             {
-                graph_Temperature.Add_Point(time_Sec, (double) Temperature);
+                graph_Temperature.Add_Point(time_Sec, (double)Temperature);
                 graph_Pressure.Add_Point(time_Sec, (double)Pressure);
                 graph_Humidity.Add_Point(time_Sec, (double)Humidity);
 
@@ -253,17 +328,16 @@ namespace Artemis_Esp32_Test_App
                 graph_Mag_X.Points.Clear();
                 graph_Mag_Y.Points.Clear();
                 graph_Mag_Z.Points.Clear();
-
             }
-            if (radioButton_IMU.Checked == true)
+            else if (radioButton_IMU.Checked)
             {
                 graph_Acc_X.Add_Point(time_Sec, (double)Acc_X * 10.0f);
                 graph_Acc_Y.Add_Point(time_Sec, (double)Acc_Y * 10.0f);
                 graph_Acc_Z.Add_Point(time_Sec, (double)Acc_Z * 10.0f);
 
-                graph_Gyro_X.Add_Point(time_Sec, (double) GyroX);
-                graph_Gyro_Y.Add_Point(time_Sec, (double) GyroY);
-                graph_Gyro_Z.Add_Point(time_Sec, (double) GyroZ);
+                graph_Gyro_X.Add_Point(time_Sec, (double)GyroX);
+                graph_Gyro_Y.Add_Point(time_Sec, (double)GyroY);
+                graph_Gyro_Z.Add_Point(time_Sec, (double)GyroZ);
 
                 graph_Temperature.Points.Clear();
                 graph_Pressure.Points.Clear();
@@ -272,9 +346,8 @@ namespace Artemis_Esp32_Test_App
                 graph_Mag_X.Points.Clear();
                 graph_Mag_Y.Points.Clear();
                 graph_Mag_Z.Points.Clear();
-
             }
-            if (radioButton_Mag.Checked)
+            else if (radioButton_Mag.Checked)
             {
                 graph_Mag_X.Add_Point(time_Sec, (double)MagX);
                 graph_Mag_Y.Add_Point(time_Sec, (double)MagY);
@@ -292,12 +365,6 @@ namespace Artemis_Esp32_Test_App
                 graph_Gyro_Y.Points.Clear();
                 graph_Gyro_Z.Points.Clear();
             }
-
-        }
-
-        private void Farand_Chart1_View_Changed(object sender, EventArgs e)
-        {
-
         }
 
         private void Initialize_Chart1()
@@ -332,143 +399,158 @@ namespace Artemis_Esp32_Test_App
 
             farand_Chart1.Clear_All_Farand_Graphs();
 
-            // PHT Sensor
-            Farand_Chart.Farand_Graph myGraph0 = new Farand_Chart.Farand_Graph();
-            myGraph0.Name = "Temperature (°C)";
-            myGraph0.PointStyle.Visible = false;
-            myGraph0.LineStyle.Color = Color.SkyBlue;
-            myGraph0.PointStyle.Size = 5.0F;
-            myGraph0.PointStyle.FillColor = Color.SkyBlue;
-            myGraph0.PointStyle.LineColor = Color.SkyBlue;
-            myGraph0.PointStyle.LineWidth = 1.0F;
-            myGraph0.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph0);
+            // PHT
+            {
+                var g0 = new Farand_Chart.Farand_Graph();
+                g0.Name = "Temperature (°C)";
+                g0.PointStyle.Visible = false;
+                g0.LineStyle.Color = Color.SkyBlue;
+                g0.PointStyle.Size = 5.0F;
+                g0.PointStyle.FillColor = Color.SkyBlue;
+                g0.PointStyle.LineColor = Color.SkyBlue;
+                g0.PointStyle.LineWidth = 1.0F;
+                g0.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g0);
 
-            Farand_Chart.Farand_Graph myGraph1 = new Farand_Chart.Farand_Graph();
-            myGraph1.Name = "Humidity (%RH)";
-            myGraph1.PointStyle.Visible = false;
-            myGraph1.LineStyle.Color = Color.Coral;
-            myGraph1.PointStyle.Size = 5.0F;
-            myGraph1.PointStyle.FillColor = Color.Coral;
-            myGraph1.PointStyle.LineColor = Color.Coral;
-            myGraph1.PointStyle.LineWidth = 1.0F;
-            myGraph1.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph1);
+                var g1 = new Farand_Chart.Farand_Graph();
+                g1.Name = "Humidity (%RH)";
+                g1.PointStyle.Visible = false;
+                g1.LineStyle.Color = Color.Coral;
+                g1.PointStyle.Size = 5.0F;
+                g1.PointStyle.FillColor = Color.Coral;
+                g1.PointStyle.LineColor = Color.Coral;
+                g1.PointStyle.LineWidth = 1.0F;
+                g1.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g1);
 
-            Farand_Chart.Farand_Graph myGraph2 = new Farand_Chart.Farand_Graph();
-            myGraph2.Name = "Pressure (hPa)";
-            myGraph2.PointStyle.Visible = false;
-            myGraph2.LineStyle.Color = Color.Gold;
-            myGraph2.PointStyle.Size = 5.0F;
-            myGraph2.PointStyle.FillColor = Color.Gold;
-            myGraph2.PointStyle.LineColor = Color.Gold;
-            myGraph2.PointStyle.LineWidth = 1.0F;
-            myGraph2.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph2);
+                var g2 = new Farand_Chart.Farand_Graph();
+                g2.Name = "Pressure (hPa)";
+                g2.PointStyle.Visible = false;
+                g2.LineStyle.Color = Color.Gold;
+                g2.PointStyle.Size = 5.0F;
+                g2.PointStyle.FillColor = Color.Gold;
+                g2.PointStyle.LineColor = Color.Gold;
+                g2.PointStyle.LineWidth = 1.0F;
+                g2.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g2);
+            }
 
-            // IMU Sensor
-            Farand_Chart.Farand_Graph myGraph3 = new Farand_Chart.Farand_Graph();
-            myGraph3.Name = "Acceleration X (m/s^2)";
-            myGraph3.PointStyle.Visible = false;
-            myGraph3.LineStyle.Color = Color.SkyBlue;
-            myGraph3.PointStyle.Size = 5.0F;
-            myGraph3.PointStyle.FillColor = Color.SkyBlue;
-            myGraph3.PointStyle.LineColor = Color.SkyBlue;
-            myGraph3.PointStyle.LineWidth = 1.0F;
-            myGraph3.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph3);
+            // IMU
+            {
+                var g3 = new Farand_Chart.Farand_Graph();
+                g3.Name = "Acceleration X (m/s^2)";
+                g3.PointStyle.Visible = false;
+                g3.LineStyle.Color = Color.SkyBlue;
+                g3.PointStyle.Size = 5.0F;
+                g3.PointStyle.FillColor = Color.SkyBlue;
+                g3.PointStyle.LineColor = Color.SkyBlue;
+                g3.PointStyle.LineWidth = 1.0F;
+                g3.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g3);
 
-            Farand_Chart.Farand_Graph myGraph4 = new Farand_Chart.Farand_Graph();
-            myGraph4.Name = "Acceleration Y (m/s^2)";
-            myGraph4.PointStyle.Visible = false;
-            myGraph4.LineStyle.Color = Color.Coral;
-            myGraph4.PointStyle.Size = 5.0F;
-            myGraph4.PointStyle.FillColor = Color.Coral;
-            myGraph4.PointStyle.LineColor = Color.Coral;
-            myGraph4.PointStyle.LineWidth = 1.0F;
-            myGraph4.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph4);
+                var g4 = new Farand_Chart.Farand_Graph();
+                g4.Name = "Acceleration Y (m/s^2)";
+                g4.PointStyle.Visible = false;
+                g4.LineStyle.Color = Color.Coral;
+                g4.PointStyle.Size = 5.0F;
+                g4.PointStyle.FillColor = Color.Coral;
+                g4.PointStyle.LineColor = Color.Coral;
+                g4.PointStyle.LineWidth = 1.0F;
+                g4.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g4);
 
-            Farand_Chart.Farand_Graph myGraph5 = new Farand_Chart.Farand_Graph();
-            myGraph5.Name = "Acceleration Z (m/s^2)";
-            myGraph5.PointStyle.Visible = false;
-            myGraph5.LineStyle.Color = Color.Gold;
-            myGraph5.PointStyle.Size = 5.0F;
-            myGraph5.PointStyle.FillColor = Color.Gold;
-            myGraph5.PointStyle.LineColor = Color.Gold;
-            myGraph5.PointStyle.LineWidth = 1.0F;
-            myGraph5.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph5);
+                var g5 = new Farand_Chart.Farand_Graph();
+                g5.Name = "Acceleration Z (m/s^2)";
+                g5.PointStyle.Visible = false;
+                g5.LineStyle.Color = Color.Gold;
+                g5.PointStyle.Size = 5.0F;
+                g5.PointStyle.FillColor = Color.Gold;
+                g5.PointStyle.LineColor = Color.Gold;
+                g5.PointStyle.LineWidth = 1.0F;
+                g5.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g5);
 
-            Farand_Chart.Farand_Graph myGraph6 = new Farand_Chart.Farand_Graph();
-            myGraph6.Name = "Gyroscope X (rad/s^2)";
-            myGraph6.PointStyle.Visible = false;
-            myGraph6.LineStyle.Color = Color.LimeGreen;
-            myGraph6.PointStyle.Size = 5.0F;
-            myGraph6.PointStyle.FillColor = Color.LimeGreen;
-            myGraph6.PointStyle.LineColor = Color.LimeGreen;
-            myGraph6.PointStyle.LineWidth = 1.0F;
-            myGraph6.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph6);
+                var g6 = new Farand_Chart.Farand_Graph();
+                g6.Name = "Gyroscope X (rad/s)";
+                g6.PointStyle.Visible = false;
+                g6.LineStyle.Color = Color.LimeGreen;
+                g6.PointStyle.Size = 5.0F;
+                g6.PointStyle.FillColor = Color.LimeGreen;
+                g6.PointStyle.LineColor = Color.LimeGreen;
+                g6.PointStyle.LineWidth = 1.0F;
+                g6.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g6);
 
-            Farand_Chart.Farand_Graph myGraph7 = new Farand_Chart.Farand_Graph();
-            myGraph7.Name = "Gyroscope Y (rad/s^2)";
-            myGraph7.PointStyle.Visible = false;
-            myGraph7.LineStyle.Color = Color.LightGray;
-            myGraph7.PointStyle.Size = 5.0F;
-            myGraph7.PointStyle.FillColor = Color.LightGray;
-            myGraph7.PointStyle.LineColor = Color.LightGray;
-            myGraph7.PointStyle.LineWidth = 1.0F;
-            myGraph7.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph7);
+                var g7 = new Farand_Chart.Farand_Graph();
+                g7.Name = "Gyroscope Y (rad/s)";
+                g7.PointStyle.Visible = false;
+                g7.LineStyle.Color = Color.LightGray;
+                g7.PointStyle.Size = 5.0F;
+                g7.PointStyle.FillColor = Color.LightGray;
+                g7.PointStyle.LineColor = Color.LightGray;
+                g7.PointStyle.LineWidth = 1.0F;
+                g7.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g7);
 
-            Farand_Chart.Farand_Graph myGraph8 = new Farand_Chart.Farand_Graph();
-            myGraph8.Name = "Gyroscope Z (rad/s^2)";
-            myGraph8.PointStyle.Visible = false;
-            myGraph8.LineStyle.Color = Color.LightPink;
-            myGraph8.PointStyle.Size = 5.0F;
-            myGraph8.PointStyle.FillColor = Color.LightPink;
-            myGraph8.PointStyle.LineColor = Color.LightPink;
-            myGraph8.PointStyle.LineWidth = 1.0F;
-            myGraph8.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph8);
+                var g8 = new Farand_Chart.Farand_Graph();
+                g8.Name = "Gyroscope Z (rad/s)";
+                g8.PointStyle.Visible = false;
+                g8.LineStyle.Color = Color.LightPink;
+                g8.PointStyle.Size = 5.0F;
+                g8.PointStyle.FillColor = Color.LightPink;
+                g8.PointStyle.LineColor = Color.LightPink;
+                g8.PointStyle.LineWidth = 1.0F;
+                g8.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g8);
+            }
 
-            // Magnetometer Sensor
-            Farand_Chart.Farand_Graph myGraph9 = new Farand_Chart.Farand_Graph();
-            myGraph9.Name = "Magnetic X (uT)";
-            myGraph9.PointStyle.Visible = false;
-            myGraph9.LineStyle.Color = Color.SkyBlue;
-            myGraph9.PointStyle.Size = 5.0F;
-            myGraph9.PointStyle.FillColor = Color.SkyBlue;
-            myGraph9.PointStyle.LineColor = Color.SkyBlue;
-            myGraph9.PointStyle.LineWidth = 1.0F;
-            myGraph9.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph9);
+            // Magnetometer
+            {
+                var g9 = new Farand_Chart.Farand_Graph();
+                g9.Name = "Magnetic X (uT)";
+                g9.PointStyle.Visible = false;
+                g9.LineStyle.Color = Color.SkyBlue;
+                g9.PointStyle.Size = 5.0F;
+                g9.PointStyle.FillColor = Color.SkyBlue;
+                g9.PointStyle.LineColor = Color.SkyBlue;
+                g9.PointStyle.LineWidth = 1.0F;
+                g9.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g9);
 
-            Farand_Chart.Farand_Graph myGraph10 = new Farand_Chart.Farand_Graph();
-            myGraph10.Name = "Magnetic Y (uT)";
-            myGraph10.PointStyle.Visible = false;
-            myGraph10.LineStyle.Color = Color.Coral;
-            myGraph10.PointStyle.Size = 5.0F;
-            myGraph10.PointStyle.FillColor = Color.Coral;
-            myGraph10.PointStyle.LineColor = Color.Coral;
-            myGraph10.PointStyle.LineWidth = 1.0F;
-            myGraph10.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph10);
+                var g10 = new Farand_Chart.Farand_Graph();
+                g10.Name = "Magnetic Y (uT)";
+                g10.PointStyle.Visible = false;
+                g10.LineStyle.Color = Color.Coral;
+                g10.PointStyle.Size = 5.0F;
+                g10.PointStyle.FillColor = Color.Coral;
+                g10.PointStyle.LineColor = Color.Coral;
+                g10.PointStyle.LineWidth = 1.0F;
+                g10.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g10);
 
-            Farand_Chart.Farand_Graph myGraph11 = new Farand_Chart.Farand_Graph();
-            myGraph11.Name = "Magnetic Z (uT)";
-            myGraph11.PointStyle.Visible = false;
-            myGraph11.LineStyle.Color = Color.Gold;
-            myGraph11.PointStyle.Size = 5.0F;
-            myGraph11.PointStyle.FillColor = Color.Gold;
-            myGraph11.PointStyle.LineColor = Color.Gold;
-            myGraph11.PointStyle.LineWidth = 1.0F;
-            myGraph11.LineStyle.Width = 1.5F;
-            farand_Chart1.Add_Farand_Graph(myGraph11);
+                var g11 = new Farand_Chart.Farand_Graph();
+                g11.Name = "Magnetic Z (uT)";
+                g11.PointStyle.Visible = false;
+                g11.LineStyle.Color = Color.Gold;
+                g11.PointStyle.Size = 5.0F;
+                g11.PointStyle.FillColor = Color.Gold;
+                g11.PointStyle.LineColor = Color.Gold;
+                g11.PointStyle.LineWidth = 1.0F;
+                g11.LineStyle.Width = 1.5F;
+                farand_Chart1.Add_Farand_Graph(g11);
+            }
 
             farand_Chart1.Refresh_All();
         }
+
+        private void Farand_Chart1_View_Changed(object sender, EventArgs e)
+        {
+            // optional: handle zoom/pan feedback here if you want
+        }
+
+        // =========================================
+        // COMMAND GENERATION / UI CONTROLS
+        // =========================================
 
         private void checkBox_Start_Qwiic_CheckedChanged(object sender, EventArgs e)
         {
@@ -477,49 +559,20 @@ namespace Artemis_Esp32_Test_App
 
         private void Power_Switch_Sensors(bool is_On)
         {
-            if (is_On)
+            lock (_cmdLock)
             {
-                command_bytes[1] = 0x01;
+                if (is_On)
+                {
+                    command_bytes[1] = 0x01; // your "power on sensors" opcode
+                    checkBox_Reporting.Enabled = true;
+                }
+                else
+                {
+                    command_bytes[1] = 0x02; // "power off sensors"
+                    checkBox_Reporting.Enabled = false;
+                }
 
-                checkBox_Reporting.Enabled = true;
-            }
-            else
-            {
-                command_bytes[1] = 0x02;
-
-                checkBox_Reporting.Enabled = false;
-            }
-
-            is_Command_Ready = true;
-
-        }
-
-        private byte Calculate_Checksum(byte[] packet)
-        {
-            byte checksum = 0;
-            for (int i = 0; i < packet.Length - 1; i++)
-            {
-                checksum += packet[i];
-            }
-            return checksum;
-        }
-        private bool VerifyChecksumAndHeader(byte[] buf, int baseIndex)
-        {
-            byte sum = 0;
-            // sum bytes 0..14
-            for (int i = 0; i < buf.Length - 1; i++)
-            {
-                sum += buf[baseIndex + i];
-            }
-            byte cs = buf[baseIndex + buf.Length - 1];
-            return (sum == cs) && (buf[baseIndex] == PACKETS_HEADER);
-        }
-
-        private void Clear_All_Buffers()
-        {
-            for (int i = 0; i < command_bytes.Length; i++)
-            {
-                command_bytes[i] = 0x00;
+                is_Command_Ready = true;
             }
         }
 
@@ -528,107 +581,71 @@ namespace Artemis_Esp32_Test_App
             Switch_Reporting(checkBox_Reporting.Checked);
         }
 
-
         private void Switch_Reporting(bool is_Reporting)
         {
-            if (is_Reporting)
+            lock (_cmdLock)
             {
-                command_bytes[1] = 0x04;
+                if (is_Reporting)
+                {
+                    command_bytes[1] = 0x04; // "start reporting"
+                    checkBox_Reporting.Enabled = true;
+                }
+                else
+                {
+                    command_bytes[1] = 0x05; // "stop reporting"
+                }
 
-                checkBox_Reporting.Enabled = true;
+                is_Command_Ready = true;
             }
-            else
+        }
+
+        // =========================================
+        // HELPERS / UTILS
+        // =========================================
+
+        private byte Calculate_Checksum(byte[] packet)
+        {
+            byte checksum = 0;
+            // sum all except last slot (checksum byte)
+            for (int i = 0; i < packet.Length - 1; i++)
             {
-                command_bytes[1] = 0x05;
+                checksum += packet[i];
+            }
+            return checksum;
+        }
+
+        // Verify 16-byte sub-frame at baseIndex:
+        // [0] header, [1..14] payload, [15] checksum
+        private bool VerifyChecksumAndHeader(byte[] buf, int baseIndex)
+        {
+            if (buf[baseIndex] != PACKETS_HEADER)
+                return false;
+
+            byte sum = 0;
+            // sum bytes 0..14 of this sub-frame
+            for (int i = 0; i < 15; i++)
+            {
+                sum += buf[baseIndex + i];
             }
 
-            is_Command_Ready = true;
-
+            byte cs = buf[baseIndex + 15];
+            return (sum == cs);
         }
 
-        private void timerUiUpdate_Tick(object sender, EventArgs e)
+        // read a big-endian unsigned 16-bit from buf[start], buf[start+1]
+        private UInt16 GetUInt16_BE(byte[] buf, int start)
         {
-            if (!_newBatchReady)
-                return;
-
-            _newBatchReady = false;
-
-            // Copy locally so we don't get race conditions mid-loop
-            ImuSample[] localBatch = new ImuSample[5];
-            for (int i = 0; i < 5; i++)
-                localBatch[i] = _incomingBatch[i];
-
-            // the last sample in the batch is the newest (~now)
-            ImuSample latest = localBatch[4];
-
-            // Convert raw sensor units to display units
-            // e.g. if Acc is in mg or m/s² * 100, apply your scaling here.
-            // I'll assume raw 'short' is already in some meaningful LSB-per-unit.
-            UpdateLabelsFromSample(latest);
-
-            // Now add ALL samples to the chart timeline
-            PushBatchToChart(localBatch);
+            int hi = buf[start];
+            int lo = buf[start + 1];
+            int combined = (hi << 8) | lo;
+            return (UInt16)combined;
         }
 
-        private void UpdateLabelsFromSample(ImuSample s)
+        private void Clear_All_Buffers()
         {
-            // Example scaling:
-            // Let's say accelerometer is in milli-g or milli-(m/s^2).
-            // If you know it's 1000x scaled, divide by 1000.0f before display.
-
-            float accX = s.AccX / 100.0f;
-            float accY = s.AccY / 100.0f;
-            float accZ = s.AccZ / 100.0f;
-
-            float gyroX = s.GyroX / 100.0f;
-            float gyroY = s.GyroY / 100.0f;
-            float gyroZ = s.GyroZ / 100.0f;
-
-            lblTemp.Text = $"AccX: {accX:0.00}";
-            lblPres.Text = $"AccY: {accY:0.00}";
-            lblHum.Text = $"AccZ: {accZ:0.00}";
-
-            label_AccX.Text = $"GyroX: {gyroX:0.00}";
-            label_AccY.Text = $"GyroY: {gyroY:0.00}";
-            label_AccZ.Text = $"GyroZ: {gyroZ:0.00}";
-
-            // If you want separate labels for accel vs gyro, map them however you like.
-            // You can rename the labels for clarity. I'm reusing your labels here.
-        }
-
-        private void PushBatchToChart(ImuSample[] batch)
-        {
-            // You already do shifting and Add_Point in Graph_Data().
-            // We’ll feed it in a loop.
-
-            for (int i = 0; i < batch.Length; i++)
+            for (int i = 0; i < command_bytes.Length; i++)
             {
-                ImuSample s = batch[i];
-
-                // scale raw sensor units here too:
-                float accX = s.AccX / 100.0f;
-                float accY = s.AccY / 100.0f;
-                float accZ = s.AccZ / 100.0f;
-
-                float gyroX = s.GyroX / 100.0f;
-                float gyroY = s.GyroY / 100.0f;
-                float gyroZ = s.GyroZ / 100.0f;
-
-                // update your globals so Graph_Data can reuse them
-                Acc_X = accX;
-                Acc_Y = accY;
-                Acc_Z = accZ;
-
-                GyroX = gyroX;
-                GyroY = gyroY;
-                GyroZ = gyroZ;
-
-                // we advance our local timeline for each sub-sample
-                // each sub-sample is 25 ms = 0.025 seconds
-                time_Sec += 0.025;
-
-                // now call your existing Graph_Data() to push these into Farand_Chart
-                Graph_Data();
+                command_bytes[i] = 0x00;
             }
         }
     }

@@ -550,6 +550,7 @@
             // 
             // timerUiUpdate
             // 
+            this.timerUiUpdate.Enabled = true;
             this.timerUiUpdate.Interval = 50;
             this.timerUiUpdate.Tick += new System.EventHandler(this.timerUiUpdate_Tick);
             // 

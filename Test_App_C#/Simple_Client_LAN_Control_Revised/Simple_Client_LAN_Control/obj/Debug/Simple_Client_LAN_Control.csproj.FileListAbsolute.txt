@@ -62,3 +62,12 @@ C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_
 C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.CoreCompileInputs.cache
 C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.dll
 C:\Projects\ORCA Software\Firmware\_Archive\Artemis Tests\UART & ESP32\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.pdb
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.dll
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\bin\Debug\Simple_Client_LAN_Control.pdb
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.AssemblyReference.cache
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.GenerateResource.cache
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.csproj.CoreCompileInputs.cache
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.dll
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.pdb
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.Properties.Resources.resources
+C:\Projects\ORCA Software\Test_App_C#\Simple_Client_LAN_Control_Revised\Simple_Client_LAN_Control\obj\Debug\Simple_Client_LAN_Control.Simple_Client_LAN_Control.resources

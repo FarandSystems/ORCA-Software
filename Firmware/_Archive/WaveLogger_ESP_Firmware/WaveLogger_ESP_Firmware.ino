@@ -4,9 +4,9 @@
 
 // ---------------- Configuration ----------------
 static constexpr int  UART_NUM = 0;
-static constexpr int  UART_RX  = 3; // ESP32 GPIO for Artemis TX
-static constexpr int  UART_TX  = 1; // ESP32 GPIO for Artemis RX
-static constexpr uint32_t UART_BAUD = 115200;
+static constexpr int  UART_RX  = 16; // ESP32 GPIO for Artemis TX
+static constexpr int  UART_TX  = 17; // ESP32 GPIO for Artemis RX
+static constexpr uint32_t UART_BAUD = 9600;
 
 // Choose one of these network modes in setup():
 static constexpr char WIFI_SSID[] = "ORCA";

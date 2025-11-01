@@ -111,8 +111,8 @@ void on_40hz_tick(void)
     rx_frame_ready = false;
 
     Service_Input_Command(rx_buffer);
-    Report_To_PC();
   }
+  Report_To_PC();
 }
 
 void on_1hz_tick(void) 
