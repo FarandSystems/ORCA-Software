@@ -119,11 +119,11 @@ namespace Artemis_Esp32_Test_App
             {
                 int baseIndex = i * 16;
 
-                if (!VerifyChecksumAndHeader(raw, baseIndex))
-                {
-                    Console.WriteLine($"Bad Checksum or Header on sample {i}!!!");
-                    continue;
-                }
+                //if (!VerifyChecksumAndHeader(raw, baseIndex))
+                //{
+                //    Console.WriteLine($"Bad Checksum or Header on sample {i}!!!");
+                //    continue;
+                //}
 
                 ImuSample s = new ImuSample();
 
