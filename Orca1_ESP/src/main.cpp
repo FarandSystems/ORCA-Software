@@ -12,7 +12,7 @@ void setup()
  init_gpio();
  init_timers();
  wifi_init();
- wifi_config();
+ wifi_config();               
  uart_init();
  Serial.begin(115200);
 
@@ -41,8 +41,6 @@ void setup()
 // {
 //   demo_tcp_tx[i] = i;
 // }
-
-
  
 }
 
@@ -53,7 +51,6 @@ void loop()
 
   if (uart_tx_ready) 
   {
-
     uart_send_packet();  // Send prepared packet
   }
 
@@ -65,39 +62,27 @@ void loop()
       uart_rx_buffer_temp[i] = 0;
     }
 
-    tcp_send_bytes (uart_rx_buffer , sizeof(uart_rx_buffer));
+    tcp_send_bytes (uart_rx_buffer , UART_RX_PACKET_SIZE);
     uart_rx_ready = false;
   }
 
   wifi_task();
 
-    if (tcp_rx_ready)
-    {
-        tcp_rx_ready = false;
 
-        Serial.print("[TCP] Got ");
-        Serial.print(tcp_rx_len);
-        Serial.println(" bytes from socket:");
-
-        for (size_t i = 0; i < tcp_rx_len; i++)
-        {
-            Serial.printf(" %02X", tcp_rx_buf[i]);
-        }
-        Serial.println();
-
-        // Echo to client
-        // tcp_send_bytes((uint8_t*)tcp_rx_buf, tcp_rx_len);
-    }
-      
+   if (uart_reset_request)
+  {
+    uart_reset_request = false;
+    uart_force_reset();
+  }   
       
 
   //  uart_process_rx();   // Process received data
 
- for (uint8_t i = 0; i < 80; i++) 
- {
-  Serial.printf("Buf[%u] = %u\n", i, uart_rx_buffer[i]);
- }
-//  wifi_process();
+//  for (uint8_t i = 0; i < 80; i++) 
+//  {
+//   Serial.printf("Buf[%u] = %u\n", i, uart_rx_buffer[i]);
+//  }
+// //  wifi_process();
 
   
 }

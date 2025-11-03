@@ -16,7 +16,7 @@ extern volatile bool tcp_client_connected;
 extern volatile bool tcp_rx_ready;
 
 // RX buffer for TCP data
-const uint16_t TCP_RX_BUF_SIZE = 8;
+const uint16_t TCP_RX_BUF_SIZE = 8; 
 extern uint8_t tcp_rx_buf[TCP_RX_BUF_SIZE];
 extern size_t  tcp_rx_len;
 

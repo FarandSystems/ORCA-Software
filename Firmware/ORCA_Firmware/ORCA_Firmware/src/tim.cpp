@@ -105,6 +105,13 @@ void on_100hz_tick(void)
 
 void on_40hz_tick(void) 
 {
+  uart_timeout_counter++;
+  if (uart_timeout_counter >= uart_timeout)
+  {
+    uart_timeout_counter = 0;
+    uart_reset_request = true;
+  }
+  
   // digitalWrite(pin_8, !digitalRead(pin_8));  // Example: Toggle pin for 8Hz
   if (rx_frame_ready)
   {
@@ -112,6 +119,7 @@ void on_40hz_tick(void)
 
     Service_Input_Command(rx_buffer);
   }
+  
   Report_To_PC();
 }
 

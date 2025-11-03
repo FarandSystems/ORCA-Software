@@ -241,54 +241,49 @@ namespace Simple_Client_LAN_Control
             {
                 while (!token.IsCancellationRequested && _isConnected)
                 {
-                    int n = 0;
+                    // Ensure free space before read
+                    if (_assemblyBuf.Length - _assemblyLen < 1024)
+                    {
+                        // If we can, compact to the front
+                        if (_assemblyLen >= _rxByteCount)
+                        {
+                            // leave as-is; inner while will drain
+                        }
+                        else
+                        {
+                            // grow buffer
+                            var bigger = new byte[_assemblyBuf.Length * 2];
+                            Buffer.BlockCopy(_assemblyBuf, 0, bigger, 0, _assemblyLen);
+                            _assemblyBuf = bigger;
+                        }
+                    }
+
+                    int n;
                     try
                     {
-                        n = await _stream.ReadAsync(
-                            _assemblyBuf,
-                            _assemblyLen,
-                            _assemblyBuf.Length - _assemblyLen,
-                            token
-                        );
+                        n = await _stream.ReadAsync(_assemblyBuf, _assemblyLen, _assemblyBuf.Length - _assemblyLen, token);
                     }
-                    catch
-                    {
-                        n = 0;
-                    }
+                    catch { n = 0; }
 
-                    if (n <= 0)
-                    {
-                        HandleDisconnect();
-                        return;
-                    }
-
+                    if (n <= 0) { HandleDisconnect(); return; }
                     _assemblyLen += n;
 
                     while (_assemblyLen >= _rxByteCount)
                     {
-                        // pull one complete frame/batch
                         Buffer.BlockCopy(_assemblyBuf, 0, _rxBuffer, 0, _rxByteCount);
-
                         int remaining = _assemblyLen - _rxByteCount;
                         Buffer.BlockCopy(_assemblyBuf, _rxByteCount, _assemblyBuf, 0, remaining);
                         _assemblyLen = remaining;
 
-                        // make a safe copy for external listeners
                         Buffer.BlockCopy(_rxBuffer, 0, _tempFrameCopy, 0, _rxByteCount);
-
-                        // flash RX indicator NOW
                         TriggerImmediateRxBlink();
-
-                        // notify listeners
                         SafeFireDataReceived(_tempFrameCopy);
                     }
                 }
             }
-            finally
-            {
-                HandleDisconnect();
-            }
+            finally { HandleDisconnect(); }
         }
+
 
         // ===========================
         // SEND LOOP

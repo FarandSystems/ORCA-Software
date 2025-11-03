@@ -12,7 +12,7 @@ void setup()
   disable_iridium();
   setup_i2c();
 
-  uart_begin(9600);
+  uart_begin(UART_BAUDRATE);
 
   // Initialize and configure the single 800 Hz timer + counters
   setupTimers();
@@ -38,11 +38,19 @@ void loop()
   // Check for any receiving RX Data
   check_rx_ready();
 
+  // Check for uart timeout
+  if (uart_reset_request)
+  {
+    uart_reset_request = false;
+    Reset_UART();
+  }
+  
+
   // Check if we should send data to PC
   if(report_to_pc_ready)
   {
     report_to_pc_ready = false;
-    GPIO-> WTSA = (1 << pin_UART); //Fast GPIO Set on Register
+    //GPIO-> WTSA = (1 << pin_UART); //Fast GPIO Set on Register
     Serial1.write(tx_buffer, TX_Buffer_Size);
     GPIO->WTCA = (1 << pin_UART);  //Fast GPIO Reset on Register
   }

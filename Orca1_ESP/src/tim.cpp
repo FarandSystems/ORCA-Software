@@ -15,7 +15,18 @@ void IRAM_ATTR onTimer1() //
 
   uart_tx_ready = true; //Start to send data
   
+  if (uart_timeout_counter < UART_TIMEOUT_LIMIT_TICKS)
+  {
+    uart_timeout_counter++;
+  }
+    
 
+  if (uart_timeout_counter >= UART_TIMEOUT_LIMIT_TICKS)
+  {
+    // Don't reset UART inside ISR; defer it
+    uart_reset_request = true;
+    uart_timeout_counter = 0; // prevent repeated requests
+  }
   // static bool state1 = false;
   // if (state1)
   //   GPIO.out_w1ts = (1 << PIN1);  // HIGH

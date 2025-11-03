@@ -40,13 +40,13 @@ namespace Artemis_Esp32_Test_App
         private struct ImuSample
         {
             public byte Header;
-            public UInt16 AccX;
-            public UInt16 AccY;
-            public UInt16 AccZ;
-            public UInt16 GyroX;
-            public UInt16 GyroY;
-            public UInt16 GyroZ;
-            public byte Checksum;
+            public short AccX;
+            public short AccY;
+            public short AccZ;
+            public short GyroX;
+            public short GyroY;
+            public short GyroZ;
+            public byte Checksum; // keep last byte; [13],[14] are reserved and ignored
         }
 
         // we receive 5 samples per batch (80 bytes total)
@@ -119,23 +119,23 @@ namespace Artemis_Esp32_Test_App
             {
                 int baseIndex = i * 16;
 
-                //if (!VerifyChecksumAndHeader(raw, baseIndex))
-                //{
-                //    Console.WriteLine($"Bad Checksum or Header on sample {i}!!!");
-                //    continue;
-                //}
+                if (!VerifyChecksumAndHeader(raw, baseIndex))
+                {
+                    Console.WriteLine($"Bad Checksum or Header on sample {i}!!!");
+                    continue;
+                }
 
                 ImuSample s = new ImuSample();
 
                 s.Header = raw[baseIndex + 0];
 
-                s.AccX = GetUInt16_BE(raw, baseIndex + 1);
-                s.AccY = GetUInt16_BE(raw, baseIndex + 3);
-                s.AccZ = GetUInt16_BE(raw, baseIndex + 5);
+                s.AccX = GetInt16_BE(raw, baseIndex + 1);
+                s.AccY = GetInt16_BE(raw, baseIndex + 3);
+                s.AccZ = GetInt16_BE(raw, baseIndex + 5);
 
-                s.GyroX = GetUInt16_BE(raw, baseIndex + 7);
-                s.GyroY = GetUInt16_BE(raw, baseIndex + 9);
-                s.GyroZ = GetUInt16_BE(raw, baseIndex + 11);
+                s.GyroX = GetInt16_BE(raw, baseIndex + 7);
+                s.GyroY = GetInt16_BE(raw, baseIndex + 9);
+                s.GyroZ = GetInt16_BE(raw, baseIndex + 11);
 
                 // bytes [13],[14] reserved if you want later
                 s.Checksum = raw[baseIndex + 15];
@@ -633,12 +633,11 @@ namespace Artemis_Esp32_Test_App
         }
 
         // read a big-endian unsigned 16-bit from buf[start], buf[start+1]
-        private UInt16 GetUInt16_BE(byte[] buf, int start)
+        private short GetInt16_BE(byte[] buf, int start)
         {
             int hi = buf[start];
             int lo = buf[start + 1];
-            int combined = (hi << 8) | lo;
-            return (UInt16)combined;
+            return unchecked((short)((hi << 8) | lo)); // sign-preserving
         }
 
         private void Clear_All_Buffers()
