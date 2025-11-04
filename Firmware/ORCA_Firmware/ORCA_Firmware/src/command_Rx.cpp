@@ -1,35 +1,15 @@
 #include "main.h"
 
-bool rx_frame_ready = false;
-
 bool report_to_pc_ready = false;
 
 bool is_power_requested = false;
 
-void check_rx_ready(void);
+
 void Service_Input_Command(uint8_t* RxBuffer);
+void Clear_All_Buffers();
 void Report_To_PC(void);
+void Imu_Report(void);
 uint8_t Encode_0x1A(uint8_t *input, uint8_t length, uint8_t *output);
-
-void check_rx_ready()
-{
-  while (Serial1.available()) 
-  {
-    uint8_t b = Serial1.read();
-    rx_buffer[rx_index++] = b;
-
-    // When 8 bytes are collected → mark frame ready
-    if (rx_index >= RX_Buffer_Size) 
-    {
-      if (rx_buffer[RX_Buffer_Size - 1] == Calculate_Checksum(rx_buffer, RX_Buffer_Size))
-      {
-        rx_frame_ready = true;
-        uart_timeout_counter = 0;
-      }
-      rx_index = 0;
-    }
-  }
-}
 
 void Service_Input_Command(uint8_t* RxBuffer)
 {
@@ -41,36 +21,55 @@ void Service_Input_Command(uint8_t* RxBuffer)
     case 0x01:
       is_power_requested = true;
       is_qwiic_on = true;
-      am_hal_gpio_output_toggle(pin_LED);
-      // am_hal_gpio_output_toggle(pin_Buzzer);
       break;
     case 0x02:
       is_power_requested = true;
       is_qwiic_on = false;
-      am_hal_gpio_output_toggle(pin_LED);
-      // am_hal_gpio_output_toggle(pin_Buzzer);
       break;
     case 0x04:
-      am_hal_gpio_output_toggle(pin_LED);
-      // am_hal_gpio_output_toggle(pin_Buzzer);
       break;
     case 0x05:
-      am_hal_gpio_output_toggle(pin_LED);
-      // am_hal_gpio_output_toggle(pin_Buzzer);
       break;
   }
+}
+void Clear_All_Buffers()
+{
+  for (uint8_t i = 0; i < TX_Buffer_Size; i++)
+  {
+    tx_buffer[i] = 0x00;
+  }
+  
 }
 
 void Report_To_PC()
 {
-  tx_buffer[0] = 0xFA;
+  Clear_All_Buffers();
   
+  tx_buffer[0] = 0xFA;
+
   // // Ramp
   // for (uint8_t i = 1; i < TX_Buffer_Size - 1; i++)
   // {
   //   tx_buffer[i] = i;  // 0x00, 0x01, 0x02, ...
   // }
+  if (is_qwiic_on)
+  {
+    Imu_Report();
+  }
+  uint8_t cs = Calculate_Checksum(tx_buffer, TX_Buffer_Size);
+  tx_buffer[TX_Buffer_Size - 1] = cs;
 
+  // for (uint8_t i = 0; i < TX_Buffer_Size; i++)
+  // {
+  //   Serial.print(i); Serial.print(":"); Serial.println(tx_buffer[i]);
+  // }
+  
+  report_to_pc_ready = true;
+  GPIO-> WTSA = (1 << pin_UART); //Fast GPIO Set on Register
+}
+
+void Imu_Report(void)
+{
   int16_t ax_i16 = (int16_t)(ax * 100.0F);
   int16_t ay_i16 = (int16_t)(ay * 100.0F);
   int16_t az_i16 = (int16_t)(az * 100.0F);
@@ -99,18 +98,6 @@ void Report_To_PC()
 
   tx_buffer[13] = 0x00; // Reserved
   tx_buffer[14] = 0x00; // Reserved
-  
-  
-  uint8_t cs = Calculate_Checksum(tx_buffer, TX_Buffer_Size);
-  tx_buffer[TX_Buffer_Size - 1] = cs;
-
-  // for (uint8_t i = 0; i < TX_Buffer_Size; i++)
-  // {
-  //   Serial.print(i); Serial.print(":"); Serial.println(tx_buffer[i]);
-  // }
-  
-  report_to_pc_ready = true;
-  GPIO-> WTSA = (1 << pin_UART); //Fast GPIO Set on Register
 }
 
 uint8_t Encode_0x1A(uint8_t *input, uint8_t length, uint8_t *output)

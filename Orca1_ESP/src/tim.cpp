@@ -10,8 +10,8 @@ hw_timer_t *timer2 = nullptr; // Timer 2
 void IRAM_ATTR onTimer1() //
 {
   // Fastest possible pin toggle: direct register access
-  GPIO.out_w1ts = (1 << PIN1);  // HIGH
-  GPIO.out_w1tc = (1 << PIN1);  // LOW
+  // GPIO.out_w1ts = (1 << PIN1);  // HIGH
+  // GPIO.out_w1tc = (1 << PIN1);  // LOW
 
   uart_tx_ready = true; //Start to send data
   

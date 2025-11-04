@@ -33,10 +33,15 @@ void loop()
   {
     is_power_requested = false;
     Switch_Qwiic(is_qwiic_on);
+    
+  }
+  if(rx_reading_request)
+  {
+    rx_reading_request = false;
+    // Check for any receiving RX Data
+    check_rx_ready();
   }
   
-  // Check for any receiving RX Data
-  check_rx_ready();
 
   // Check for uart timeout
   if (uart_reset_request)

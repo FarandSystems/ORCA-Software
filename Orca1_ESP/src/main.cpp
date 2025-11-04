@@ -51,7 +51,11 @@ void loop()
 
   if (uart_tx_ready) 
   {
+    GPIO.out_w1ts = (1 << PIN1);  // HIGH
+    Serial.printf("Buf[%u] = %u\n", 1, uart_tx_buffer[1]);
     uart_send_packet();  // Send prepared packet
+    uart_tx_ready = false;
+    GPIO.out_w1tc = (1 << PIN1);  // LOW
   }
 
   if(uart_rx_ready)

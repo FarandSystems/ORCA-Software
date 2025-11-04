@@ -187,10 +187,10 @@ bool tcp_send_bytes(uint8_t *data, size_t len)
     if (!tcp_client_connected) return false;
     if (!client.connected())   return false;
     
-    GPIO.out_w1ts = (1 << PIN2);  // HIGH
+    // GPIO.out_w1ts = (1 << PIN2);  // HIGH
 
     size_t sent = client.write(data, len);
      
-    GPIO.out_w1tc = (1 << PIN2);  // LOW
+    // GPIO.out_w1tc = (1 << PIN2);  // LOW
     return (sent == len);
 }

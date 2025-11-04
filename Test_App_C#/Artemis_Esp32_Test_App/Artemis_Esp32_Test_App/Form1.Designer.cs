@@ -258,22 +258,22 @@
             // radioButton_Mag
             // 
             this.radioButton_Mag.AutoSize = true;
-            this.radioButton_Mag.Checked = true;
             this.radioButton_Mag.Location = new System.Drawing.Point(12, 77);
             this.radioButton_Mag.Name = "radioButton_Mag";
             this.radioButton_Mag.Size = new System.Drawing.Size(46, 17);
             this.radioButton_Mag.TabIndex = 2;
-            this.radioButton_Mag.TabStop = true;
             this.radioButton_Mag.Text = "Mag";
             this.radioButton_Mag.UseVisualStyleBackColor = true;
             // 
             // radioButton_IMU
             // 
             this.radioButton_IMU.AutoSize = true;
+            this.radioButton_IMU.Checked = true;
             this.radioButton_IMU.Location = new System.Drawing.Point(12, 50);
             this.radioButton_IMU.Name = "radioButton_IMU";
             this.radioButton_IMU.Size = new System.Drawing.Size(45, 17);
             this.radioButton_IMU.TabIndex = 1;
+            this.radioButton_IMU.TabStop = true;
             this.radioButton_IMU.Text = "IMU";
             this.radioButton_IMU.UseVisualStyleBackColor = true;
             // 

@@ -14,6 +14,7 @@ bool is_qwiic_on = true;
 void setup_i2c(void);
 void read_IMU(void);
 void Switch_Qwiic(bool is_On);
+void Init_Sensors(void);
 
 void setup_i2c(void)
 {
@@ -33,6 +34,11 @@ void setup_i2c(void)
   delay(100);
   Serial.println("Qwiic is powered on");
 
+  Init_Sensors();
+}
+
+void Init_Sensors(void)
+{
   // Initialize IMU
   if (!ism330dhcx.begin_I2C(0x6A, &agtWire)) 
   {
@@ -47,11 +53,14 @@ void setup_i2c(void)
 
   Serial.println("IMU is Started!");
 }
+
 void Switch_Qwiic(bool is_On)
 {
   if (is_On)
   {
     qwiic_switch.powerOn();
+    delay(1);
+    Init_Sensors();
   }
   else
   {

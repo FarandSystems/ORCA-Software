@@ -105,6 +105,9 @@ void on_100hz_tick(void)
 
 void on_40hz_tick(void) 
 {
+
+  rx_reading_request = true;
+
   uart_timeout_counter++;
   if (uart_timeout_counter >= uart_timeout)
   {
@@ -113,10 +116,11 @@ void on_40hz_tick(void)
   }
   
   // digitalWrite(pin_8, !digitalRead(pin_8));  // Example: Toggle pin for 8Hz
+
+  // Service RX if available at 40Hz
   if (rx_frame_ready)
   {
     rx_frame_ready = false;
-
     Service_Input_Command(rx_buffer);
   }
   

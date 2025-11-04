@@ -13,6 +13,9 @@ uint32_t uart_timeout_counter = 0;   // increments each tick
 volatile bool uart_reset_request   = false; // set in tick, handled in loop
 
 bool VerifyCheckSumandHeader(uint8_t* frame);
+void Clear_All_Buffers();
+void send_uart_heartbeat_packet();
+
 
 uint8_t uart_rx_buffer[UART_RX_PACKET_SIZE];
 uint8_t uart_rx_buffer_temp[UART_RX_PACKET_SIZE];
@@ -45,7 +48,7 @@ void uart_init(void)
 {
 //   SerialPort.begin(UART_BAUDRATE, SERIAL_8N1, UART_RX_PIN, UART_TX_PIN);
   SerialPort.onReceive(uart_rx_isr);
-  SerialPort.begin(9600, SERIAL_8N1, 16, 17); 
+  SerialPort.begin(9600, SERIAL_8N1, 16, 17);
 
   // Optional: fill TX buffer with example data
   // for (int i = 0; i < UART_TX_PACKET_SIZE; i++) 
@@ -59,8 +62,7 @@ void uart_send_packet(void)
 {
   if(tcp_rx_ready)
   {
-    tcp_rx_ready = false;
-
+    
     for (int i = 0; i < UART_TX_PACKET_SIZE; i++) 
     {
       uart_tx_buffer[i] = tcp_rx_buf[i] ;
@@ -68,16 +70,32 @@ void uart_send_packet(void)
   }
   else
   {
-    for (int i = 0; i < UART_TX_PACKET_SIZE; i++) 
-    {
-     uart_tx_buffer[i] = 0 ;
-    }
+    send_uart_heartbeat_packet();
   }
-
+  
+  tcp_rx_ready = false;
+  
   SerialPort.write(uart_tx_buffer,UART_TX_PACKET_SIZE);
-  uart_tx_ready = false;
 
 }
+void send_uart_heartbeat_packet()
+{
+    Clear_All_Buffers();
+    uart_tx_buffer[0] = 0x55;  // Header
+
+    uart_tx_buffer[UART_TX_PACKET_SIZE - 1] = 0x55;  // Checksum
+}
+
+void Clear_All_Buffers()
+{
+   for (int i = 0; i < UART_TX_PACKET_SIZE; i++) 
+   {
+     uart_tx_buffer[i] = 0 ;
+   }
+}
+
+
+
 bool VerifyCheckSumandHeader(uint8_t* frame)
 {
    for (int p = 0; p < 5; ++p)
@@ -106,7 +124,7 @@ void uart_force_reset()
 
   SerialPort.end();
   delay(5);  // brief pause allows driver to settle
-
+  
   uart_init();
   // Flush any garbage
   while (SerialPort.available())

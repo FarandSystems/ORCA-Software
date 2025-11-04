@@ -158,7 +158,7 @@ namespace Artemis_Esp32_Test_App
                 if (!is_Command_Ready) // heartbeat / keep-alive mode
                 {
                     Clear_All_Buffers();
-                    command_bytes[1] = 0xFA;
+                    command_bytes[0] = PACKETS_HEADER;
                 }
                 else
                 {
