@@ -7,10 +7,11 @@ void setup()
   am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_SYSCLK_MAX, 0);
   am_hal_sysctrl_fpu_enable();
   am_hal_sysctrl_fpu_stacking_enable(true);
+
+
   Serial.begin(115200);
   setup_GPIO();
   Alarm_Init(pin_Buzzer, true);
-  disable_iridium();
   setup_i2c();
   
   // Initialize and configure the single 800 Hz timer + counters
@@ -38,6 +39,7 @@ void loop()
     Switch_Qwiic(is_qwiic_on);
     
   }
+
   if(rx_reading_request)
   {
     rx_reading_request = false;
@@ -61,5 +63,12 @@ void loop()
     //GPIO-> WTSA = (1 << pin_UART); //Fast GPIO Set on Register
     Serial1.write(tx_buffer, TX_Buffer_Size);
     GPIO->WTCA = (1 << pin_UART);  //Fast GPIO Reset on Register
+  }
+
+  if(is_1hz_Timer_Int_Ready)
+  {
+    is_1hz_Timer_Int_Ready = false;
+    
+    //Read_Gnss();
   }
 }

@@ -13,5 +13,6 @@
 #include "uart.h"
 #include "command_Rx.h"
 #include "Alarm.h"
+#include "gnss_manager.h"
 
 #endif // MAIN_H

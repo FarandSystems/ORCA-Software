@@ -9,6 +9,8 @@ uint32_t counter_800 = 0;
 
 bool is_800hz_Timer_Int_Ready = false;
 
+bool is_1hz_Timer_Int_Ready = false;
+
 extern "C" void Timer_ISR_800Hz(void) 
 {
 
@@ -129,6 +131,5 @@ void on_40hz_tick(void)
 
 void on_1hz_tick(void) 
 {
-  //am_hal_gpio_output_toggle(pin_1);  // Example: Toggle pin for 1Hz
-  // Add more 1 Hz logic here
+  is_1hz_Timer_Int_Ready = true;
 }

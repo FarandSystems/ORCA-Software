@@ -7,6 +7,7 @@
 #include <am_hal_sysctrl.h>    // For clocks (HFRC auto-enabled)
 
 extern bool is_800hz_Timer_Int_Ready;
+extern bool is_1hz_Timer_Int_Ready;
 
 extern uint32_t counter_800;
 extern uint32_t counter_100hz;

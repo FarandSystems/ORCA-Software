@@ -15,7 +15,10 @@ uint8_t pin_IRIDIUM_EN = 17;
 
 void i2c_pins_init(void);
 void uart_pins_init(void);
-void disable_iridium(void);
+void turn_iridium_off(void);
+void turn_iridium_on(void);
+void turn_gnss_on(void);
+void turn_gnss_off(void);
 
 void setup_GPIO()
 {
@@ -26,12 +29,49 @@ void setup_GPIO()
 
   pinMode(pin_LED, OUTPUT);
   pinMode(pin_Buzzer, OUTPUT);
-  pinMode(pin_IRIDIUM_EN, OUTPUT);
+
+  // IRIDUIM PINs
+  pinMode(iridiumPwrEN, OUTPUT); 
+  pinMode(superCapChgEN, OUTPUT);
+  pinMode(iridiumSleep, OUTPUT); 
+
+  // GNSS PINs
+  pinMode(gnssEN, OUTPUT); 
 }
 
-void disable_iridium()
+// --- Power helpers (minimum set) ---
+void turn_iridium_off(void)
 {
-  am_hal_gpio_output_clear(pin_IRIDIUM_EN);
+  Serial.println(F("turn iridium off"));
+  digitalWrite(iridiumPwrEN, LOW);
+  digitalWrite(superCapChgEN, LOW);
+  digitalWrite(iridiumSleep, LOW);
+}
+
+void turn_gnss_on(void)
+{
+  Serial.println(F("turn gnss on"));
+  turn_iridium_off();
+  delay(100);
+  pinMode(gnssEN, OUTPUT); digitalWrite(gnssEN, LOW); // enable GNSS
+  delay(1000);
+}
+void turn_gnss_off(void)
+{
+  Serial.println(F("turn gnss off"));
+  digitalWrite(gnssEN, HIGH); // disable GNSS
+  delay(10);
+  pinMode(gnssEN, INPUT_PULLUP); // avoid backfeed
+}
+
+void turn_iridium_on(void)
+{
+  Serial.println(F("turn iridium on"));
+  turn_gnss_off();
+  delay(100);
+  digitalWrite(superCapChgEN, HIGH);
+  digitalWrite(iridiumPwrEN, HIGH);
+  delay(1000);
 }
 
 void i2c_pins_init()

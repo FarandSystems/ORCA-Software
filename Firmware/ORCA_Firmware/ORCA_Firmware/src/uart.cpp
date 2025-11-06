@@ -48,12 +48,12 @@ void check_rx_ready()
     if (now - last_rx_ms > RX_GAP_RESET_MS) {
       st  = RXState::FIND_SYNC;
       idx = 0;
-      Serial.println("[UART] gap reset -> FIND_SYNC");
+      // Serial.println("[UART] gap reset -> FIND_SYNC");
     }
   }
 
   uint16_t todo = Serial1.available();
-  Serial.println("[UART] bytes available: " + String(todo));
+  // Serial.println("[UART] bytes available: " + String(todo));
 
   if (todo > MAX_BYTES_PER_CALL) todo = MAX_BYTES_PER_CALL;
 
@@ -71,7 +71,7 @@ void check_rx_ready()
           frame[0] = b;
           idx = 1;
           st  = RXState::READ_PAYLOAD;
-          Serial.print("[UART] SYNC="); Serial.println(frame[0], HEX);
+          // Serial.print("[UART] SYNC="); Serial.println(frame[0], HEX);
         }
         break;
 
@@ -79,7 +79,7 @@ void check_rx_ready()
         frame[idx++] = b;
         if (idx == RX_Buffer_Size - 1) {
           st = RXState::READ_CSUM;
-          Serial.println("[UART] → READ_CSUM");
+          // Serial.println("[UART] → READ_CSUM");
         }
         break;
 
@@ -91,29 +91,33 @@ void check_rx_ready()
         uint8_t cs = Calculate_Checksum(frame, RX_Buffer_Size);
         bool ok = (cs == frame[RX_Buffer_Size - 1]);
 
-        Serial.print("[UART] CS exp="); Serial.print(cs, HEX);
-        Serial.print(" got=");          Serial.print(frame[RX_Buffer_Size - 1], HEX);
-        Serial.print(" -> ");           Serial.println(ok ? "OK" : "FAIL");
+        // Serial.print("[UART] CS exp="); Serial.print(cs, HEX);
+        // Serial.print(" got=");          Serial.print(frame[RX_Buffer_Size - 1], HEX);
+        // Serial.print(" -> ");           Serial.println(ok ? "OK" : "FAIL");
 
-        if (ok) {
+        if (ok) 
+        {
           memcpy(rx_buffer, frame, RX_Buffer_Size);
           rx_frame_ready = true;
           uart_timeout_counter = 0;
 
-          Serial.print("[UART] FRAME OK: ");
-          for (uint8_t i = 0; i < RX_Buffer_Size; i++) {
-            if (frame[i] < 16) Serial.print('0');
-            Serial.print(frame[i], HEX);
-            if (i + 1 < RX_Buffer_Size) Serial.print(' ');
-          }
-          Serial.println();
-        } else {
-          Serial.println("[UART] FRAME BAD");
+          // Serial.print("[UART] FRAME OK: ");
+          // for (uint8_t i = 0; i < RX_Buffer_Size; i++) {
+          //   if (frame[i] < 16) Serial.print('0');
+          //   Serial.print(frame[i], HEX);
+          //   if (i + 1 < RX_Buffer_Size) Serial.print(' ');
+        // }
+          // Serial.println();
+        } 
+        else 
+        {
+          // Serial.println("[UART] FRAME BAD");
 
           // FIX 2: DO NOT reuse the checksum byte as sync.
           // Instead, quickly purge bytes until next sync is at the head.
           // (Non-blocking: only consume what’s already buffered.)
-          while (Serial1.available() > 0) {
+          while (Serial1.available() > 0) 
+          {
             int peekb = Serial1.peek();
             if (peekb < 0) break;
             if (isSync((uint8_t)peekb)) break;   // stop when the next byte is a sync
@@ -124,7 +128,7 @@ void check_rx_ready()
         // Reset to hunt next frame
         st  = RXState::FIND_SYNC;
         idx = 0;
-        Serial.println("[UART] → FIND_SYNC");
+        // Serial.println("[UART] → FIND_SYNC");
       } break;
     }
   }
