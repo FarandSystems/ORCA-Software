@@ -144,6 +144,7 @@ uint8_t Calculate_Checksum(uint8_t *buffer, uint8_t length)
 
 void Reset_UART(void)
 {
+  Alarm(SHORT_BEEP_X2, 1, 40, 1);
   Serial.println("Reseting UART!");
   // DeInit
   Serial1.flush();                   // wait for TX to finish

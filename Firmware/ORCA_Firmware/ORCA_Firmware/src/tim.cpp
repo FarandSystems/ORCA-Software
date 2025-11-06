@@ -105,7 +105,7 @@ void on_100hz_tick(void)
 
 void on_40hz_tick(void) 
 {
-
+  Alarm_Update_32Hz();
   rx_reading_request = true;
 
   uart_timeout_counter++;
@@ -129,6 +129,6 @@ void on_40hz_tick(void)
 
 void on_1hz_tick(void) 
 {
-//  am_hal_gpio_output_toggle(pin_1);  // Example: Toggle pin for 1Hz
+  //am_hal_gpio_output_toggle(pin_1);  // Example: Toggle pin for 1Hz
   // Add more 1 Hz logic here
 }

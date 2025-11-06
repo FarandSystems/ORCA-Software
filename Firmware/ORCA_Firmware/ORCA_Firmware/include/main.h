@@ -12,5 +12,6 @@
 #include "i2c.h"
 #include "uart.h"
 #include "command_Rx.h"
+#include "Alarm.h"
 
 #endif // MAIN_H

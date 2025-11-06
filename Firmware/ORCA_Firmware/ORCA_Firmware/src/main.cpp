@@ -9,13 +9,16 @@ void setup()
   am_hal_sysctrl_fpu_stacking_enable(true);
   Serial.begin(115200);
   setup_GPIO();
+  Alarm_Init(pin_Buzzer, true);
   disable_iridium();
   setup_i2c();
-
-  uart_begin(UART_BAUDRATE);
-
+  
   // Initialize and configure the single 800 Hz timer + counters
   setupTimers();
+  Alarm(SHORT_BEEP_X2, 1, 40, 1);
+  uart_begin(UART_BAUDRATE);
+
+  Alarm(SHORT_BEEP_X1, 1, 40, 1);
 }
 
 void loop() 

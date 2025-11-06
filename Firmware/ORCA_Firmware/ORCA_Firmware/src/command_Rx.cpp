@@ -19,10 +19,14 @@ void Service_Input_Command(uint8_t* RxBuffer)
       // Nothing
       break;
     case 0x01:
+      Alarm(SHORT_BEEP_X1, 1, 40, 1);
+
       is_power_requested = true;
       is_qwiic_on = true;
+      
       break;
     case 0x02:
+      Alarm(SHORT_BEEP_X1, 1, 40, 1);
       is_power_requested = true;
       is_qwiic_on = false;
       break;
