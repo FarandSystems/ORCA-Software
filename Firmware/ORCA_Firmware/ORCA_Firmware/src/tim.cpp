@@ -5,52 +5,67 @@ uint32_t counter_100hz = 0;
 uint32_t counter_40hz = 0;
 uint32_t counter_1hz = 0;
 
-uint32_t counter_800 = 0;
+uint32_t counter_1600hz = 0;
 
 bool is_800hz_Timer_Int_Ready = false;
 
 bool is_1hz_Timer_Int_Ready = false;
 
-extern "C" void Timer_ISR_800Hz(void) 
+extern "C" void Timer_ISR_1600Hz(void) 
 {
+  counter_1600hz++;
 
-  // am_hal_gpio_output_toggle(pin_800); // Toggle pin for 800Hz
+  if (counter_1600hz >= 1600)
+  {
+    counter_1600hz = 0;
+  }
+
+  
+  // At Evens always Read IMU
+  if (counter_1600hz % 2 == 0)
+  {
+    is_800hz_Timer_Int_Ready = true;
+  }
+  // At Odds do other stuffs
+  else
+  {
+      // NEW: Increment counters every 800 Hz tick
+    counter_100hz++;
+    counter_40hz++;
+    counter_1hz++;
+
+        // Check for 100 Hz: Every 8 ticks (800 / 100 = 8)
+    if (counter_100hz >= 8) 
+    {
+      am_hal_gpio_output_toggle(pin_Toggle); // Toggle pin for 800Hz
+      counter_100hz = 0;  // Reset to 0
+      on_100hz_tick();    // Call the 100 Hz function
+    }
+
+    // Check for 5 Hz: Every 160 ticks (800 / 5 = 160)
+    if (counter_40hz >= 20) 
+    {
+      counter_40hz = 0;    // Reset to 0
+      on_40hz_tick();      // Call the 8 Hz function
+    }
+
+    // Check for 1 Hz: Every 800 ticks (800 / 1 = 800)
+    if (counter_1hz >= 800) 
+    {
+      counter_1hz = 0;    // Reset to 0
+      on_1hz_tick();      // Call the 1 Hz function
+    }
+  }
   
 
-  is_800hz_Timer_Int_Ready = true;
 
-  // NEW: Increment counters every 800 Hz tick
-  counter_100hz++;
-  counter_40hz++;
-  counter_1hz++;
-
-  // Check for 100 Hz: Every 8 ticks (800 / 100 = 8)
-  if (counter_100hz >= 8) 
-  {
-    counter_100hz = 0;  // Reset to 0
-    on_100hz_tick();    // Call the 100 Hz function
-  }
-
-  // Check for 5 Hz: Every 160 ticks (800 / 5 = 160)
-  if (counter_40hz >= 20) 
-  {
-    counter_40hz = 0;    // Reset to 0
-    on_40hz_tick();      // Call the 8 Hz function
-  }
-
-  // Check for 1 Hz: Every 800 ticks (800 / 1 = 800)
-  if (counter_1hz >= 800) 
-  {
-    counter_1hz = 0;    // Reset to 0
-    on_1hz_tick();      // Call the 1 Hz function
-  }
 
   // Clear the interrupt bit
   am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA0C0);
   
 }
 
-// Configure ONLY the 800 Hz timer (high-freq clock)
+// Configure ONLY the 1600 Hz timer (high-freq clock)
 void configureTimer(uint32_t timer, uint32_t frequency) 
 {
   uint32_t interval;
@@ -60,7 +75,7 @@ void configureTimer(uint32_t timer, uint32_t frequency)
   // High freq: Use 12 MHz clock
   clockCfg = AM_HAL_CTIMER_HFRC_12MHZ;
   uint32_t timer_freq = 12000000;
-  interval = timer_freq / frequency;  // ~15000 for 800 Hz
+  interval = timer_freq / frequency;
   if (interval > 65535) interval = 65535;
 
   // Configure single segment (A) in repeat mode with interrupt
@@ -78,7 +93,7 @@ void configureTimer(uint32_t timer, uint32_t frequency)
 
   // Enable specific interrupt bit and register ISR
   am_hal_ctimer_int_enable(intBit);
-  am_hal_ctimer_int_register(AM_HAL_CTIMER_INT_TIMERA0C0, Timer_ISR_800Hz);
+  am_hal_ctimer_int_register(AM_HAL_CTIMER_INT_TIMERA0C0, Timer_ISR_1600Hz);
 }
 // Updated wrapper function (only configures 800 Hz timer)
 void setupTimers() 
@@ -87,7 +102,7 @@ void setupTimers()
   am_hal_ctimer_globen(1);
 
   // Configure ONLY the 800 Hz timer (CTIMER0)
-  configureTimer(0, 796);  // Uses HFRC_12MHZ, interval ~15000 ticks
+  configureTimer(0, 1593);  // Uses HFRC_12MHZ, interval ~15000 ticks
 
   // Start the timer
   am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
@@ -95,7 +110,7 @@ void setupTimers()
   NVIC_SetPriority(CTIMER_IRQn, 5);  // lower prio than IOM
   // Enable the shared CTIMER NVIC IRQ
   NVIC_EnableIRQ(CTIMER_IRQn);
-  Serial.println("800 Hz CTIMER enabled with software counters - Check pins with scope!");
+  Serial.println("1600 Hz CTIMER enabled with software counters - Check pins with scope!");
 }
 
 // NEW: Implement these functions with your logic (e.g., toggle pins, set flags, etc.)

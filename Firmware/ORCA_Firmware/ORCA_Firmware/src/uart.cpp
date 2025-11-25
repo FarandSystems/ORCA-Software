@@ -20,6 +20,8 @@ uint8_t Calculate_Checksum(uint8_t *buffer, uint8_t length);
 
 void check_rx_ready(void);
 
+void Handle_UART_Commands(void);
+
 void uart_begin(uint32_t baud)
 {
   uart_pins_init();
@@ -101,7 +103,7 @@ void check_rx_ready()
           rx_frame_ready = true;
           uart_timeout_counter = 0;
 
-          // Serial.print("[UART] FRAME OK: ");
+          Serial.print("[UART] FRAME OK: ");
           // for (uint8_t i = 0; i < RX_Buffer_Size; i++) {
           //   if (frame[i] < 16) Serial.print('0');
           //   Serial.print(frame[i], HEX);
@@ -159,4 +161,32 @@ void Reset_UART(void)
   uart_begin(UART_BAUDRATE);
   // Optionally clear any stale RX
   while (Serial1.available()) (void)Serial1.read();
+}
+
+
+void Handle_UART_Commands(void)
+{
+    // Check if we have a Command or not
+  if(rx_reading_request)
+  {
+    rx_reading_request = false;
+    // Check for any receiving RX Data
+    check_rx_ready();
+  }
+
+  // Check if we should send data to PC
+  if(report_to_pc_ready)
+  {
+    report_to_pc_ready = false;
+    //GPIO-> WTSA = (1 << pin_UART); //Fast GPIO Set on Register
+    Serial1.write(tx_buffer, TX_Buffer_Size);
+    GPIO->WTCA = (1 << pin_UART);  //Fast GPIO Reset on Register
+  }
+
+  // // Check for uart timeout
+  // if (uart_reset_request)
+  // {
+  //   uart_reset_request = false;
+  //   Reset_UART();
+  // }
 }

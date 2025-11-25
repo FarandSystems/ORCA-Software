@@ -18,6 +18,8 @@ extern void uart_begin(uint32_t baud);
 extern void Reset_UART(void);
 extern void check_rx_ready(void);
 
+extern void Handle_UART_Commands(void);
+
 extern uint8_t Calculate_Checksum(uint8_t *buffer, uint8_t length);
 
 extern uint8_t rx_buffer[RX_Buffer_Size];

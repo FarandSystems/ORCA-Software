@@ -15,4 +15,12 @@
 #include "Alarm.h"
 #include "gnss_manager.h"
 
+enum System_State
+{
+    STARTUP_STATE = 0,
+    GNSS_ACQUIRE_STATE = 1,
+    NORMAL_STATE = 2,
+    ERROR_STATE = 3
+};
+
 #endif // MAIN_H

@@ -4,6 +4,8 @@ bool report_to_pc_ready = false;
 
 bool is_power_requested = false;
 
+bool is_skip_gnss_requested = true;
+
 
 void Service_Input_Command(uint8_t* RxBuffer);
 void Clear_All_Buffers();
@@ -31,6 +33,8 @@ void Service_Input_Command(uint8_t* RxBuffer)
       is_qwiic_on = false;
       break;
     case 0x04:
+      Alarm(SHORT_BEEP_X1, 1, 40, 1);
+      is_skip_gnss_requested = true;
       break;
     case 0x05:
       break;

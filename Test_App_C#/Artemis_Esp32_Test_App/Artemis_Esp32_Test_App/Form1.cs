@@ -71,7 +71,7 @@ namespace Artemis_Esp32_Test_App
             // init TCP client control
             esp = new Simple_Client_LAN_Control.Simple_Client_LAN_Control
             {
-                IPAddress = "192.168.0.117",
+                IPAddress = "192.168.0.201",
                 Port = 5001,
                 RX_Byte_Count = 16 * 5 // 16 bytes/sample * 5 samples = 80 bytes per batch
             };

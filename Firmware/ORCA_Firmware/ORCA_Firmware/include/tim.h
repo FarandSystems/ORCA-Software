@@ -9,7 +9,7 @@
 extern bool is_800hz_Timer_Int_Ready;
 extern bool is_1hz_Timer_Int_Ready;
 
-extern uint32_t counter_800;
+extern uint32_t counter_1600hz;
 extern uint32_t counter_100hz;
 extern uint32_t counter_40hz;
 extern uint32_t counter_1hz;

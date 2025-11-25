@@ -1,6 +1,7 @@
 
 extern bool report_to_pc_ready;
 extern bool is_power_requested;
+extern bool is_skip_gnss_requested;
 
 extern void Service_Input_Command(uint8_t* RxBuffer);
 extern void Report_To_PC(void);
